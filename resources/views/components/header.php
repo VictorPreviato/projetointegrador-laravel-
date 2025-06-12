@@ -17,7 +17,7 @@
  <div class="headdesk"> <!-- Navbar Desktop -->
    
 <div>
-  <a href="index"><img src="IMG/LOGOS/Logosn.svg" alt="" class="logonav"></a>
+  <a href="/"><img src="IMG/LOGOS/Logosn.svg" alt="" class="logonav"></a>
   <button onclick="document.location='adote'" class="bnav">Adote um Pet</button>
   <button onclick="document.location='desaparecidos'" class="bnav">Desaparecidos</button>
   <button onclick="document.location='sobre'" class="bnav">Sobre o Projeto</button>
@@ -36,7 +36,7 @@
 
  <nav class="navbar bg-body-tertiary fixed-top"> <!-- Navbar Mobile --> 
   <div class="container-fluid">
-    <a href="index.php">
+    <a href="/">
     <img src="IMG/LOGOS/Logosn.svg" alt="" class="logonav"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
