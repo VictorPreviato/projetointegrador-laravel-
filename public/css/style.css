@@ -1,0 +1,841 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Poppins", sans-serif;
+    margin-top: 110px;
+}
+
+h1{
+    color: var(--cor-1);
+    font-weight: 900;
+    font-size: 40px;
+}
+
+h5{
+    color: var(--cor-3);
+}
+
+:root{
+    --cor-1: #31403E;
+    --cor-2: #9BBFBC;
+    --cor-3: #485958;
+    --cor-4: #B4D9D5;
+    --cor-5: #DCF2F0;
+}
+
+/* Header */
+
+.headdesk{
+    z-index: 3;
+    display: flex;
+    height: 90px;
+    position: absolute;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    align-items: center;
+    background-color: #F5F5F5;
+    justify-content:space-around;
+}
+
+
+.bnav {
+  background-color: transparent;
+  border: none;
+  margin: 0 8px;
+  transition: transform 0.2s ease, border-bottom 0.2s ease;
+}
+
+.bnav:hover {
+  transform: translateY(-3px); /* efeito de "subir" */
+  border-bottom: solid 3px #9BBFBC;
+}
+
+#bcad{
+    background-color:transparent;
+    border: none;
+    margin: 0 4px;
+    height: 50px;
+    width: 150px;
+    border-radius: 20px;
+}
+
+#bcad:hover{
+    color: #31403E;
+    border: none;
+    margin: 0 4px;
+}
+
+#blog{
+    background-color:#31403E;
+    color: white;
+    border: none;
+    margin: 0 4px;
+    border-radius: 20px;
+    height: 50px;
+    width: 150px;
+}
+
+#blog:hover{
+background-color: rgba(49, 64, 62, 0.9);
+}
+
+.logonav{
+width: 100px;
+}
+
+.logonav:hover{
+width: 100px;
+cursor: pointer;
+}
+
+.pesbtn{
+    position: absolute;
+    margin-left: 10px;
+    width: 25px;
+    padding-top: 5px;
+}
+
+input[type=search]{
+    padding-left: 2.4em;
+    height: 35px;
+    border-radius: 13px;
+    width: 220px;
+    border: solid 1.5pt #9BBFBC;
+}
+
+.navbar{
+z-index: 3;
+height: max-content;
+position: absolute;
+position: fixed;
+margin-top: 0px;
+left: 0;
+top: 0;
+width: 100%;
+background-color: #F5F5F5;
+align-items: center;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+}
+
+.offcanvas li{
+    font-size: 18px;
+}
+
+/* Home */
+
+#carouselExampleCaptions{
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+}
+
+.d-block{
+    height: 60vh;
+    object-fit: cover;
+    margin:auto;
+    width: 70vw;   
+    border-radius: 20px;
+}
+
+
+.tcar1{
+    width: 25vw;
+    position: absolute;
+    text-align: right;
+    right: 20%;
+    top: 5%;
+}
+
+#bcar1{
+    position: absolute;
+    right: 20%;
+    bottom: 15%;
+    background-color: transparent;
+    width: 8vw;
+    height: 5vh;
+    border-radius: 15px;
+    border: solid 2px #31403E;
+    color: #31403E;
+    transition: background-color .5s;
+    font-weight: 500;
+} 
+
+
+.tcar2{
+    width: 42vw;
+    position: absolute;
+    margin: auto;
+    text-align: left;
+    left: 20%;
+    top: 5%;
+}
+
+.tcar2 h5{
+    width: 32vw;
+}
+
+#bcar2{
+    position: absolute;
+    right: 20%;
+    bottom: 15%;
+    background-color: transparent;
+    width: 8vw;
+    height: 5vh;
+    border-radius: 15px;
+    border: solid 2px white;
+    color: white;
+    font-weight: 500;
+    transition: background-color .5s;
+
+} 
+
+.tcar3{
+    width: 80vw;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    right: 13%;
+}
+
+.carousel-indicators #on{
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    background-color: var(--cor-1);}
+
+
+.carousel-indicators #off{
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    background-color: var(--cor-1);
+}
+
+.carousel-indicators{
+    top:100%;
+}
+
+
+#bannerhdiv{
+    width: 100%;
+    background-image: url(../IMG/pexels-tranmautritam-2215599.jpg);
+    height: 70vh;
+    display: flex;
+    background-position: center;
+    background-size: 100%;
+    margin-top: 3%;
+} 
+
+.textbanner{
+    background-color: rgba(72, 89, 88, 0.9);
+}
+
+
+#bannerhdiv h1{
+    width: 30vw;
+    height: 70vh;
+    color: white;
+    padding: 40px;
+    letter-spacing: 4px;
+    font-size: calc(2vw + 1vh);
+}
+
+#bannerhdiv button{
+    background-color: transparent;
+    position: relative;
+    left: 60%;
+    top: 90%;
+    width: calc(8vw);
+    height: 5vh;
+    border-radius: 15px;
+    border: solid 2px #31403E;
+    color: #31403E;
+    transition: background-color .5s;
+    font-weight: 500;
+}
+
+#bannerhdiv button:hover{
+    background-color: #31403E;
+    width: 8vw;
+    height: 5vh;
+    border-radius: 15px;
+    color: white;
+
+}
+
+.comentario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3%;
+}
+ 
+.form_box{
+    display: flex;
+    flex-direction: column;    
+    border-radius: 8px;
+    width: 700px;
+}
+ 
+.form_box form{
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;    
+}
+ 
+.form_box input, .form_box textarea{
+    width: calc(50% - 8px);
+    height: 48px;
+    border-radius: 8px;
+    border:thin solid #9BBFBC;
+    padding-left: 16px;
+    margin-bottom: 16px;
+}
+ 
+.form_box input:first-child{
+    margin-right: 16px;
+}
+ 
+.form_box input[name=email]{
+    width: 100%;
+}
+ 
+.form_box textarea{
+    width: 100%;
+    height: 180px;
+    padding: 16px;
+ 
+}
+
+
+/* Carrosssel desaparecido */
+ 
+.form_box button{
+    display: block;
+    border: none;
+    outline: none;
+    width: 180px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #31403E;
+    color: #F5F5F5; 
+    margin-left: 550px;
+   }
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#cCarousel {
+  position: relative;
+  max-width: 900px;
+  margin: auto;
+}
+
+#cCarousel .arrow {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  width: 45px;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  z-index: 1;
+  font-size: 26px;
+  color: white;
+  background: #00000072;
+  cursor: pointer;
+}
+
+#cCarousel #prev {
+  left: 0px;
+}
+
+#cCarousel #next {
+  right: 0px;
+}
+
+#carousel-vp {
+  width: 770px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  margin: auto;
+}
+
+@media (max-width: 770px) {
+  #carousel-vp {
+    width: 510px;
+  }
+}
+
+@media (max-width: 510px) {
+  #carousel-vp {
+    width: 250px;
+  }
+}
+
+#cCarousel #cCarousel-inner {
+  display: flex;
+  position: absolute;
+  transition: 0.3s ease-in-out;
+  gap: 10px;
+  left: 0px;
+}
+
+.cCarousel-item {
+  width: 250px;
+  height: 365px;
+  border: 2px solid white;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cCarousel-item img {
+  width: 100%;
+  object-fit: cover;
+  min-height: 246px;
+  color: white;
+}
+
+.cCarousel-item .infos {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background: white;
+  color: black;
+}
+
+.cCarousel-item .infos button {
+  background: #222;
+  padding: 10px 30px;
+  border-radius: 15px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+/* Cadastro */
+
+.txtcad{
+    margin-bottom: 3vh;
+}
+
+#cardform{
+    margin-bottom: 200px;
+    width: 50vw;
+}
+
+#cardform  .col-6 input{
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
+    border: 2px solid var(--cor-2);
+    padding-left: 10px;
+    margin-bottom: 3vh;
+    margin-right: 10px;
+}
+
+#cardform  .col-12 input{
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
+    border: 2px solid var(--cor-2);
+    padding-left: 10px;
+    margin-bottom: 3vh;
+}
+ 
+input[name="but-cad"]{
+    width: 100%;
+    height: 60px;
+    border-radius: 8px;
+    background-color: var(--cor-1);
+    color: #F5F5F5;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 3vh;
+   
+}
+
+input[name="but-cad"]:hover{
+    background-color: rgba(49, 64, 62, 0.9);
+}
+
+
+
+/* Footer */
+
+.footer{
+width: 100%;
+display: flex;
+justify-content: space-around;
+position: relative;
+left: 0;
+margin-top: 5vh;
+}
+
+
+.footer a{
+ margin: 20px;
+ color: #000;
+ text-decoration: none;
+}
+
+.footer a:hover{
+    text-decoration: underline;
+}
+
+.logofoot{
+width: 100px;
+position: absolute;
+right: 1%;
+bottom: 1%;
+}
+
+/* Mobile - Retrato*/
+
+@media (max-width:991px){
+
+    body{
+        margin-top: 110px;
+    }
+    
+    .headdesk{
+    display: none;
+    }
+
+    p{
+        font-size: medium;
+    }
+
+    h1{
+        font-size: 30px;
+    }
+
+    h2{
+        font-size: 25px;
+    }
+
+    h3{
+        font-size: 20px;
+    }
+
+    h5{
+        font-size: 18px;
+    }
+
+
+    /* Mobile Home */
+
+    
+    #carouselExampleCaptions{
+    margin-top: 110px;
+    }
+
+    .d-block{
+        width: 90vw;
+        height: 60vh;
+    }
+
+
+    .tcar1{
+        width: 75vw;
+        margin: auto;
+        background-color: rgba(255, 255, 255, 0.6);
+        padding: 3%;
+        right: 8%;
+        border-radius: 20px;
+    }
+
+
+    #bcar1{
+     width: 22vw;
+     bottom: 2%;
+     font-size: 3vw;
+     padding: 2px;
+     background-color: rgba(255, 255, 255, 0.8);
+     color: var(--cor-1);
+     font-weight: bold;
+     border: none;
+     font-weight: 500;
+     right: 12%;
+    }
+
+    .tcar2{
+    width: 75vw;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 15px;
+    height: 40vh;
+    border-radius: 20px;
+    left: 10%;
+    }
+
+    #bcar2{
+     width: 22vw;
+     bottom: 2%;
+     font-size: 3vw;
+     padding: 2px;
+     background-color: rgba(255, 255, 255, 0.8);
+     color: var(--cor-1);
+     border: none;
+     font-weight: 500;
+     right: 10%;
+    }
+
+    .tcar2 h1{
+        font-size: 30px;
+    
+    }
+
+    .tcar2 h5{
+    width: 70vw;
+    }
+
+    .tcar3{
+    width: 70vw;
+    margin: auto;
+    }
+
+    #bannerhdiv{
+    display: none;
+    }
+
+    
+
+.comentario{
+margin-top: 3%;
+}
+ 
+.form_box{
+    width: 90%;
+}
+ 
+.form_box form{
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;    
+}
+ 
+.form_box input, .form_box textarea{
+    width: calc(50% - 8px);
+    height: 48px;
+    border-radius: 8px;
+    border:thin solid #9BBFBC;
+    padding-left: 2vw;
+    margin-bottom: 16px;
+}
+ 
+.form_box input:first-child{
+    margin-right: 16px;
+}
+ 
+.form_box input[name=email]{
+    width: 100%;
+}
+ 
+.form_box textarea{
+    width: 100%;
+    height: 180px;
+    padding: 0 2vw;
+ 
+}
+ 
+.form_box button{
+    margin-left: 0px;
+    width: 35vw;
+
+   }
+
+   /* Cadastro */
+
+   
+#cardform{
+    width: 95%;
+}
+
+#cardform  .col-6 input{
+    padding-left: 8px;
+    font-size: 14px;
+}
+
+#cardform  .col-12 input{
+    font-size: 14px;
+}
+
+
+
+    /* Mobile Footeer */
+
+    .footer{
+        margin-top: 2%;
+    }
+
+    .footer a{
+        margin: 5px;
+        display: block;
+        text-align: center;
+    }
+
+    .logofoot{
+        width: 80px;
+    }
+
+
+    .logofoot{
+    position: absolute;
+    right: 5%;
+    margin-bottom: 3vh;
+}
+
+}
+
+/* Mobile paisagem */
+
+@media (max-height:450px){ 
+    #bcar1{
+        height: 8vh;
+        font-size: medium;
+    }
+
+    #bcar2{
+        height: 8vh;
+        font-size: medium;
+    }
+}
+
+
+@media (min-width:991px){
+    .navbar{
+        display: none;
+    }
+
+    #bcar1:hover{
+    position: absolute;
+    background-color: #31403E;
+    width: 8vw;
+    height: 5vh;
+    border-radius: 15px;
+    color: white;
+}
+
+    #bcar2:hover{
+    position: absolute;
+    width: 8vw;
+    height: 5vh;
+    border-radius: 15px;
+    background-color: white;
+    color: var(--cor-1);
+    border: none;
+}
+   
+}
+
+
+/* carrossel desaparecidos e adoção home */
+ 
+.petdesaparecido {
+    text-align: right;
+    margin-top: 3vw;
+    margin-right: 18vw;
+    color: var(--cor-3);
+}
+ 
+.container:hover {
+    justify-content: center;
+}
+ 
+.card-wrapper {
+    max-width: 1200px;
+    margin: 0 50px 10px;
+    padding: 20px 10px;
+    overflow: hidden;
+}
+ 
+.card-list .card-item {
+    list-style: none;
+}
+ 
+.card-list .card-item .card-link {
+    user-select: none;
+    display: block;
+    background-color: #31403E;
+    padding: 15px;
+    border-radius: 22px;
+    text-decoration: none;
+    border: 2px solid transparent;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+    transition: 0.2S ease;
+}
+ 
+.card-list .card-item .card-link:hover {
+    border-color: #DCF2F0;
+}
+ 
+.card-item .card-link .card-image{
+    width: 100%;
+    aspect-ratio: 7 / 9;
+    object-fit: cover;
+    border-radius: 10px;
+}
+ 
+.card-list, .card-link, .badge{
+    color: #DCF2F0;
+    padding: 8px 16px;
+    font-size: 1.50rem;
+    font-weight: 500;
+    margin: 16px 0 18px;
+    width: fit-content;
+    border-radius: 50px;
+}
+ 
+.card-list, .card-link, .card-title {
+    font-size: 1.00rem;
+    color: #DCF2F0;
+    font-weight: 600;
+}
+ 
+.card-list .card-link .card-buttom {
+    height: 35px;
+    width: 35px;
+    color: #DCF2F0;
+    border-radius: 50%;
+    margin: 30px 0 5px;
+    background: none;
+    cursor: pointer;
+    border: 2px solid #DCF2F0;
+    transform: rotate(-45deg);
+    transition: 0.4s ease;
+}
+ 
+.card-list .card-link:hover .card-buttom {
+    color: #fff;
+    background: #DCF2F0;
+}
+ 
+.swiper-button-prev, .swiper-button-next {
+    color: #31403E;
+}
+
