@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DotmeController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Dotme;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,8 +40,8 @@ Route::get('/redes', function () {
     return view('redes');
 });
 
-
-
+Route::post('cadastro', [DotmeController::class,
+'create'])->name('cadastro.post');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
