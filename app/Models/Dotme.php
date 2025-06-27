@@ -19,4 +19,6 @@ class Dotme extends Model
         "email",
         "password"    
      ];
+
+     
 }

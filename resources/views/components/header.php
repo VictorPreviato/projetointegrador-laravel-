@@ -9,6 +9,7 @@
     <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <link rel="icon" type="image/x-icon" href="IMG/LOGOS/Logosn.svg">
 <link href="CSS/style.css" rel="stylesheet" >
 
 </head>

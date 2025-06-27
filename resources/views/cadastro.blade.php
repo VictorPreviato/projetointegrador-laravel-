@@ -7,7 +7,7 @@
 <h3 style="text-align: center;" >Enviaremos uma confirmação de cadastro para você pelo e-mail.</h3>
 </div>
 
-<form action="" method="POST">
+<form action="{{ route('cadastro.post') }}" method="POST">
     @csrf
 <div class="container m-auto" id="cardform">
     <div class="row d-flex">
@@ -15,20 +15,20 @@
             <input type="text" placeholder="Nome Completo*" required name="nome">
         </div>
         <div class="col-6">
-            <input type="date" required name="data_nasc">
+            <input type="date" required name="data_nasc" required>
         </div>
     </div>
     <div class="row">
         <div class="col-6">
-            <input type="number" placeholder="CPF*" name="cpf" required>
+            <input id="cpfMask" type="text" placeholder="CPF*" name="cpf" required>
         </div>
         <div class="col-6">
-            <input type="tel" placeholder="Telefone celular*" name="telefone" required>
+            <input id="telefoneMask" type="text" placeholder="Telefone celular*" name="telefone" >
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <input type="email" placeholder="E-mail*" required name="email">
+            <input  type="email" placeholder="E-mail*" required name="email">
         </div>
     </div>
     <div class="row">
@@ -41,10 +41,10 @@
             <input type="password" placeholder="Crie sua senha*" required name="password">
         </div>
         <div class="col-6">
-            <input type="password"   placeholder="Confirme sua senha*" required>
+            <input type="password"  placeholder="Confirme sua senha*"  required>
         </div>
         <div>
-        <input type="checkbox"> Estou de acordo com os <b><a href="" style="color: var(--cor-3);">termos de privacidade</a></b>
+        <input type="checkbox" required> Estou de acordo com os <b><a href="" style="color: var(--cor-3);">termos de privacidade</a></b>
         </div>
         <div>
             <input type="submit" class="" name="but-cad" value="Criar Conta">
