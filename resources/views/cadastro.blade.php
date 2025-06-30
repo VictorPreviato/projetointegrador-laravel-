@@ -12,37 +12,47 @@
 <div class="container m-auto" id="cardform">
     <div class="row d-flex">
         <div class="col-6">
-            <input type="text" placeholder="Nome Completo*" required name="nome">
+            <input type="text" placeholder="Nome Completo*" required name="nome" value="{{ old('nome') }}">
         </div>
         <div class="col-6">
-            <input type="date" required name="data_nasc" required>
+            <input type="date" required name="data_nasc" required value="{{ old('data_nasc') }}">
         </div>
     </div>
     <div class="row">
         <div class="col-6">
-            <input id="cpfMask" type="text" placeholder="CPF*" name="cpf" required>
+            <input id="cpfMask" type="text" placeholder="CPF*" name="cpf" required value="{{ old('cpf') }}">
         </div>
         <div class="col-6">
-            <input id="telefoneMask" type="text" placeholder="Telefone celular*" name="telefone" >
+            <input id="telefoneMask" type="text" placeholder="Telefone celular*" name="telefone" value="{{ old('telefone') }}">
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <input  type="email" placeholder="E-mail*" required name="email">
-        </div>
+   <div class="row">
+    <div class="col-12">
+        <input type="email" placeholder="E-mail*" required name="email" value="{{ old('email') }}">
+        @error('email')
+            <div class="text-danger">O campo de confirmação do e-mail não corresponde.</div>
+        @enderror
     </div>
-    <div class="row">
-        <div class="col-12">
-            <input type="email" placeholder="Confirme seu e-mail*" required>
-        </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <input type="email" placeholder="Confirme seu e-mail*" required name="email_confirmation" value="{{ old('email_confirmation') }}">
     </div>
+</div>
     <div class="row">
+                        @error('password')
+            <div class="text-danger">O campo de confirmação da senha não corresponde.</div>
+        @enderror
         <div class="col-6">
             <input type="password" placeholder="Crie sua senha*" required name="password">
+         
         </div>
         <div class="col-6">
-            <input type="password"  placeholder="Confirme sua senha*"  required>
+            <input type="password"  placeholder="Confirme sua senha*" name="password_confirmation" required>
+
         </div>
+
         <div>
         <input type="checkbox" required> Estou de acordo com os <b><a href="" style="color: var(--cor-3);">termos de privacidade</a></b>
         </div>

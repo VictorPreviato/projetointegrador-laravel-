@@ -20,8 +20,9 @@ class FormRequestCadastro extends FormRequest
                 'nome' => 'required|string|max:255',
                 'telefone' => ['required', 'regex:/^\(\d{2}\)\s?\d{4,5}-\d{4}$/'],
                 'cpf' => ['required', 'regex:/^\d{3}\.\d{3}\.\d{3}-\d{2}$/'],
-                'email' => ['required', 'email', 'regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'],
-                'password' => 'required|max:100',
+                'email' => ['required', 'email', 'confirmed', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'],
+                'password' => ['required', 'max:100', 'confirmed'],
+
             ];
         }
 
