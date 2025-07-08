@@ -187,7 +187,7 @@
         <br>
         <form action="" method="post">
             <input type="text" name="name" placeholder="Nome Completo*">
-            <input type="tel" name="telefone" placeholder="(00) 00000-0000" pattern="[0-9]{2} [0-9]{5}-[0-9]{4}">
+            <input id="telefoneMask" type="tel" name="telefone" placeholder="(00) 00000-0000" pattern="[0-9]{2} [0-9]{5}-[0-9]{4}">
             <input type="email" name="email" placeholder="E-mail*">
             <textarea name="comentario" cols="50" rows="10" placeholder="Comentários*"></textarea>
             <button type="submit">Enviar</button>
