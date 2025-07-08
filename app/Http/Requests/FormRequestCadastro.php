@@ -19,8 +19,8 @@ class FormRequestCadastro extends FormRequest
             $request = [
                 'nome' => 'required|string|max:255',
                 'telefone' => ['required', 'regex:/^\(\d{2}\)\s?\d{4,5}-\d{4}$/'],
-                'cpf' => ['required', 'regex:/^\d{3}\.\d{3}\.\d{3}-\d{2}$/'],
-                'email' => ['required', 'email', 'confirmed', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'],
+                'cpf' => ['required', 'regex:/^\d{3}\.\d{3}\.\d{3}-\d{2}$/', 'unique:cadastro,cpf'],
+                'email' => ['required', 'email', 'confirmed', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'unique:cadastro,email'],
                 'password' => ['required', 'max:100', 'confirmed'],
 
             ];
@@ -28,4 +28,15 @@ class FormRequestCadastro extends FormRequest
 
         return $request;
     }
+
+    public function messages(): array
+{
+    return [
+        'cpf.unique' => 'Este CPF já foi cadastrado.',
+        'email.unique' => 'Este e-mail já foi cadastrado.',
+        'email.confirmed' => 'O campo de confirmação do e-mail não corresponde.',
+        'password.confirmed' => 'O campo de confirmação da senha não corresponde.',
+       
+    ];
+}
 }

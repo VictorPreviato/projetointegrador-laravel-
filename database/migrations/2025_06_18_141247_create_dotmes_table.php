@@ -15,12 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->date('data_nasc');
-            $table->string('cpf');
+            $table->string('cpf')->unique();
             $table->string('telefone');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('password');
             $table->timestamps();
         });
+    }
+
+        public function down(): void
+    {
+        Schema::dropIfExists('cadastro');
     }
 
     /**

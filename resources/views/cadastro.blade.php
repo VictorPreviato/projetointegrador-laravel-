@@ -19,18 +19,22 @@
         </div>
     </div>
     <div class="row">
+          @error('cpf')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
         <div class="col-6">
             <input id="cpfMask" type="text" placeholder="CPF*" name="cpf" required value="{{ old('cpf') }}">
         </div>
         <div class="col-6">
             <input id="telefoneMask" type="text" placeholder="Telefone celular*" name="telefone" value="{{ old('telefone') }}">
+            
         </div>
     </div>
    <div class="row">
     <div class="col-12">
         <input type="email" placeholder="E-mail*" required name="email" value="{{ old('email') }}">
         @error('email')
-            <div class="text-danger">O campo de confirmação do e-mail não corresponde.</div>
+            <div class="text-danger">{{ $message }}</div>
         @enderror
     </div>
 </div>
@@ -41,8 +45,8 @@
     </div>
 </div>
     <div class="row">
-                        @error('password')
-            <div class="text-danger">O campo de confirmação da senha não corresponde.</div>
+        @error('password')
+            <div class="text-danger">{{ $message }}</div>
         @enderror
         <div class="col-6 pass">
               <input type="password" name="password" id="password" placeholder="Crie sua senha*" required>
