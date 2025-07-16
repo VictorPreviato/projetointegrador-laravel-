@@ -236,20 +236,49 @@ input[type=search] {
     top: 100%;
 }
 
-/* Banner */
+/* Postagem(home) */
 
-#bannerhdiv {
-    width: 100%;
-    background-image: url(../IMG/pexels-tranmautritam-2215599.jpg);
-    height: 70vh;
+#posthome{
     display: flex;
-    background-position: center;
-    background-size: 100%;
-    margin-top: 3%;
+    justify-content: center;
+    width: 60%;
+    margin-top: 4%;
+    margin-right: auto;
+    margin-left: auto; 
+    height: 20vh; 
 }
 
-.textbanner {
-    background-color: rgba(72, 89, 88, 0.9);
+#poshomecontent{
+    background-color: #485958;
+    border-radius: 0 20px 20px 0;
+    padding-left: 40px;
+    position: relative;
+    width: 30vw;
+    margin-right: 34%;
+}
+
+#poshomecontent h3{
+    width: 50%;
+    color: white;
+    font-size: calc(1vw + 1.1vh); 
+    overflow: hidden;
+}
+
+
+#poshomecontent button{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    background-color: var(--cor-1);
+    color: white;
+    border: none;
+    width: 10vw;
+    height: 5vh;
+    border-radius: 15px;
+}
+
+#poshomecontent button:hover{
+    background-color: rgba(49, 64, 62, 0.8);
 }
 
 /* Carrossel Animais */
@@ -339,6 +368,21 @@ input[type=search] {
 
 
 /* Banner */
+
+
+#bannerhdiv {
+    width: 100%;
+    background-image: url(../IMG/pexels-tranmautritam-2215599.jpg);
+    height: 70vh;
+    display: flex;
+    background-position: center;
+    background-size: 100%;
+    margin-top: 3%;
+}
+
+.textbanner {
+    background-color: rgba(72, 89, 88, 0.9);
+}
 
 #bannerhdiv h1 {
     width: 30vw;
@@ -743,7 +787,7 @@ text-align: center;
 .right-panel {
   flex: 2;
   background-color: white;
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
   border:thin solid #9BBFBC;
 }
@@ -1078,7 +1122,7 @@ form textarea {
     bottom: 1%;
 }
 
-/* ALTSENHA(CONFIRMAÇAÕ DE E-MAIL) */
+/* <<<<< ALTSENHA(CONFIRMAÇAÕ DE E-MAIL) >>>>> */
 
 .img-altemail{
  
@@ -1137,6 +1181,91 @@ form textarea {
 }
  
 .bt-senha{
+ 
+    display: flex;
+    gap: 5vw;
+    justify-content: center ;
+     
+}
+
+/* <<<<< ALTSENHA(REDEFINIÇÃO DA SENHA) >>>>> */
+
+.caixa-rsenha{
+    margin-top: 10%;
+    margin-bottom: 7%;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+   
+}
+
+input[name=nova-senha]{
+
+    width: 25vw;
+}
+
+input[name=confirmar-nsenha]{
+
+    width: 25vw;
+}
+ 
+.prsenha{
+    width: 20vw;
+    text-align: center;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+ 
+.but-rcsenha{
+   
+    border: none;
+    outline: none;
+    width: 15vw;
+    height:60px;
+    border-radius: 8px;
+    background-color: #31403E;
+    color: #F5F5F5;
+    font-size: 16px;
+    margin: 10px;  
+     
+}
+
+.but-rcsenha:hover{
+     background-color: rgba(49, 64, 62, 0.9)
+}
+ 
+.but-rcasenha{
+ 
+    border: none;
+    outline: none;
+    width: 15vw;
+    height:60px;
+    border-radius: 8px;
+    background-color: #777777;
+    color: #F5F5F5;
+    font-size: 16px;  
+    margin: 10px;   
+}
+
+#nova-senhatoggle{
+    right: 26%;
+    top: 25%;
+}
+
+#confirmar-nsenhatoggle{
+    right: 26%;
+    top: 25%;
+}
+
+.but-rcasenha:hover{
+    background-color: rgba(119, 119, 119, 0.8);
+}
+ 
+.bt-rsenha{
  
     display: flex;
     gap: 5vw;
@@ -1246,6 +1375,27 @@ form textarea {
     .tcar3 {
         width: 70vw;
         margin: auto;
+    }
+
+    #posthome{
+        margin-top: 15%;
+        height: 20vh;
+        width: 100vw;
+    }
+
+    #poshomecontent{
+        width: 90%;
+        height: 100%;
+    }
+
+    #poshomecontent h3{
+        width: 80%;
+        font-size: calc(1.5vw + 1.5vh);
+    }
+
+    #poshomecontent button{
+        width: 30vw;
+        bottom: 5%;
     }
 
     .slide-container{
@@ -1382,7 +1532,7 @@ form textarea {
         width: 80vw;
     }
 
-    /* Mobile - Altsenha(confirmação de w-mail) */
+    /* Mobile - Altsenha(confirmação de e-mail) */
 
     .img-altemail{
     width: 50vw;
@@ -1418,7 +1568,58 @@ form textarea {
     gap: 5vw; 
 }
 
+/* Mobile = Altsenha(Redefinição de senha) */
+
+.caixa-rsenha{
+    width: 90VW;
+}
+
+.prsenha{
+    width: 70vw;
+}
+
+input[name=nova-senha]{
+    width: 70vw;
+}
+
+input[name=confirmar-nsenha]{
+
+    width: 70vw;
+}
+
+.bt-rsenha div{
+    width: 100%;
+}
+
+.but-rcsenha{
+    width: 90%;
+    height:50px;
+    font-size: 12px;  
+}
+
+#nova-senhatoggle{
+    right: 13%;
+
+}
+
+#confirmar-nsenhatoggle{
+    right: 13%;
+    
+}
+ 
+.but-rcasenha{
+    width: 90%;
+    height:50px;
+    font-size: 12px;      
+}
+
 /* Mobile - Postagem */
+
+.postcont {
+  display: flex;
+  padding: 10px;
+  gap: 1px;
+}
 
 .left-panel{
     margin-bottom: 10px;
@@ -1647,7 +1848,9 @@ form textarea {
 
 /* <<<<< Mobile paisagem >>>>> */
 
-@media (max-height:450px) {
+@media (max-height:500px) {
+
+    /* Home - Mobile (Paisagem) */
     #bcar1 {
         height: 8vh;
         font-size: medium;
@@ -1657,6 +1860,40 @@ form textarea {
         height: 8vh;
         font-size: medium;
     }
+
+    #posthome{
+        margin-top: 9%;
+        height: 35vh;
+    }
+
+    #poshomecontent h3{
+        font-size: calc(2vh + 2vw);
+    }
+
+    #poshomecontent button{
+        bottom: 10%;
+        height: 8vh;
+        width: 25vw;
+    }
+
+    #cardani img{
+        height: 200px;
+    }
+
+    .card-content{
+        height: 100px;
+    }
+
+    .cardepoi .card{
+        height: 50vh;
+    }
+
+    /* Postagem - Mobile (Paisagem) */
+
+    .upload-box{
+        height: 160px;
+    }
+
 }
 
 

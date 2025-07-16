@@ -42,6 +42,14 @@
 </div>
 </div>
 
+<!-- Encaminhar para postagem -->
+<div id="posthome">
+    <div id="poshomecontent">
+        <h3 style="color: white;">Seu companheiro sumiu ou você precisa doá-lo?</h3>
+        <button onclick="document.location='postagem.php' ">Clique aqui</button>
+    </div>
+</div>
+
 <!-- Carrossel animais - Desaparecidos -->
 
  <div class="slide-container swiper">
