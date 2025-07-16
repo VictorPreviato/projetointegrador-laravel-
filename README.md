@@ -62,6 +62,7 @@ php artisan serve
 
 A aplicação estará disponível em: http://localhost:8000
 
+
 <p align="center">
-  <img src="IMG/LOGOS/DotPetLogT.png" width="300" />
+<img src="/public/IMG/LOGOS/DotPetLogT.png" alt="Logo Dotme" width="300"/>
 </p>
