@@ -11,6 +11,9 @@
     @csrf
 <div class="container m-auto" id="cardform">
     <div class="row d-flex">
+          @error('nome')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
         <div class="col-6">
             <input type="text" placeholder="Nome Completo*" required name="nome" value="{{ old('nome') }}">
         </div>
