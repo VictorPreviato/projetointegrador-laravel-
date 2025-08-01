@@ -4,6 +4,7 @@ use App\Http\Controllers\DotmeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Dotme;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('index');
@@ -41,8 +42,8 @@ Route::get('/redes', function () {
     return view('redes');
 });
 
-// Route::post('dotmelogin', [DotmeController::class,
-// 'login'])->name('dotmelogin.post');
+ Route::post('dotmelogin', [DotmeController::class,
+ 'login'])->name('dotmelogin.post');
 
 Route::post('cadastro', [DotmeController::class,
 'create'])->name('cadastro.post');

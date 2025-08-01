@@ -6,6 +6,7 @@ use App\Http\Requests\FormRequestCadastro;
 use App\Models\Dotme;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\Auth\LoginRequest;
 
 class DotmeController extends Controller
 {
@@ -31,7 +32,9 @@ class DotmeController extends Controller
                 return redirect()->back()->with('error', 'Usuário não encontrado');
             }
  
-           //aqui chamar a autenticação pra validar a senha
+            if (!password_verify($data['password'], $user->password)) {
+                return redirect()->back()->with('error', 'Senha incorreta');
+            }
            return view('index');
         }  
     }
