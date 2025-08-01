@@ -19,4 +19,20 @@ class DotmeController extends Controller
 
         return view('log');
     }
+
+     public function login(LoginRequest $request)
+    {
+        if ($request->isMethod('post')) {
+            $data = $request->all();
+ 
+            $user = Dotme::where('email', $data['email'])->first();
+ 
+            if ($user === null) {
+                return redirect()->back()->with('error', 'Usuário não encontrado');
+            }
+ 
+           //aqui chamar a autenticação pra validar a senha
+           return view('index');
+        }  
+    }
 }

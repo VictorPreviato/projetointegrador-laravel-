@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+
 * {
     margin: 0;
     padding: 0;
@@ -863,6 +864,49 @@ form textarea {
 
 /* <<<<< FEED - ADOÇÃO >>>>> */
 
+.botao-doacao {
+  background-color: #2E3A39;
+  width: 300px;
+  height: 180px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.botao-doacao p {
+  font-size: 18px;
+  margin-bottom: 15px;
+  line-height: 1.4;
+  color: white;
+}
+
+.botao-doacao button {
+  background-color: #3F4E4D;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.botao-doacao button:hover {
+  background-color: #556665;
+}
+
+
+.filtros h1,h2,p{
+    margin-bottom: 1rem;
+  }
+
+
 .filtros {
   max-width: 950px;
   margin: auto;
@@ -1092,6 +1136,689 @@ form textarea {
 #contdono:hover{
     background-color: rgba(49, 64, 62, 0.9);
 }
+
+.profile-cont{
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;  
+}
+ 
+/* Cabeçalho do perfil com imagem e info lado a lado */
+.perfil-h{
+  display: flex;
+  align-items: center;
+  justify-content: left; /* Centraliza horizontalmente */
+  background: #31403E;  
+  border-radius: 20px;
+  padding: 50px;
+  margin-bottom: 30px;  
+}
+ 
+.info-us{
+  margin-left: 20px;
+  text-align: left;  
+}
+ 
+.img-us{
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+}
+ 
+/* BOX OK */
+.info-b{
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  gap: 20px;
+ 
+}
+ 
+/* OK */
+.info-c {
+  padding: 19px;
+  border-radius: 10px;
+  width: 25%;  
+  border: 3px solid #9BBFBC;
+  min-height: 200px; /* Altura mínima (opcional) */
+  height: auto; /* ✅ Altura automática */
+}
+ 
+  /* OK */
+.post-listas {
+  width: 73%;
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 0 auto 20px auto;
+  border: 3px solid #9BBFBC;
+  height: auto; 
+}
+
+
+
+/* CONFIG-USUARIO */
+.perfil {
+  display: flex;
+  align-items: center;
+  background-color: #2f4f4f;
+  padding: 30px;
+  color: white;
+  position: relative;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  }
+
+.foto-usuario {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+  }
+
+.info-usuario h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.alterar-foto {
+  font-size: 12px;
+  color: #ccc;
+  text-decoration: underline;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.formulario {
+  padding: 15px;
+  border: solid #2f4f4f 1px;
+  border-radius: 30px;
+}
+
+.formulario h2 {
+  margin-top: 25px; 
+  color: #2f4f4f;  
+  padding-bottom: 5px;
+}
+
+.linha {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.campo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  color: #2f4f4f;
+}
+
+.campo label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.campo input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.campo.pequeno {
+  flex: 0.5;  
+  max-width: 80px;
+}
+
+.campo.grande {
+  flex: 2;
+}
+
+.botoes {
+    display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 30px;  
+  padding-left: 15px;
+  padding-right: 15px;
+ 
+}
+
+.botoes button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  width: 300px;
+}
+
+.cancelar {
+  background-color: #ccc;
+  color: #2f4f4f;
+}
+
+.salvar {
+  background-color: #2f4f4f;
+  color: white;
+}
+
+/* <<<<< FAQ >>>>> */
+
+.titulo-faq {
+    
+    text-align: center;
+    font-size: 30px;
+      margin-top: 8%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    background-color: var(--cor-1);
+    width: 50%;
+    padding: 10px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.div-faq {
+    margin-bottom: 7%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.section-faq {
+  
+    max-width: 800px;
+    width: 100%;
+    
+}
+
+details {
+   
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 10px;
+   
+   
+}
+
+details:hover {
+    background-color: var(--cor-4)
+}
+
+summary {
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--cor-1);
+    outline: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+details p {
+    margin-top: 10px;
+    font-size: 0.95em;
+    color: var(--cor-1)
+}
+
+/* <<<<< SOBRE O PROJETO>>>>>*/
+
+
+.cont-apoie {
+    max-width: 960px; /* Largura máxima para o layout */
+    width: 90%; /* Largura responsiva */
+    margin: 40px auto; /* Centraliza horizontalmente o contêiner na página */
+    padding: 20px 0; /* Preenchimento vertical para o contêiner principal */
+    background-color: #ffffff;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os itens filhos (seções) horizontalmente */
+    /* REMOVIDO: text-align: center; aqui. É melhor aplicar diretamente aos elementos de texto. */
+}
+
+/* Estilo para o H1 dentro do .cont-apoie */
+.cont-apoie h1 {
+    color: #333;
+    font-size: 2.5em;
+    padding: 0 20px 30px 20px; /* Mantém o padding para espaçamento */
+    margin: 0;
+    text-align: center; /* CENTRALIZADO: Título principal */
+    position: relative;
+}
+
+/* Seções de Texto (Bem Vindo e Nossa História) e outras seções */
+.secao-texto,
+.secao-nossa-historia,
+.secao-parcerias,
+.secao-contato {
+    padding: 0 20px; /* Preenchimento horizontal para o conteúdo das seções */
+    margin-bottom: 30px; /* Espaço padrão entre as seções */
+    border-bottom: none;
+    padding-bottom: 0;
+    text-align: center; /* CENTRALIZADO: Todo o conteúdo de texto nestas seções */
+}
+
+.secao-texto p,
+.secao-nossa-historia p,
+.secao-contato p {
+    margin-bottom: 1em; /* Espaçamento entre parágrafos */
+    font-size: 1em;
+    color: #333;
+    line-height: 1.5;
+    /* text-align: center; herdado das seções pai, mas pode ser explícito se necessário */
+}
+
+/* Subtítulos (Nossa História, Parcerias, Fale Conosco) */
+.secao-nossa-historia h2,
+.secao-parcerias h2,
+.secao-contato h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center; /* CENTRALIZADO: Subtítulos */
+    position: relative;
+    padding-bottom: 0;
+}
+
+/* Caixa de Alerta */
+.caixa-alerta {
+    background-color: transparent;
+    border: none;
+    padding: 15px 20px;
+    margin: 30px 20px;
+    display: flex;
+    justify-content: center; /* CENTRALIZADO: Ícone e texto da caixa de alerta */
+    align-items: center;
+    border-radius: 0;
+    box-shadow: none;
+    text-align: center; /* CENTRALIZADO: Texto da caixa de alerta */
+}
+
+.caixa-alerta i {
+    color: #e74c3c;
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+
+.caixa-alerta p {
+    color: #333;
+    margin: 0;
+    font-weight: normal;
+    font-size: 1em;
+    /* text-align: center; herdado do pai */
+}
+
+/* Seção Parcerias */
+.secao-parcerias p {
+    font-size: 1em;
+    color: var(--cor-3);
+    margin-top: 10px;
+    margin-bottom: 15px;
+    /* text-align: center; herdado da seção pai */
+}
+
+.secao-parcerias h3 {
+    font-size: 1.2em;
+    color: #333;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    /* text-align: center; herdado da seção pai */
+}
+
+.grid-parcerias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 0;
+    margin-top: 20px;
+    background-color: var(--cor-3);
+    padding: 20px;
+    border-radius: 8px;
+    /* justify-content: center; <<< Removido, pois align-items: center no pai e text-align: center na seção já cuidam disso melhor para o grid como um todo */
+}
+
+.item-parceiro {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    height: 100px;
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo dentro de cada item do parceiro */
+    align-items: center; /* Centraliza o conteúdo dentro de cada item do parceiro */
+    color: #888;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* Ajustes Responsivos */
+@media (max-width: 768px) {
+    .cont-apoie {
+        padding: 15px 0;
+        width: 95%;
+    }
+
+    .cont-apoie h1 {
+        font-size: 2em;
+        padding: 0 15px 20px 15px;
+    }
+
+    .secao-texto,
+    .secao-nossa-historia,
+    .caixa-alerta,
+    .secao-parcerias,
+    .secao-contato {
+        padding: 0 15px;
+    }
+
+    .secao-nossa-historia h2,
+    .secao-parcerias h2,
+    .secao-contato h2 {
+        font-size: 1.6em;
+    }
+
+    .secao-parcerias h3 {
+        font-size: 1.1em;
+    }
+
+    .grid-parcerias {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .item-parceiro {
+        height: 80px;
+    }
+
+    .caixa-alerta {
+        padding: 10px 15px;
+        margin: 20px 0;
+    }
+
+    .caixa-alerta i {
+        font-size: 1.5em;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cont-apoie {
+        padding: 10px 0;
+        width: 98%;
+    }
+
+    .cont-apoie h1 {
+        font-size: 1.6em;
+        padding: 0 10px 15px 10px;
+    }
+
+    .secao-texto,
+    .secao-nossa-historia,
+    .caixa-alerta,
+    .secao-parcerias,
+    .secao-contato {
+        padding: 0 10px;
+    }
+
+    .secao-nossa-historia h2,
+    .secao-parcerias h2,
+    .secao-contato h2 {
+        font-size: 1.4em;
+    }
+
+    .secao-parcerias h3 {
+        font-size: 1.1em;
+    }
+
+    .grid-parcerias {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .item-parceiro {
+        height: 60px;
+    }
+
+    .caixa-alerta i {
+        font-size: 1.2em;
+        margin-right: 8px;
+    }
+}
+
+
+
+
+/*-- <<<<< CONTATOS >>>>> -->*/
+
+/* Seção Principal de Contato (engloba formulário e redes sociais) */
+.secao-contato-principal {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Faz com que esta seção ocupe o espaço restante */
+}
+
+/* Seção do Formulário de Contato com Fundo Escuro */
+.formulario-contato-fundo {
+    background-color: var(--cor-1); /* Cor de fundo escura como na imagem */
+    color: #f4f4f4; /* Cor do texto claro para contraste */
+    padding: 60px 20px; /* Mais padding para espaçamento vertical */
+    display: flex;
+    justify-content: center; /* Centraliza o container do formulário */
+    align-items: center;
+    flex-grow: 1; /* Permite que esta seção cresça e empurre o rodapé para baixo */
+}
+
+.container-form {
+    max-width: 600px; /* Largura máxima do formulário */
+    width: 100%;
+    padding: 0 20px; /* Ajusta o padding interno */
+    box-sizing: border-box; /* Garante que padding não adicione largura extra */
+    text-align: center; /* Centraliza o título */
+}
+
+.container-form h1 {
+    font-size: 2.5em;
+    margin-bottom: 40px; /* Espaço abaixo do título */
+    color: #ffffff; /* Título branco */
+}
+
+/* Estilos do Formulário */
+.formulario-contato {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Espaço entre os grupos de campo */
+}
+
+.campo-grupo {
+    position: relative;
+    margin-bottom: 20px; /* Espaço entre os campos */
+}
+
+.campo-grupo label {
+    position: absolute;
+    left: 0;
+    top: 15px; /* Posição inicial da label */
+    font-size: 1em;
+    pointer-events: none; /* Permite clicar no input através da label */
+    transition: all 0.2s ease-out; /* Transição suave para o efeito flutuante */
+}
+
+.campo-grupo input,
+.campo-grupo textarea {
+    width: 100%;
+    padding: 10px 0; /* Padding vertical para os inputs */
+    background: transparent; /* Fundo transparente */
+    border: none;
+    border-bottom: 1px solid #b0c4de; /* Linha inferior do input */
+    color: #ffffff; /* Cor do texto digitado */
+    font-size: 1.1em;
+    outline: none; /* Remove a borda de foco padrão */
+}
+
+/* Efeito de label flutuante */
+.campo-grupo input:focus + .label-flutuante,
+.campo-grupo input:not(:placeholder-shown) + .label-flutuante,
+.campo-grupo textarea:focus + .label-flutuante,
+.campo-grupo textarea:not(:placeholder-shown) + .label-flutuante {
+    top: -10px; /* Move a label para cima */
+    font-size: 0.8em; /* Diminui a fonte da label */
+    color: #ffffff; /* Cor da label quando flutuante */
+}
+
+
+/* Estilo do Botão Enviar */
+.botao-enviar {
+    background-color: var(--cor-5); /* Cor do botão como na imagem */
+    color: var(--cor-1); /* Cor do texto do botão */
+    border: none;
+    padding: 10px 80px;
+    font-size: 1.2em;
+    border-radius: 5px; /* Cantos arredondados */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center; /* Centraliza o botão dentro do flex container do formulário */
+    margin-top: 20px; /* Espaço acima do botão */
+}
+
+.botao-enviar:hover {
+    background-color: var(--cor-2); /* Um tom ligeiramente mais escuro ao passar o mouse */
+}
+
+/* Seção de Redes Sociais com Fundo Branco */
+.redes-sociais-fundo {
+    background-color: #ffffff; /* Fundo branco como na imagem */
+    padding: 50px 20px;
+    text-align: center; /* Centraliza o conteúdo (título e ícones) */
+}
+
+.container-redes {
+    max-width: 960px; /* Alinha a largura com o conteúdo principal */
+    margin: 0 auto;
+}
+
+.container-redes h2 {
+    font-size: 3em;
+    margin-bottom: 30px; /* Espaço abaixo do título */
+    color: var(--cor-1); /* Cor do título */
+}
+
+.icones-redes {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.icone-rede img {
+  width: 70px;  /* Tamanho pequeno */
+  height: auto;
+  transition: transform 0.2s;
+}
+
+.icone-rede img:hover {
+  transform: scale(1.1);  /* Efeito ao passar o mouse */
+}
+
+
+/* Ajustes Responsivos */
+@media (max-width: 768px) {
+    .container-form {
+        padding: 0 15px;
+    }
+
+    .container-form h1 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+
+    .formulario-contato {
+        gap: 25px;
+    }
+
+    .campo-grupo label {
+        font-size: 0.9em;
+    }
+
+    .campo-grupo input,
+    .campo-grupo textarea {
+        font-size: 1em;
+    }
+
+    .botao-enviar {
+        padding: 12px 25px;
+        font-size: 1.1em;
+    }
+
+    .container-redes h2 {
+        font-size: 1.8em;
+        margin-bottom: 25px;
+    }
+
+    .icones-redes {
+        gap: 20px;
+    }
+
+    .icone-rede {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .formulario-contato-fundo,
+    .redes-sociais-fundo {
+        padding: 40px 15px;
+    }
+
+    .container-form h1 {
+        font-size: 1.8em;
+        margin-bottom: 25px;
+    }
+
+    .formulario-contato {
+        gap: 20px;
+    }
+
+    .campo-grupo label {
+        font-size: 0.8em;
+    }
+
+    .campo-grupo input,
+    .campo-grupo textarea {
+        font-size: 0.9em;
+    }
+
+    .botao-enviar {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .container-redes h2 {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+
+    .icones-redes {
+        gap: 15px;
+    }
+
+    .icone-rede {
+        font-size: 2em;
+    }
+}
+
 
 /* <<<<< FOOTER >>>>> */
 
@@ -1674,13 +2401,16 @@ input[name=confirmar-nsenha]{
 
 /* Mobile - Feed Adoção */
 
+
+
 .filtros,
   .filtro {
     padding: 1rem;
   }
 
   .filtros h1,h2,p{
-    text-align: center;
+    
+    margin-bottom: 1rem;
   }
 
   .filter-form {
@@ -1702,9 +2432,9 @@ input[name=confirmar-nsenha]{
 
   .fundos img {
     width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3;
+    height: 280px;
     object-fit: cover;
+    border-radius: 10px 10px 0 0;
   }
 
   .fill {
@@ -1728,10 +2458,7 @@ input[name=confirmar-nsenha]{
     width: 100%;
   }
 
-  .fundos img {
-    height: 150px;
-    border-radius: 8px 8px 0 0;
-  }
+ 
 
   /* Mobile - Descrição */
 
@@ -1814,8 +2541,22 @@ input[name=confirmar-nsenha]{
     margin-top: 5%;
 }
 
+/* Mobile - faq */
 
-    /* Mobile - Footeer */
+.titulo-faq {
+        font-size: 20px;
+        border-radius: 0px;
+        width: 100%;
+    }
+
+    .section-faq {
+        padding: 0 10px;
+    }
+
+
+
+
+    /* Mobile - Footer */
 
     .footer {
         margin-top: 2%;
@@ -1926,3 +2667,6 @@ input[name=confirmar-nsenha]{
     }
 
 }
+
+ 
+

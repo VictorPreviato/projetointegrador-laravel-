@@ -35,10 +35,14 @@ Route::get('/apoie', function () {
 });
 Route::get('/faq', function () {
     return view('faq');
-});
+})->name('faq');
+
 Route::get('/redes', function () {
     return view('redes');
 });
+
+// Route::post('dotmelogin', [DotmeController::class,
+// 'login'])->name('dotmelogin.post');
 
 Route::post('cadastro', [DotmeController::class,
 'create'])->name('cadastro.post');
