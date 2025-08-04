@@ -7,6 +7,7 @@ use App\Models\Dotme;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Support\Facades\Session;
 
 class DotmeController extends Controller
 {
@@ -35,7 +36,16 @@ class DotmeController extends Controller
             if (!password_verify($data['password'], $user->password)) {
                 return redirect()->back()->with('error', 'Senha incorreta');
             }
-           return view('index');
-        }  
+        // Armazena o usuário na sessão
+        Session::put('user', $user);
+
+        return redirect()->route('index'); // Redireciona para a home logado
     }
+}
+
+     public function logout()
+{
+    Session::forget('user');
+    return redirect()->route('index'); // ou rota de login
+}
 }

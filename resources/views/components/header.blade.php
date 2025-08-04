@@ -15,24 +15,43 @@
 </head>
 <body>
 
- <div class="headdesk"> <!-- Navbar Desktop -->
-   
-<div>
-  <a href="/"><img src="IMG/LOGOS/Logosn.svg" alt="" class="logonav"></a>
-  <button onclick="document.location='adote'" class="bnav">Adote um Pet</button>
-  <button onclick="document.location='desaparecidos'" class="bnav">Desaparecidos</button>
-  <button onclick="document.location='sobre'" class="bnav">Sobre o Projeto</button>
+<div class="headdesk"> <!-- Navbar Desktop -->
+  <div>
+    <a href="/"><img src="{{ asset('IMG/LOGOS/Logosn.svg') }}" alt="" class="logonav"></a>
+    <button onclick="document.location='adote'" class="bnav">Adote um Pet</button>
+    <button onclick="document.location='desaparecidos'" class="bnav">Desaparecidos</button>
+    <button onclick="document.location='sobre'" class="bnav">Sobre o Projeto</button>
+  </div>
+
+  <div class="user-actions">
+    <form action="">
+      <img src="{{ asset('IMG/search.svg') }}" class="pesbtn" alt="">
+      <input type="search">
+    </form>
+
+    @php
+        $user = Session::get('user');
+    @endphp
+
+    @if ($user)
+      {{-- Usuário logado: mostrar nome + opções --}}
+      <div class="dropdown-user">
+        <span style="font-weight: bold; margin-right: 10px;">
+            Olá, {{ strtok($user->nome, ' ') }}!
+        </span>
+        <div class="dropdown-content">
+          <a href="{{ route('perfil') }}">Meu Perfil</a>
+          <a href="{{ route('logout') }}">Sair</a>
+        </div>
+      </div>
+    @else
+      {{-- Usuário não logado: mostrar botões padrão --}}
+      <button onclick="document.location='cadastro'" id="bcad">Cadastrar-se</button>
+      <button onclick="document.location='log'" id="blog">Login</button>
+    @endif
+  </div>
 </div>
 
-<div class="user-actions">
-  <form action="">
-    <img src="IMG/search.svg" class="pesbtn" alt="">
-    <input type="search">
-  </form>
-  <button onclick="document.location='cadastro'" id="bcad">Cadastrar-se</button>
-  <button onclick="document.location='log'" id="blog">Login</button>
-</div>
-</div>
 
 
  <nav class="navbar bg-body-tertiary fixed-top"> <!-- Navbar Mobile --> 

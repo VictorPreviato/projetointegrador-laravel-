@@ -8,7 +8,14 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
+
+Route::get('/perfil', function () {
+    if (!Session::has('user')) {
+        return redirect()->route('login')->with('error', 'Faça login para acessar o perfil.');
+    }
+    return view('perfil');
+})->name('perfil');
 
 // Header
 Route::get('/cadastro', function () {
@@ -51,6 +58,9 @@ Route::post('cadastro', [DotmeController::class,
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Logoff
+Route::get('/logout', [DotmeController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
