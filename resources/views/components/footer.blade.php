@@ -38,6 +38,17 @@
   })
 </script>
 
+  <script>
+ 
+    let profile = document.querySelector('.profile');
+let menu = document.querySelector('.menu');
+ 
+profile.onclick = function () {
+    menu.classList.toggle('active');
+}
+ 
+    </script>
+
 
 <script>$(document).ready(function () {
  

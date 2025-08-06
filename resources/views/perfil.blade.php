@@ -6,14 +6,29 @@
     @endphp
 
     <section class="perfil-h">
-        {{-- Imagem estática por enquanto --}}
-        <img src="{{ asset('IMG/mulher.webp') }}" alt="foto do usuário" class="img-us" />
+        <div class="img-us-container" style="text-align: center;">
+            @if($user->foto)
+                <img src="{{ asset('storage/fotos/' . $user->foto) }}" alt="foto do usuário" class="img-us" />
+            @else
+                <img src="{{ asset('IMG/user-icon.png') }}" alt="foto padrão" class="img-us" />
+            @endif
+        </div>
+        
+        <form action="{{ route('perfil.foto') }}" method="POST" enctype="multipart/form-data" style="text-align: center; margin-top: 10px;">
+    @csrf
+    <input type="file" name="foto" id="foto" style="display: none;">
+    <label for="foto" style="display: inline-block; background-color: #ffffff22; color: #fff; padding: 8px 15px; border-radius: 6px; cursor: pointer;">
+        Alterar foto de perfil
+    </label>
+    <button type="submit">Enviar foto</button> <!-- botão temporário -->
+</form>
+
 
         <div class="info-us">
             <h1 style="color: #fff;">{{ $user->nome }}</h1>
         </div>
     </section>
-    
+
     <section class="info-b">
         <div class="info-c">
             <h3><b>Informações</b></h3>

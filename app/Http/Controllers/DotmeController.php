@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FormRequestCadastro;
 use App\Models\Dotme;
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Session;
@@ -48,4 +48,28 @@ class DotmeController extends Controller
     Session::forget('user');
     return redirect()->route('index'); // ou rota de login
 }
+
+
+public function salvarFoto(Request $request)
+{
+    $user = Session::get('user'); // ou Auth::user() se estiver usando Auth
+
+    if ($request->hasFile('foto')) {
+        $arquivo = $request->file('foto');
+        $nomeArquivo = time() . '_' . $arquivo->getClientOriginalName();
+
+        $salvou = Storage::disk('public')->putFileAs('fotos', $arquivo, $nomeArquivo);
+
+        if ($salvou) {
+            $user->foto = $nomeArquivo;
+            $user->save();
+
+            // Atualiza a sessão para refletir a nova foto
+            Session::put('user', $user);
+        }
+    }
+
+    return redirect()->back()->with('success', 'Foto de perfil atualizada com sucesso.');
+}
+
 }

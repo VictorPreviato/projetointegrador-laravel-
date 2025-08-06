@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\DotmeController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Session;
 use App\Models\Dotme;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+
+
+Route::post('/perfil/foto', [DotmeController::class, 'salvarFoto'])->name('perfil.foto');
 
 Route::get('/', function () {
     return view('index');
