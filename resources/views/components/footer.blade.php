@@ -197,6 +197,38 @@ profile.onclick = function () {
   </script>
 
 
+
+  <script>
+   // Filtro de CEP
+function buscarCEP() {
+  const cep = document.getElementById('cep').value.replace(/\D/g, '');
+
+  fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.erro) {
+        alert("CEP não encontrado.");
+        document.getElementById('cidade').value = '';
+        document.getElementById('estado').value = '';
+      } else {
+        document.getElementById('cidade').value = data.localidade;
+        document.getElementById('estado').value = data.uf;
+      }
+    })
+    .catch(() => alert("Erro ao buscar CEP."));
+}
+
+
+  // Botão ver mais no feed desaparecidos
+function mostrarMais() {
+  document.querySelectorAll('.foto.hidden').forEach(card => {
+    card.classList.remove('hidden');
+  });
+  document.querySelector('.load-more').style.display = 'none';
+}
+  </script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 
 </body>
