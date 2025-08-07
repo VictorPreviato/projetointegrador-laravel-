@@ -1290,7 +1290,8 @@ form textarea {
   text-align: center;  
 }
  
-/* Cabeçalho do perfil com imagem e info lado a lado */
+/* <<<<<Perfil Usuário>>>>> */
+
 .perfil-h{
   display: flex;
   align-items: center;
@@ -1300,6 +1301,36 @@ form textarea {
   padding: 50px;
   margin-bottom: 30px;  
 }
+
+#inserir-ft{
+    background-color: #ffffff22;
+    width: 150px;
+    padding: 5px 5px;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+#inserir-ft:hover{
+    background-color: rgba(255, 255, 255, 0.2) ;
+}
+
+#enviar-ft{
+    background-color: #ffffff22;
+    width: 150px;
+    padding: 5px 5px;
+    border-radius: 6px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+#enviar-ft:hover{
+    background-color: rgba(255, 255, 255, 0.2)
+}
+
  
 .info-us{
   margin-left: 20px;
@@ -2218,6 +2249,10 @@ input[name=confirmar-nsenha]{
         border-radius: 20px;
     }
 
+    .img-us{
+        width: 60px;
+        height: 60px;
+    }
 
     #bcar1 {
         width: 22vw;
@@ -2456,6 +2491,10 @@ input[name=confirmar-nsenha]{
 .bt-senha{
     display: block;
     gap: 5vw; 
+}
+
+#email-password{
+    height: 55px;
 }
 
 /* Mobile = Altsenha(Redefinição de senha) */
