@@ -57,7 +57,10 @@ Para este projeto, o arquivo .env **não está incluído no .gitignore**, por tr
 #### 5. Rode as migrations para criar as tabelas no banco
 php artisan migrate
 
-#### 6. Inicie o servidor de desenvolvimento
+#### 6. Link simbólico de imagens públicas
+php artisan storage:link
+
+#### 7. Inicie o servidor de desenvolvimento
 php artisan serve
 
 A aplicação estará disponível em: http://localhost:8000
