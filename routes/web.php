@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Session;
 use App\Models\Dotme;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostagemController;
 
 
 Route::post('/perfil/foto', [DotmeController::class, 'salvarFoto'])->name('perfil.foto');
@@ -19,6 +20,10 @@ Route::get('/perfil', function () {
     }
     return view('perfil');
 })->name('perfil');
+
+// Postagem
+Route::get('/postagem', [PostagemController::class, 'create'])->name('postagem.create');
+Route::post('/postagem', [PostagemController::class, 'store'])->name('postagem.store');
 
 // Header
 Route::get('/cadastro', function () {

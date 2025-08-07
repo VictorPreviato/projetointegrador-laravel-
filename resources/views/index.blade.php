@@ -1,5 +1,11 @@
 @include("components.header")
 
+@if(session('success'))
+    <script>
+        alert("{{ session('success') }}");
+    </script>
+@endif
+
 <!-- Carrossel topo -->
 
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
@@ -46,7 +52,7 @@
 <div id="posthome">
     <div id="poshomecontent">
         <h3 style="color: white;">Seu companheiro sumiu ou você precisa doá-lo?</h3>
-        <button onclick="document.location='postagem.php' ">Clique aqui</button>
+        <button onclick="document.location='postagem' ">Clique aqui</button>
     </div>
 </div>
 
