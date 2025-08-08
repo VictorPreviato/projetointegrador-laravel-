@@ -13,12 +13,25 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
+Route::get('/config-perfil', function () {
+    if (!Session::has('user')) {
+        return redirect()->route('login')
+            ->with('error', 'Faça login para acessar as configurações do perfil.');
+    }
+
+    $user = Session::get('user'); 
+    return view('config-perfil', compact('user'));
+})->name('config-perfil');
+
+Route::put('/usuario/update', [DotmeController::class, 'update'])->name('usuario.update');
+
 Route::get('/perfil', function () {
     if (!Session::has('user')) {
         return redirect()->route('login')->with('error', 'Faça login para acessar o perfil.');
     }
     return view('perfil');
 })->name('perfil');
+
 
 // Header
 Route::get('/cadastro', function () {
