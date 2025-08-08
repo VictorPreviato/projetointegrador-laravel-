@@ -19,6 +19,7 @@ return new class extends Migration
         $table->string('tem_nome');
         $table->string('nome_pet')->nullable();
         $table->string('raca')->nullable();
+        $table->string('porte');
         $table->string('genero');
         $table->string('idade')->nullable();
         $table->string('contato');

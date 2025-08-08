@@ -215,7 +215,6 @@ function buscarCEP() {
         document.getElementById('estado').value = data.uf;
       }
     })
-    .catch(() => alert("Erro ao buscar CEP."));
 }
 
 
@@ -227,6 +226,18 @@ function mostrarMais() {
   document.querySelector('.load-more').style.display = 'none';
 }
   </script>
+
+  <script>
+function mostrarMais() {
+  const fotos = document.querySelectorAll('.foto.hidden');
+  for (let i = 0; i < 6 && i < fotos.length; i++) {
+    fotos[i].classList.remove('hidden');
+  }
+  if (document.querySelectorAll('.foto.hidden').length === 0) {
+    document.querySelector('.load-more').style.display = 'none';
+  }
+}
+</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>

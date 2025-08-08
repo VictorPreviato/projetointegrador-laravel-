@@ -15,6 +15,7 @@ class Postagem extends Model
         'tem_nome',
         'nome_pet',
         'raca',
+        'porte',
         'genero',
         'idade',
         'contato',

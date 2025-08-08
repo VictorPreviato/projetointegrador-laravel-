@@ -35,9 +35,8 @@ Route::get('/log', function () {
 Route::get('/adote', function () {
     return view('adote');
 });
-Route::get('/desaparecidos', function () {
-    return view('desaparecidos');
-});
+
+Route::get('/desaparecidos', [PostagemController::class, 'desaparecidos'])->name('desaparecidos');
 
 // Footer
 Route::get('/sobre', function () {

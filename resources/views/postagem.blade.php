@@ -166,12 +166,23 @@ document.addEventListener('DOMContentLoaded', function() {
         <input type="text" id="nome_pet" name="nome_pet" placeholder="Digite o nome do pet" />
       </div>
  
-       <label>Raça</label>
+       <label>Porte do animal</label>
       @if($errors->has('raca'))
       <span style="color:red;">{{ $errors->first('raca') }}</span>
       @endif
         <input type="text" name="raca" placeholder="Ex: Labrador, Vira-lata, Pintcher" />
-      
+
+        <label for="porte">Porte do animal</label>
+        @if($errors->has('porte'))
+        <span style="color:red;">{{ $errors->first('porte') }}</span>
+        @endif
+        <select name="porte" id="porte">
+          <option value="">Selecione</option>
+          <option value="grande">Grande</option>
+          <option value="medio">Médio</option>
+          <option value="pequeno">Pequeno</option>
+        </select>
+ 
 
         <div class="campos-lado-a-lado">
           <div>
