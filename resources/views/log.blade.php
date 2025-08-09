@@ -21,7 +21,7 @@
  
     <div class="row">
         <div class="col-12">
-            <input type="email" name="email" placeholder="E-mail" required>
+            <input id="email-password" type="email" name="email" placeholder="E-mail" required>
         </div>
     </div>
  
