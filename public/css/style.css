@@ -2742,8 +2742,16 @@ input[name=confirmar-nsenha]{
         padding: 0 10px;
     }
 
+    /* Mobile - Config-user */
 
+    .info-usuario h1{
+        font-size: large;
+    }
 
+    .perfil img{
+        width: 100px;
+        height: 100px;
+    }
 
     /* Mobile - Footer */
 
