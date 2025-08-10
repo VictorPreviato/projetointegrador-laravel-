@@ -93,8 +93,8 @@
      <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">  
 
       <li><a class="a-perfil-mob" href="{{ route('perfil') }}"><i class="ph-bold ph-user"></i>&nbsp;Meu perfil</a></li>
-      <li><a class="a-perfil-mob" href="#"><i class="ph-bold ph-gear-six"></i>&nbsp;Configurações</a></li>
-      <li><a class="a-perfil-mob" href="{{ route('config-perfil') }}"><i class="ph-bold ph-question"></i>&nbsp;Ajuda</a></li>
+      <li><a class="a-perfil-mob" href="{{ route('config-perfil') }}"><i class="ph-bold ph-gear-six"></i>&nbsp;Configurações</a></li>
+      <li><a class="a-perfil-mob" href=""><i class="ph-bold ph-question"></i>&nbsp;Ajuda</a></li>
       <li><a class="a-perfil-mob" href="{{ route('logout') }}"><i class="ph-bold ph-sign-out"></i>&nbsp;Sair</a></li>
     </ul>
  

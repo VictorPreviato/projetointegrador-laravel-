@@ -41,33 +41,33 @@ Route::post('/postagem', [PostagemController::class, 'store'])->name('postagem.s
 // Header
 Route::get('/cadastro', function () {
     return view('cadastro');
-});
+})->name('cadastro');
 Route::get('/log', function () {
     return view('log');
-});
+})->name('log');
 Route::get('/adote', function () {
     return view('adote');
-});
+})->name('adote');
 
 Route::get('/desaparecidos', [PostagemController::class, 'desaparecidos'])->name('desaparecidos');
 
 // Footer
 Route::get('/sobre', function () {
     return view('sobre');
-});
+})->name('sobre');
 Route::get('/contato', function () {
     return view('contato');
-});
+})->name('contato');
 Route::get('/apoie', function () {
     return view('apoie');
-});
+})->name('apoie');
 Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
 
 Route::get('/redes', function () {
     return view('redes');
-});
+})->name('redes');
 
  Route::post('dotmelogin', [DotmeController::class,
  'login'])->name('dotmelogin.post');
