@@ -12,15 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cadastro', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome');
-            $table->date('data_nasc');
-            $table->string('cpf')->unique();
-            $table->string('telefone');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->timestamps();
-        });
+        $table->id();
+        $table->string('nome');
+        $table->date('data_nasc');
+        $table->string('cpf')->unique();
+        $table->string('telefone');
+        $table->string('email')->unique();
+        $table->string('password');
+        $table->string('foto')->nullable(); // adicionada aqui
+        $table->rememberToken(); // adicionada aqui
+        $table->timestamps();
+    });
     }
 
         public function down(): void

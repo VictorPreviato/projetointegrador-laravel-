@@ -129,10 +129,10 @@
       <div class="offcanvas-body mt-4 ms-3">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link" href="adote">Adote um Pet</a>
+            <a class="nav-link" href="{{ route('adote')}}">Adote um Pet</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="dasaparecidos">Desaparecidos</a>
+            <a class="nav-link" href="{{ route('desaparecidos')}}">Desaparecidos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="sobre">Sobre o Projeto</a>

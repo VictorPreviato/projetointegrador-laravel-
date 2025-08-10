@@ -8,9 +8,18 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
 
 class DotmeController extends Controller
 {
+
+    function currentUser()
+{
+    return Auth::user() ?? Session::get('user');
+}
+
+
     // Criação de novo usuário
     public function create(FormRequestCadastro $request){
         if($request->method() == "POST"){
@@ -25,37 +34,47 @@ class DotmeController extends Controller
 
     // Login e logout do usuário
      public function login(LoginRequest $request)
-    {
-        if ($request->isMethod('post')) {
-            $data = $request->all();
- 
-            $user = Dotme::where('email', $data['email'])->first();
- 
-            if ($user === null) {
-                return redirect()->back()->with('error', 'Usuário não encontrado');
-            }
- 
-            if (!password_verify($data['password'], $user->password)) {
-                return redirect()->back()->with('error', 'Senha incorreta');
-            }
-        // Armazena o usuário na sessão
-        Session::put('user', $user);
+{
+    if ($request->isMethod('post')) {
+        $data = $request->only('email', 'password');
 
-        return redirect()->route('index'); // Redireciona para a home logado
+        // Tentativa de login usando Auth
+        $remember = $request->has('remember'); // checkbox "lembrar de mim"
+
+        if (Auth::guard('web')->attempt($data, $remember)) {
+            // Login bem-sucedido
+            $user = Auth::user();
+            Session::put('user', $user); // mantém compatibilidade com sua lógica atual
+
+            return redirect()->route('index');
+        }
+
+        // Caso não logue, tratamos como você já faz
+        $user = Dotme::where('email', $data['email'])->first();
+
+        if ($user === null) {
+            return redirect()->back()->with('error', 'Usuário não encontrado');
+        }
+
+        return redirect()->back()->with('error', 'Senha incorreta');
     }
 }
 
-     public function logout()
+ public function logout(Request $request)
 {
-    Session::forget('user');
-    return redirect()->route('index'); // ou rota de login
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect()->route('index');
 }
+
 
 
 // Inserir e salvar fotos do usuário no banco de dados, processo feito na tela de perfil
 public function salvarFoto(Request $request)
 {
-    $user = Session::get('user'); // ou Auth::user() se estiver usando Auth
+    $user = Auth::user(); // ou Auth::user() se estiver usando Auth
 
     if ($request->hasFile('foto')) {
         $arquivo = $request->file('foto');
@@ -65,6 +84,7 @@ public function salvarFoto(Request $request)
 
         if ($salvou) {
             $user->foto = $nomeArquivo;
+            /** @var \App\Models\Dotme|null $user */
             $user->save();
 
             // Atualiza a sessão para refletir a nova foto
@@ -79,13 +99,13 @@ public function salvarFoto(Request $request)
 // Método para atualizar dados do usuário na tela config-perfil
 public function update(Request $request)
 {
-    $user = Session::get('user');
+    /** @var \App\Models\Dotme|null $user */
+    $user = Auth::user();
 
     if (!$user) {
         return redirect()->route('login')->with('error', 'Usuário não autenticado.');
     }
 
-    // Validação (pode usar FormRequest também)
     $request->validate([
         'nome' => ['required', 'string', 'max:255', 'regex:/^(?!.*(<script|<\/script|<\?|<\s*\/?\s*php)).*$/i'],
         'telefone' => ['required', 'regex:/^\(\d{2}\)\s?\d{4,5}-\d{4}$/'],
@@ -93,15 +113,13 @@ public function update(Request $request)
         'data_nasc' => ['required', 'date'],
     ]);
 
-    // Atualiza no banco
     $user->nome = $request->nome;
     $user->telefone = $request->telefone;
     $user->email = $request->email;
     $user->data_nasc = $request->data_nasc;
     $user->save();
 
-    // Atualiza a sessão
-    Session::put('user', $user);
+    // Não precisa atualizar a sessão manualmente, o Auth já faz isso
 
     return redirect()->route('config-perfil')->with('success', 'Perfil atualizado com sucesso!');
 }
