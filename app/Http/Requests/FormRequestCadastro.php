@@ -17,10 +17,10 @@ class FormRequestCadastro extends FormRequest
 
         if($this->method() == 'POST'){
             $request = [
-                'nome' => ['required', 'string', 'max:255', 'regex:/^(?!.*(<script|<\/script|<\?|<\s*\/?\s*php)).*$/i'],
+                'name' => ['required', 'string', 'max:255', 'regex:/^(?!.*(<script|<\/script|<\?|<\s*\/?\s*php)).*$/i'],
                 'telefone' => ['required', 'regex:/^\(\d{2}\)\s?\d{4,5}-\d{4}$/'],
-                'cpf' => ['required', 'regex:/^\d{3}\.\d{3}\.\d{3}-\d{2}$/', 'unique:cadastro,cpf'],
-                'email' => ['required', 'email', 'confirmed', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'unique:cadastro,email'],
+                'cpf' => ['required', 'regex:/^\d{3}\.\d{3}\.\d{3}-\d{2}$/', 'unique:users,cpf'],
+                'email' => ['required', 'email', 'confirmed', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'unique:users,email'],
                 'password' => ['required', 'max:100', 'confirmed', 'regex:/^(?!.*(<script|<\/script|<\?|<\s*\/?\s*php)).*$/i'],
 
             ];
@@ -32,7 +32,7 @@ class FormRequestCadastro extends FormRequest
     public function messages(): array
 {
     return [
-        'nome' => 'O formato do campo de nome não é válido.',
+        'name' => 'O formato do campo de nome não é válido.',
         'cpf.unique' => 'Este CPF já foi cadastrado.',
         'email.unique' => 'Este e-mail já foi cadastrado.',
         'email.confirmed' => 'O campo de confirmação do e-mail não corresponde.',

@@ -7,31 +7,27 @@ use App\Models\Dotme;
 use Illuminate\Support\Facades\Route;
 
 
-Route::post('/perfil/foto', [DotmeController::class, 'salvarFoto'])->name('perfil.foto');
 
 Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/config-perfil', function () {
-    if (!Session::has('user')) {
-        return redirect()->route('login')
-            ->with('error', 'Faça login para acessar as configurações do perfil.');
-    }
+Route::middleware('auth')->group(function () {
+    Route::get('/config-perfil', function () {
+        $user = Auth::user();
+        return view('config-perfil', compact('user'));
+    })->name('config-perfil');
 
-    $user = Session::get('user'); 
-    return view('config-perfil', compact('user'));
-})->name('config-perfil');
+    Route::put('/usuario/update', [DotmeController::class, 'update'])->name('usuario.update');
+    
+    Route::post('/perfil/foto', [DotmeController::class, 'salvarFoto'])->name('perfil.foto');
 
-Route::put('/usuario/update', [DotmeController::class, 'update'])->name('usuario.update');
+    Route::get('/perfil', function () {
+        return view('perfil', ['user' => Auth::user()]);
+    })->name('perfil');
 
-Route::get('/perfil', function () {
-    if (!Session::has('user')) {
-        return redirect()->route('login')->with('error', 'Faça login para acessar o perfil.');
-    }
-    return view('perfil');
-})->name('perfil');
-
+    Route::get('/logout', [DotmeController::class, 'logout'])->name('logout');
+});
 
 // Header
 Route::get('/cadastro', function () {
@@ -39,7 +35,7 @@ Route::get('/cadastro', function () {
 });
 Route::get('/log', function () {
     return view('log');
-});
+})->name('log');
 Route::get('/adote', function () {
     return view('adote');
 });
@@ -75,8 +71,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Logoff
-Route::get('/logout', [DotmeController::class, 'logout'])->name('logout');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

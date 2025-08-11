@@ -2,7 +2,7 @@
 
 <main class="profile-cont">
     @php
-        $user = Session::get('user');
+        $user = Auth::user();
     @endphp
 
     <section class="perfil-h">
@@ -21,7 +21,7 @@
         
    <div class="info-us">
             
-            <h1 style="color: #fff;">{{ $user->nome }}</h1>
+            <h1 style="color: #fff;">{{ $user->name }}</h1>
             <!-- Link para alterar foto -->
 <a href="#" class="alterar-foto" onclick="document.getElementById('inputFoto').click(); return false;">
     Alterar foto de perfil

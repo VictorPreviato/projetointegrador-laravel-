@@ -15,7 +15,7 @@
             <div class="text-danger">{{ $message }}</div>
         @enderror
         <div class="col-6">
-            <input type="text" placeholder="Nome Completo*" required name="nome" value="{{ old('nome') }}">
+            <input type="text" placeholder="Nome Completo*" required name="name" value="{{ old('name') }}">
         </div>
         <div class="col-6">
             <input type="date" required name="data_nasc" required value="{{ old('data_nasc') }}">
