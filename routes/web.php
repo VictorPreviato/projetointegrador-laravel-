@@ -3,8 +3,9 @@
 use App\Http\Controllers\DotmeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Session;
-use App\Models\Dotme;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostagemController;
 
 
 
@@ -29,37 +30,40 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [DotmeController::class, 'logout'])->name('logout');
 });
 
+// Postagem
+Route::get('/postagem', [PostagemController::class, 'create'])->name('postagem.create');
+Route::post('/postagem', [PostagemController::class, 'store'])->name('postagem.store');
+
 // Header
 Route::get('/cadastro', function () {
     return view('cadastro');
-});
+})->name('cadastro');
 Route::get('/log', function () {
     return view('log');
 })->name('log');
 Route::get('/adote', function () {
     return view('adote');
-});
-Route::get('/desaparecidos', function () {
-    return view('desaparecidos');
-});
+})->name('adote');
+
+Route::get('/desaparecidos', [PostagemController::class, 'desaparecidos'])->name('desaparecidos');
 
 // Footer
 Route::get('/sobre', function () {
     return view('sobre');
-});
+})->name('sobre');
 Route::get('/contato', function () {
     return view('contato');
-});
+})->name('contato');
 Route::get('/apoie', function () {
     return view('apoie');
-});
+})->name('apoie');
 Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
 
 Route::get('/redes', function () {
     return view('redes');
-});
+})->name('redes');
 
  Route::post('dotmelogin', [DotmeController::class,
  'login'])->name('dotmelogin.post');

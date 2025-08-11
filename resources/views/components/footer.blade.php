@@ -2,8 +2,8 @@
   <img src="IMG/LOGOS/DotPetLogT.png" alt="" class="logofoot">
   <div class="linkfoot">
     <a href="">Campanhas</a>
-    <a href="contato.php">Contato</a>
-    <a href="sobre.php">Sobre o Projeto</a>
+    <a href="{{ route('contato') }}">Contato</a>
+    <a href="{{ route('sobre') }}">Sobre o Projeto</a>
     <a href="{{ route('faq') }}">FAQ</a>
     <a href=""></a>
     <div style="text-align: center; margin-top:5%"><?php echo "© " . date("Y") . " DotMe | Todos os direitos reservados " ?></div>
@@ -195,6 +195,49 @@ profile.onclick = function () {
       }
     });
   </script>
+
+
+
+  <script>
+   // Filtro de CEP
+function buscarCEP() {
+  const cep = document.getElementById('cep').value.replace(/\D/g, '');
+
+  fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.erro) {
+        alert("CEP não encontrado.");
+        document.getElementById('cidade').value = '';
+        document.getElementById('estado').value = '';
+      } else {
+        document.getElementById('cidade').value = data.localidade;
+        document.getElementById('estado').value = data.uf;
+      }
+    })
+}
+
+
+  // Botão ver mais no feed desaparecidos
+function mostrarMais() {
+  document.querySelectorAll('.foto.hidden').forEach(card => {
+    card.classList.remove('hidden');
+  });
+  document.querySelector('.load-more').style.display = 'none';
+}
+  </script>
+
+  <script>
+function mostrarMais() {
+  const fotos = document.querySelectorAll('.foto.hidden');
+  for (let i = 0; i < 6 && i < fotos.length; i++) {
+    fotos[i].classList.remove('hidden');
+  }
+  if (document.querySelectorAll('.foto.hidden').length === 0) {
+    document.querySelector('.load-more').style.display = 'none';
+  }
+}
+</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>

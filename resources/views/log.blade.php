@@ -8,12 +8,14 @@
  
 <!-- Mensagem de erro -->
  
-@if (session('error'))
+@if ($errors->any())
     <div style="color: red; text-align: center; margin-bottom: 1rem;">
-        {{ session('error') }}
+        @foreach ($errors->all() as $error)
+            <div>{{ $error }}</div>
+        @endforeach
     </div>
 @endif
- 
+
  
 <!-- Formulário único envolvendo os campos -->
 <form action="{{ route('dotmelogin.post') }}" method="POST">
