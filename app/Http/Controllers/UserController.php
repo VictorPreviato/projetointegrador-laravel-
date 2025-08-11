@@ -51,7 +51,8 @@ class UserController extends Controller
 
             $nomeArquivo = time() . '_' . $request->file('foto')->getClientOriginalName();
             $request->file('foto')->storeAs('public/fotos', $nomeArquivo);
-            $user->foto = $nomeArquivo;
+            $user->foto = $nomeArquivo; // só nome do arquivo, sem 'fotos/' na frente
+
         }
 
         $user->save();

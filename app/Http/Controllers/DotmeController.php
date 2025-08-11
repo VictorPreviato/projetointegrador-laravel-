@@ -39,7 +39,7 @@ class DotmeController extends Controller
             Session::put('user', $user);
             Session::put('user_id', $user->id);
 
-            return redirect()->route('index')->with('success', 'Login realizado com sucesso!');
+            return redirect()->route('index');
         } else {
             // Verifica se o email existe
             $userExists = User::where('email', $request->email)->exists();
@@ -98,4 +98,29 @@ class DotmeController extends Controller
 
         return redirect()->back()->with('success', 'Foto de perfil removida com sucesso!');
     }
+
+    public function update(Request $request)
+{
+    /** @var \App\Models\Dotme|null $user */
+    $user = Auth::user();
+
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'Usuário não autenticado.');
+    }
+
+    $request->validate([
+        'name' => ['required', 'string', 'max:255', 'regex:/^(?!.*(<script|<\/script|<\?|<\s*\/?\s*php)).*$/i'],
+        'telefone' => ['required', 'regex:/^\(\d{2}\)\s?\d{4,5}-\d{4}$/'],
+        'email' => ['required', 'email', 'confirmed', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'unique:users,email,' . $user->id],
+        'data_nasc' => ['required', 'date'],
+    ]);
+
+    $user->name = $request->name;
+    $user->telefone = $request->telefone;
+    $user->email = $request->email;
+    $user->data_nasc = $request->data_nasc;
+    $user->save();
+
+    return redirect()->route('config-perfil')->with('success', 'Perfil atualizado com sucesso!');
+}
 }
