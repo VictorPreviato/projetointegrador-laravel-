@@ -30,8 +30,13 @@ Route::middleware('auth')->group(function () {
 });
 
 // Postagem
-Route::get('/postagem', [PostagemController::class, 'create'])->name('postagem.create');
-Route::post('/postagem', [PostagemController::class, 'store'])->name('postagem.store');
+Route::middleware('auth')->group(function () {
+    Route::get('/postagem', [PostagemController::class, 'create'])->name('postagem.create');
+    Route::post('/postagem', [PostagemController::class, 'store'])->name('postagem.store');
+});
+Route::get('/log', function () {
+    return view('log');
+})->name('log');
 
 // Header
 Route::get('/cadastro', function () {

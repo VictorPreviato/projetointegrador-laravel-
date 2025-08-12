@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <input type="text" id="nome_pet" name="nome_pet" placeholder="Digite o nome do pet" />
       </div>
  
-       <label>Porte do animal</label>
+       <label>Raça</label>
       @if($errors->has('raca'))
       <span style="color:red;">{{ $errors->first('raca') }}</span>
       @endif
