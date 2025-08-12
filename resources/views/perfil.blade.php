@@ -40,23 +40,36 @@
 
     </section>
 
-    <section class="info-b">
-        <div class="info-c">
+  
             <h3><b>Informações</b></h3>
             <p>{{ $user->telefone ?? '(00) 00000-0000' }}</p>
             <p>{{ $user->email }}</p>
-        </div>
+    
 
-        <div class="post-listas">
             <h3><b>Post realizados</b></h3>
             {{-- Em breve: listar posts do usuário --}}
-        </div>
-    </section>
 
-    <section class="info-c" style="margin-top: 40px;">
-        <h3><b>Depoimentos realizados</b></h3>
-        {{-- Em breve: listar depoimentos do usuário --}}
-    </section>
+
+   
 </main>
+
+<div class="dep-container">
+ 
+<h2 class="h2-dep">Adicione um novo depoimento</h2>
+ 
+<form >
+   
+    <label class="label-dep"  for="titulo">Título*</label>
+    <input class="input-dep" type="text" name="titulo" required>
+ 
+    <label class="label-dep" for="depoimento">Escreva seu depoimento*</label>
+    <textarea id="depoimento" name="depoimento" maxlength="500" required></textarea>
+ 
+   
+ 
+    <button class="button-dep" type="submit">Postar</button>
+ 
+  </form>
+</div>
 
 @include("components.footer")
