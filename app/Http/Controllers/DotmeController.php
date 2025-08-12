@@ -66,12 +66,13 @@ class DotmeController extends Controller
     // Remover foto de perfil
     public function removerFoto()
     {
-        /** @var User|null $user */
+        
         $user = Auth::user();
 
         if ($user->foto && Storage::disk('public')->exists($user->foto)) {
             Storage::disk('public')->delete($user->foto);
             $user->foto = null;
+            /** @var User|null $user */
             $user->save();
            
         }
@@ -118,7 +119,6 @@ class DotmeController extends Controller
 
     public function atualizarPerfil(Request $request)
     {
-        /** @var User|null $user */
         $user = Auth::user();
 
         // Validação dos campos
@@ -131,6 +131,8 @@ class DotmeController extends Controller
 
         // Atualiza campos
         $user->name = $request->name;
+        $user->telefone= $request->telefone;
+        $user->data_nasc = $request->data_nasc;
         $user->email = $request->email;
 
         if ($request->filled('password')) {
@@ -141,7 +143,7 @@ class DotmeController extends Controller
         if ($request->hasFile('foto')) {
             // Apaga a foto antiga, se existir
             if ($user->foto && Storage::exists('public/fotos/' . $user->foto)) {
-                Storage::disk('public')->delete('fotos/' . $user->foto);
+                Storage::delete('public/fotos/' . $user->foto);
             }
 
             $nomeArquivo = time() . '_' . $request->file('foto')->getClientOriginalName();
@@ -149,15 +151,13 @@ class DotmeController extends Controller
             $user->foto = $nomeArquivo; // só nome do arquivo, sem 'fotos/' na frente
 
         }
-
+         /** @var User|null $user */
         $user->save();
-
         return redirect()->route('config-perfil')->with('success', 'Perfil atualizado com sucesso!');
-    }
+    }    
 
     public function salvarFoto(Request $request)
 {
-    /** @var User|null $user */
     $user = Auth::user();
 
     if (!$user) {
@@ -175,6 +175,7 @@ class DotmeController extends Controller
 
     // Salva nova foto e armazena caminho completo
     $user->foto = $request->file('foto')->store('fotos', 'public');
+    /** @var User|null $user */ 
     $user->save();
   
     return redirect()->back()->with('success', 'Foto de perfil atualizada com sucesso!');
