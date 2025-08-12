@@ -15,6 +15,21 @@
 <a href="#" class="alterar-foto" onclick="document.getElementById('inputFoto').click(); return false;">
     Alterar foto de perfil
 </a>
+@if($user->foto)
+
+   <a href="#" class="remover-foto" 
+   onclick="event.preventDefault(); 
+            if(confirm('Confirma remoção da foto de perfil?')) { 
+                document.getElementById('formRemoverFoto').submit(); 
+            }">
+    Remover foto de perfil
+</a>
+
+<form id="formRemoverFoto" action="{{ route('perfil.removerFoto') }}" method="POST" style="display: none;">
+    @csrf
+</form>
+@endif
+
 
 <!-- Formulário escondido -->
 <form id="formFoto" action="{{ route('perfil.foto') }}" method="POST" enctype="multipart/form-data" style="display: none;">
@@ -24,6 +39,7 @@
 
       </div>
     </div>
+    
 
    <form action="{{ route('usuario.update') }}" method="POST">
     @csrf

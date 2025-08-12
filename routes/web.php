@@ -22,10 +22,6 @@ Route::middleware('auth')->group(function () {
         return view('config-perfil', compact('user'));
     })->name('config-perfil');
 
-    Route::put('/usuario/update', [DotmeController::class, 'update'])->name('usuario.update');
-    
-    Route::post('/perfil/foto', [DotmeController::class, 'salvarFoto'])->name('perfil.foto');
-
     Route::get('/perfil', function () {
         return view('perfil', ['user' => Auth::user()]);
     })->name('perfil');
@@ -33,6 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [DotmeController::class, 'logout'])->name('logout');
 
     Route::post('/depoimentos', [DepoimentoController::class, 'store'])->name('depoimentos.store');
+
+    Route::put('/usuario/update', [DotmeController::class, 'atualizarPerfil'])->name('usuario.update');
+    Route::post('/perfil/foto', [DotmeController::class, 'salvarFoto'])->name('perfil.foto');
+    Route::post('/perfil/remover-foto', [DotmeController::class, 'removerFoto'])->name('perfil.removerFoto');
+
+    
  
 });
 

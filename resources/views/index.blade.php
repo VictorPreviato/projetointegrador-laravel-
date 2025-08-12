@@ -142,62 +142,52 @@
 
 <!-- Depoimentos -->
 <h1 class="h1depoi">Depoimentos</h1>
+
 <div class="depoi">
     <div class="tdepoi">
         <h2>Adotar é transformar vidas</h2>
         <p>Adotar um animal é um gesto de amor que muda tudo — pra quem é adotado e pra quem adota. É acolher, cuidar e, no fim, descobrir que o coração sempre tem espaço pra mais amor (e mais patinhas também).</p>
     </div>
+
     <div class="cardepoi">
         <div class="cards-box">
+
+            <!-- Card inicial invisível (base para animação) -->
             <div class="card hide">
                 <div class="content-placeholder">
                     <div class="row">
                         <div class="img-text"></div>
-                        <h3>Lucas</h3>
+                        <h3>Usuário</h3>
                         <div class="img" data-letter=""></div>
                     </div>
-                    <p>“A um mês adotei um gato na Dotme, isso foi a melhor coisa que já fiz, bolt está a tão pouco tempo comigo e já é parte da minha família”</p>
+                    <p>“Exemplo de depoimento”</p>
                 </div>
             </div>
+
+            <!-- Cards dinâmicos dos depoimentos -->
             @foreach($depoimentos as $dep)
-            <div class="card">
-                <div class="content-placeholder">
-                    <div class="row">
-                        <h3>{{ $dep->user->name }}</h3>
-                        <div class="img"> @if($dep->user->foto)
-                            <img src="{{ asset('storage/' . $dep->user->foto) }}" alt="Foto de {{ $dep->user->name }}" class="img">
-                        @else
-                            <div class="img" data-letter="{{ strtoupper(substr($dep->user->name,0,1)) }}"></div>
-                        @endif</div>
+                <div class="card">
+                    <div class="content-placeholder">
+                        <div class="row">
+                            <h3>{{ $dep->user->name }}</h3>
+                            @if($dep->user->foto)
+                                <div class="img">
+                                    <img src="{{ asset('storage/' . $dep->user->foto) }}" alt="Foto de {{ $dep->user->name }}" class="img">
+                                </div>
+                            @else
+                                <div class="img" data-letter="{{ strtoupper(substr($dep->user->name, 0, 1)) }}"></div>
+                            @endif
+                        </div>
+                        <h5>{{ $dep->titulo }}</h5>
+                        <p>“{{ $dep->depoimento }}”</p>
                     </div>
-                    <h5>{{ $dep->titulo }}</h5>
-                    <p>“{{ $dep->depoimento }}”</p>
                 </div>
-                @endforeach
-            </div>
-            <div class="card">
-                <div class="content-placeholder">
-                    <div class="row">
-                        <h3>Nome</h3>
-                        <div class="img" data-letter="M"></div>
-                    </div>
-                    <h5>Título</h5>
-                    <p>"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium consectetur a voluptas ducimus odit"</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="content-placeholder">
-                    <div class="row">
-                        <h3>Nome</h3>
-                        <div class="img" data-letter="S"></div>
-                    </div>
-                    <h5>Título</h5>
-                    <p>“Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium consectetur a voluptas ducimus odia”</p>
-                </div>
-            </div>
+            @endforeach
+
         </div>
     </div>
-</div> 
+</div>
+
 
 <!-- Feedback -->
 <div class="comentario">

@@ -66,12 +66,14 @@ class DotmeController extends Controller
     // Remover foto de perfil
     public function removerFoto()
     {
+        /** @var User|null $user */
         $user = Auth::user();
 
         if ($user->foto && Storage::disk('public')->exists($user->foto)) {
             Storage::disk('public')->delete($user->foto);
             $user->foto = null;
             $user->save();
+           
         }
 
         return redirect()->back()->with('success', 'Foto de perfil removida com sucesso!');
@@ -79,7 +81,7 @@ class DotmeController extends Controller
 
     public function update(Request $request)
 {
-    /** @var \App\Models\Dotme|null $user */
+    /** @var \App\Models\User|null $user */
     $user = Auth::user();
 
     if (!$user) {
@@ -116,6 +118,7 @@ class DotmeController extends Controller
 
     public function atualizarPerfil(Request $request)
     {
+        /** @var User|null $user */
         $user = Auth::user();
 
         // Validação dos campos
@@ -138,7 +141,7 @@ class DotmeController extends Controller
         if ($request->hasFile('foto')) {
             // Apaga a foto antiga, se existir
             if ($user->foto && Storage::exists('public/fotos/' . $user->foto)) {
-                Storage::delete('public/fotos/' . $user->foto);
+                Storage::disk('public')->delete('fotos/' . $user->foto);
             }
 
             $nomeArquivo = time() . '_' . $request->file('foto')->getClientOriginalName();
@@ -154,6 +157,7 @@ class DotmeController extends Controller
 
     public function salvarFoto(Request $request)
 {
+    /** @var User|null $user */
     $user = Auth::user();
 
     if (!$user) {
@@ -172,7 +176,7 @@ class DotmeController extends Controller
     // Salva nova foto e armazena caminho completo
     $user->foto = $request->file('foto')->store('fotos', 'public');
     $user->save();
-
+  
     return redirect()->back()->with('success', 'Foto de perfil atualizada com sucesso!');
 }
 }

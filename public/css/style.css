@@ -598,10 +598,19 @@ input[type=search] {
     position: absolute;
     right: 2%;
     top: 2%;
-    background: var(--cor-5);
     width: calc(25px + 2vw);
     height: calc(25px + 2vw);
     border-radius: 50%;
+}
+
+.content-placeholder .row .img.placeholder {
+    background: var(--cor-5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
 }
 
 .cards-box .card.hide {
@@ -1441,6 +1450,15 @@ button:hover {
   margin-top: 5px;
   display: inline-block;
 }
+
+.remover-foto{
+  font-size: 12px;
+  color: #ccc;
+  text-decoration: underline;
+  margin-top: 5px;
+  display: inline-block;
+}
+
 
 .formulario {
   padding: 15px;
@@ -2807,6 +2825,10 @@ input[name=confirmar-nsenha]{
         width: 110px;
         height: 110px;
     }
+      .profile-cont svg{
+        width: 110px;
+        height: 110px;
+    }
 
     .dep-container{
         width: 90vw;
@@ -2820,6 +2842,7 @@ input[name=confirmar-nsenha]{
         width: 90vw;
         height: 40vh;
     }
+
 
     /* Mobile - Footer */
 
