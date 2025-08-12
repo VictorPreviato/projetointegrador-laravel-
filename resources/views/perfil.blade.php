@@ -57,8 +57,8 @@
  
 <h2 class="h2-dep">Adicione um novo depoimento</h2>
  
-<form >
-   
+<form action="{{ route('depoimentos.store') }}" method="POST">
+   @csrf
     <label class="label-dep"  for="titulo">Título*</label>
     <input class="input-dep" type="text" name="titulo" required>
  

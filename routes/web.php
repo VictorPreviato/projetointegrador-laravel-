@@ -5,12 +5,16 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostagemController;
+use App\Http\Controllers\DepoimentoController;
+use App\Http\Controllers\HomeController;
 
 
 
 Route::get('/', function () {
     return view('index');
 })->name('index');
+
+// Rotas privadas
 
 Route::middleware('auth')->group(function () {
     Route::get('/config-perfil', function () {
@@ -27,7 +31,14 @@ Route::middleware('auth')->group(function () {
     })->name('perfil');
 
     Route::get('/logout', [DotmeController::class, 'logout'])->name('logout');
+
+    Route::post('/depoimentos', [DepoimentoController::class, 'store'])->name('depoimentos.store');
+ 
 });
+
+// Rotas públicas
+
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 // Postagem
 Route::get('/postagem', [PostagemController::class, 'create'])->name('postagem.create');

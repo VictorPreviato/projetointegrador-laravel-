@@ -159,15 +159,21 @@
                     <p>“A um mês adotei um gato na Dotme, isso foi a melhor coisa que já fiz, bolt está a tão pouco tempo comigo e já é parte da minha família”</p>
                 </div>
             </div>
+            @foreach($depoimentos as $dep)
             <div class="card">
                 <div class="content-placeholder">
                     <div class="row">
-                        <h3>Lucas</h3>
-                        <div class="img" data-letter="L"></div>
+                        <h3>{{ $dep->user->name }}</h3>
+                        <div class="img"> @if($dep->user->foto)
+                            <img src="{{ asset('storage/' . $dep->user->foto) }}" alt="Foto de {{ $dep->user->name }}" class="img">
+                        @else
+                            <div class="img" data-letter="{{ strtoupper(substr($dep->user->name,0,1)) }}"></div>
+                        @endif</div>
                     </div>
-                    <h5>Meu novo amigo</h5>
-                    <p>“A um mês adotei um gato na Dotme, isso foi a melhor coisa que já fiz, bolt está a tão pouco tempo comigo e já é parte da minha família”</p>
+                    <h5>{{ $dep->titulo }}</h5>
+                    <p>“{{ $dep->depoimento }}”</p>
                 </div>
+                @endforeach
             </div>
             <div class="card">
                 <div class="content-placeholder">
