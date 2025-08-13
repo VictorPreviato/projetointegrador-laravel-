@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Postagem extends Model
@@ -22,5 +23,12 @@ class Postagem extends Model
         'ultima_localizacao',
         'informacoes',
         'foto',
+        'user_id',
+        'cep',
     ];
+
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
 }

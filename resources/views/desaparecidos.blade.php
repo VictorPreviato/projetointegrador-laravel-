@@ -62,7 +62,10 @@
           <img src="{{ asset('storage/' . $pet->foto) }}" alt="{{ $pet->nome_pet ?? 'Pet' }}">
           <h3 class="tl">{{ $pet->nome_pet ?? 'Sem nome' }}</h3>
           <p class="tl">{{ $pet->ultima_localizacao }}</p>
-          <p class="tl">Contato: {{ $pet->contato }}</p>
+          <p class="tl">
+          Dono: {{ $pet->user->name ?? 'Não informado' }}<br>
+          Telefone: {{ $pet->user->telefone ?? 'Não informado' }}
+          </p>
         </div>
         @php $totalMostrados++; @endphp
       @endforeach
