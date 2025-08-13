@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostagemController;
+use App\Http\Controllers\DepoimentoController;
+use App\Http\Controllers\HomeController;
 
 
 
@@ -12,22 +14,33 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
+// Rotas privadas
+
 Route::middleware('auth')->group(function () {
     Route::get('/config-perfil', function () {
         $user = Auth::user();
         return view('config-perfil', compact('user'));
     })->name('config-perfil');
 
-    Route::put('/usuario/update', [DotmeController::class, 'update'])->name('usuario.update');
-    
-    Route::post('/perfil/foto', [DotmeController::class, 'salvarFoto'])->name('perfil.foto');
-
     Route::get('/perfil', function () {
         return view('perfil', ['user' => Auth::user()]);
     })->name('perfil');
 
     Route::get('/logout', [DotmeController::class, 'logout'])->name('logout');
+
+    Route::post('/depoimentos', [DepoimentoController::class, 'store'])->name('depoimentos.store');
+
+    Route::put('/usuario/update', [DotmeController::class, 'atualizarPerfil'])->name('usuario.update');
+    Route::post('/perfil/foto', [DotmeController::class, 'salvarFoto'])->name('perfil.foto');
+    Route::post('/perfil/remover-foto', [DotmeController::class, 'removerFoto'])->name('perfil.removerFoto');
+
+    
+ 
 });
+
+// Rotas públicas
+
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 // Postagem
 Route::middleware('auth')->group(function () {

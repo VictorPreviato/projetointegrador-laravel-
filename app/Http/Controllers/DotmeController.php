@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
+
 
 class DotmeController extends Controller
 {
@@ -54,46 +56,26 @@ class DotmeController extends Controller
 
     // Logout
     public function logout()
+    
     {
         Session::forget(['user', 'user_id']);
         Auth::logout();
         return redirect()->route('log')->with('success', 'Você saiu da sua conta.');
     }
 
-    // Exibir página de configuração de perfil
-    public function editarPerfil()
-    {
-        $user = User::find(Session::get('user_id'));
-        return view('config-perfil', compact('user'));
-    }
-
-    // Atualizar foto de perfil
-    public function salvarFoto(Request $request)
-    {
-        $user = User::find(Session::get('user_id'));
-
-        if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
-            // Apaga a foto antiga se existir
-            if ($user->foto && Storage::disk('public')->exists($user->foto)) {
-                Storage::disk('public')->delete($user->foto);
-            }
-
-            $user->foto = $request->file('foto')->store('fotos', 'public');
-            $user->save();
-        }
-
-        return redirect()->back()->with('success', 'Foto de perfil atualizada com sucesso!');
-    }
 
     // Remover foto de perfil
     public function removerFoto()
     {
-        $user = User::find(Session::get('user_id'));
+        
+        $user = Auth::user();
 
         if ($user->foto && Storage::disk('public')->exists($user->foto)) {
             Storage::disk('public')->delete($user->foto);
             $user->foto = null;
+            /** @var User|null $user */
             $user->save();
+           
         }
 
         return redirect()->back()->with('success', 'Foto de perfil removida com sucesso!');
@@ -101,7 +83,7 @@ class DotmeController extends Controller
 
     public function update(Request $request)
 {
-    /** @var \App\Models\Dotme|null $user */
+    /** @var \App\Models\User|null $user */
     $user = Auth::user();
 
     if (!$user) {
@@ -122,5 +104,81 @@ class DotmeController extends Controller
     $user->save();
 
     return redirect()->route('config-perfil')->with('success', 'Perfil atualizado com sucesso!');
+}
+
+ public function editarPerfil()
+{
+    $user = Auth::user(); // ou auth()->user()
+    
+    if (!$user) {
+        // Caso o usuário não exista, redireciona para login (opcional)
+        return redirect()->route('login')->with('error', 'Usuário não encontrado.');
+    }
+
+    return view('config-perfil', compact('user'));
+}
+
+    public function atualizarPerfil(Request $request)
+    {
+        $user = Auth::user();
+
+        // Validação dos campos
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|min:6',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        // Atualiza campos
+        $user->name = $request->name;
+        $user->telefone= $request->telefone;
+        $user->data_nasc = $request->data_nasc;
+        $user->email = $request->email;
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        // Atualiza foto se enviada
+        if ($request->hasFile('foto')) {
+            // Apaga a foto antiga, se existir
+            if ($user->foto && Storage::exists('public/fotos/' . $user->foto)) {
+                Storage::delete('public/fotos/' . $user->foto);
+            }
+
+            $nomeArquivo = time() . '_' . $request->file('foto')->getClientOriginalName();
+            $request->file('foto')->storeAs('public/fotos', $nomeArquivo);
+            $user->foto = $nomeArquivo; // só nome do arquivo, sem 'fotos/' na frente
+
+        }
+         /** @var User|null $user */
+        $user->save();
+        return redirect()->route('config-perfil')->with('success', 'Perfil atualizado com sucesso!');
+    }    
+
+    public function salvarFoto(Request $request)
+{
+    $user = Auth::user();
+
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'Usuário não autenticado.');
+    }
+
+    $request->validate([
+        'foto' => 'required|image|max:2048'
+    ]);
+
+    // Apaga foto antiga, se existir
+    if ($user->foto && Storage::disk('public')->exists($user->foto)) {
+        Storage::disk('public')->delete($user->foto);
+    }
+
+    // Salva nova foto e armazena caminho completo
+    $user->foto = $request->file('foto')->store('fotos', 'public');
+    /** @var User|null $user */ 
+    $user->save();
+  
+    return redirect()->back()->with('success', 'Foto de perfil atualizada com sucesso!');
 }
 }
