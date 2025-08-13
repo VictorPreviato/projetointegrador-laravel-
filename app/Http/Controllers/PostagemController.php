@@ -1,109 +1,119 @@
-<?php
+<?php 
+
 
 namespace App\Http\Controllers;
 
-use App\Models\Postagem;
 use Illuminate\Http\Request;
+use App\Models\Postagem;
 use Illuminate\Support\Facades\Auth;
 
 class PostagemController extends Controller
 {
+    /**
+     * Exibir formulário de criação.
+     */
     public function create()
     {
         return view('postagem');
     }
 
+    /**
+     * Salvar nova postagem no banco.
+     */
     public function store(Request $request)
-{
-    // Validação
-    $data = $request->validate([
-        'tipo_cadastro' => 'required|string',
-        'tipo_animal' => 'required|string',
-        'tem_nome' => 'required|string',
-        'nome_pet' => 'required_if:tem_nome,sim|string|nullable',
-        'raca' => 'required|string',
-        'porte' => 'required|string',
-        'genero' => 'required|string',
-        'idade' => 'required|string',
-        'contato' => 'required|string',
-        'ultima_localizacao' => 'required_if:tipo_cadastro,perdido|string|nullable',
-        'informacoes' => 'nullable|string',
-        'foto' => 'required|image|max:2048'
-    ], [
-        'required' => 'O campo :attribute é obrigatório.',
-        'required_if' => 'O campo :attribute é obrigatório.',
-        'image' => 'A foto deve ser uma imagem.',
-        'max' => 'A foto deve ter no máximo 2MB.'
-    ]);
-
-    // Upload da imagem
-    if ($request->hasFile('foto')) {
-        $data['foto'] = $request->file('foto')->store('pets', 'public');
-    }
-
-    // Adiciona o ID do usuário autenticado
-    $data['user_id'] = Auth::id();
-
-    $data['cep'] = $request->cep;
-
-    // Cria o registro no banco
-    Postagem::create($data);
-
-    return redirect()->route('index')->with('success', 'Pet cadastrado com sucesso!');
-}
-
-    public function desaparecidos(Request $request)
     {
-        $query = Postagem::with('user')
-            ->where('tipo_cadastro', 'perdido');
+        //  dd($request->all());   
+        // Validação dos campos
+        $validated = $request->validate([
+            'tipo_cadastro' => 'required|string|max:255',
+            'tipo_animal' => 'required|string|max:255',
+            'outro_animal' => 'nullable|string|max:255',
+            'tem_nome' => 'required|string|max:255',
+            'nome_pet' => 'nullable|string|max:255',
+            'raca' => 'nullable|string|max:255',
+            'porte' => 'required|string|max:255',
+            'genero' => 'required|string|max:255',
+            'idade' => 'nullable|string|max:255',
+            'contato' => 'required|string|max:255',
+            'ultima_localizacao' => 'nullable|string|max:255',
+            'cep' => 'nullable|string|max:9',
+            'cidade' => 'nullable|string|max:255',
+            'estado' => 'nullable|string|max:255',
+            'informacoes' => 'nullable|string',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
-        // Filtros
-        if ($request->filled('especie')) {
-            $query->where('tipo_animal', $request->especie);
+        // Upload da foto (se houver)
+        if ($request->hasFile('foto')) {
+            $validated['foto'] = $request->file('foto')->store('fotos', 'public');
         }
 
-        if ($request->filled('sexo')) {
-            $query->where('genero', $request->sexo);
-        }
+        // Associar usuário logado
+        $validated['user_id'] = Auth::id();
 
-        if ($request->filled('idade')) {
-            $idadeFiltro = $request->idade;
-            $query->where(function ($q) use ($idadeFiltro) {
-                if ($idadeFiltro == 'filhote') {
-                    $q->where('idade', 'like', '%mes%');
-                } elseif ($idadeFiltro == 'adulto') {
-                    $q->where('idade', 'like', '%1 ano%')
-                      ->orWhere('idade', 'like', '%2 ano%')
-                      ->orWhere('idade', 'like', '%3 ano%');
-                } elseif ($idadeFiltro == 'idoso') {
-                    $q->where('idade', 'like', '%6 ano%')
-                      ->orWhere('idade', 'like', '%7 ano%')
-                      ->orWhere('idade', 'like', '%8 ano%')
-                      ->orWhere('idade', 'like', '%9 ano%')
-                      ->orWhere('idade', 'like', '%10 ano%');
-                }
-            });
-        }
+        // Criar a postagem
+        Postagem::create($validated);
 
-        if ($request->filled('porte')) {
-            $query->where('porte', $request->porte);
-        }
+        return redirect()->route('index')->with('success', 'Postagem criada com sucesso!');
+    }
 
-        if ($request->filled('cidade')) {
-            $query->where('ultima_localizacao', 'like', '%' . $request->cidade . '%');
-        }
+    /**
+     * Exibir uma postagem.
+     */
+    public function show($id)
+    {
+        $postagem = Postagem::with('user')->findOrFail($id);
+        return view('postagens.show', compact('postagem'));
+    }
 
-        if ($request->filled('estado')) {
-            $query->where('ultima_localizacao', 'like', '%' . $request->estado . '%');
-        }
+     public function desaparecidos(Request $request)
+{
+    $query = Postagem::with('user')
+        ->where('tipo_cadastro', 'perdido'); // deve bater com o value do select do formulário
 
-        if ($request->filled('cep')) {
-    $query->where('cep', 'like', '%' . $request->cep . '%');
+    // Filtros opcionais
+    if ($request->filled('especie')) {
+        $query->where('tipo_animal', $request->especie);
+    }
+    if ($request->filled('sexo')) {
+        $query->where('genero', $request->sexo);
+    }
+    if ($request->filled('idade')) {
+        $query->where('idade', $request->idade);
+    }
+    if ($request->filled('porte')) {
+        $query->where('porte', $request->porte);
+    }
+    if ($request->filled('cep')) {
+        $query->where('cep', $request->cep);
+    }
+    if ($request->filled('cidade')) {
+        $query->where('cidade', $request->cidade);
+    }
+    if ($request->filled('estado')) {
+        $query->where('estado', $request->estado);
+    }
+
+    $postagens = $query->latest()->get();
+
+    return view('desaparecidos', compact('postagens'));
 }
 
-        $postagens = $query->latest()->get();;
 
-        return view('desaparecidos', compact('postagens'));
+    /**
+     * Deletar postagem.
+     */
+    public function destroy($id)
+    {
+        $postagem = Postagem::findOrFail($id);
+
+        // Verifica se a postagem pertence ao usuário
+        if ($postagem->user_id !== Auth::id()) {
+            return redirect()->route('home')->with('error', 'Você não tem permissão para excluir esta postagem.');
+        }
+
+        $postagem->delete();
+
+        return redirect()->route('home')->with('success', 'Postagem excluída com sucesso!');
     }
 }
-

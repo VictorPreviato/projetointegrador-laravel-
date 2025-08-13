@@ -58,77 +58,38 @@
 
 <!-- Carrossel animais - Desaparecidos -->
 
- <div class="slide-container swiper">
+<div class="slide-container swiper">
     <div class="tcaranim">
-    <h1>Animais Desaparecidos</h1>
-    <h4>Reconhece algum desses bichinhos? Ajude-os a voltar para casa!</h4>
+        <h1>Animais Desaparecidos</h1>
+        <h4>Reconhece algum desses bichinhos? Ajude-os a voltar para casa!</h4>
     </div>
-            <div class="slide-content">
-                <div class="card-wrapper swiper-wrapper">
-                    <div class="card swiper-slide" id="cardani">
-                        <div><img src="IMG/PET/robin.jpg" alt=""></div>
-                        <div class="card-content">
-                            <h4 class="name">Robin</h4>
-                            <p>Contato:(11) 99999-9999</p>
-                            <p>Último local visto:</p>
-                        </div>
+    <div class="slide-content">
+        <div class="card-wrapper swiper-wrapper">
+            @forelse($desaparecidos as $pet)
+                <div class="card swiper-slide" id="cardani">
+                    <div>
+                        <img src="{{ $pet->foto ? asset('storage/' . $pet->foto) : 'IMG/PET/default.jpg' }}" 
+                             alt="{{ $pet->nome_pet ?? 'Pet' }}">
                     </div>
-                    <div class="card swiper-slide" id="cardani">
-                        <div><img src="IMG/PET/robin.jpg" alt=""></div>
-                        <div class="card-content">
-                            <h4 class="name">Robin</h4>
-                            <p>Contato:(11) 99999-9999</p>
-                            <p>Último local visto:</p>
-                        </div>
+                    <div class="card-content">
+                        <h4 class="name">{{ $pet->nome_pet ?? 'Sem nome' }}</h4>
+                        <p>Contato: {{ $pet->user->telefone ?? 'Não informado' }}</p>
+                        <p>Última localização: {{ $pet->ultima_localizacao ?? 'Não informado' }}</p>
                     </div>
-                    <div class="card swiper-slide" id="cardani">
-                        <div><img src="IMG/PET/robin.jpg" alt=""></div>
-                        <div class="card-content">
-                            <h4 class="name">Robin</h4>
-                            <p>Contato:(11) 99999-9999</p>
-                            <p>Último local visto:</p>
-                        </div>
-                    </div>
-                    <div class="card swiper-slide" id="cardani">
-                        <div><img src="IMG/PET/robin.jpg" alt=""></div>
-                        <div class="card-content">
-                            <h4 class="name">Robin</h4>
-                            <p>Contato:(11) 99999-9999</p>
-                            <p>Último local visto:</p>
-                        </div>
-                    </div>
-                    <div class="card swiper-slide" id="cardani">
-                        <div><img src="IMG/PET/robin.jpg" alt=""></div>
-                        <div class="card-content">
-                            <h4 class="name">Robin</h4>
-                            <p>Contato:(11) 99999-9999</p>
-                            <p>Último local visto:</p>
-                        </div>
-                    </div>
-                    <div class="card swiper-slide" id="cardani">
-                        <div><img src="IMG/PET/robin.jpg" alt=""></div>
-                        <div class="card-content">
-                            <h4 class="name">Robin</h4>
-                            <p>Contato:(11) 99999-9999</p>
-                            <p>Último local visto:</p>
-                        </div>
-                    </div>
-                    <div class="card swiper-slide" id="cardani">
-                        <div><img src="IMG/PET/robin.jpg" alt=""></div>
-                        <div class="card-content">
-                            <h4 class="name">Robin</h4>
-                            <p>Contato:(11) 99999-9999</p>
-                            <p>Último local visto:</p>
-                        </div>
-                    </div>
-                   
                 </div>
-            </div>
-
-             <div class="swiper-button-next swiper-navBtn"></div>
-            <div class="swiper-button-prev swiper-navBtn"></div>
-             <div class="swiper-pagination"></div>
+            @empty
+                <h3 id="sempost">Nenhum post de desaparecidos no momento.</h3>
+            @endforelse
         </div>
+    </div>
+
+    @if($desaparecidos->isNotEmpty())
+    <div class="swiper-button-next swiper-navBtn"></div>
+    <div class="swiper-button-prev swiper-navBtn"></div>
+    <div class="swiper-pagination"></div>
+
+@endif
+</div>
 
 <!-- Banner -->
 <div id="bannerhdiv">
@@ -165,7 +126,7 @@
             </div>
 
             <!-- Cards dinâmicos dos depoimentos -->
-            @foreach($depoimentos as $dep)
+            @forelse($depoimentos as $dep)
                 <div class="card">
                     <div class="content-placeholder">
                         <div class="row">
@@ -182,7 +143,9 @@
                         <p>“{{ $dep->depoimento }}”</p>
                     </div>
                 </div>
-            @endforeach
+                 @empty
+                <h4>Nenhum depoimento postado</h4>
+            @endforelse
 
         </div>
     </div>

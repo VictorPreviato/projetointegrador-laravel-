@@ -1,15 +1,17 @@
 <?php
 
+
 namespace App\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Postagem extends Model
 {
     protected $table = 'postagem';
 
-    protected $fillable = [
+       protected $fillable = [
+        'user_id',
         'tipo_cadastro',
         'tipo_animal',
         'outro_animal',
@@ -21,14 +23,15 @@ class Postagem extends Model
         'idade',
         'contato',
         'ultima_localizacao',
-        'informacoes',
-        'foto',
-        'user_id',
         'cep',
+        'cidade',     // novo campo
+        'estado',     // novo campo
+        'informacoes',
+        'foto'
     ];
 
     public function user()
-{
-    return $this->belongsTo(User::class);
-}
+    {
+        return $this->belongsTo(User::class);
+    }
 }

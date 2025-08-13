@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <section class="right-panel">
 
       <form method="POST" action="{{ route('postagem.store') }}" enctype="multipart/form-data">
+
         @csrf
 
         <div class="left-panel">
