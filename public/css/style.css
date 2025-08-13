@@ -617,6 +617,10 @@ input[type=search] {
     visibility: hidden;
 }
 
+.cards-box h5{
+    margin-bottom: 3%;
+}
+
 .cards-box .card:not(.hide) {
     position: absolute;
     top: 0;

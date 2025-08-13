@@ -56,6 +56,7 @@ class DotmeController extends Controller
 
     // Logout
     public function logout()
+    
     {
         Session::forget(['user', 'user_id']);
         Auth::logout();
@@ -165,7 +166,7 @@ class DotmeController extends Controller
     }
 
     $request->validate([
-        'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        'foto' => 'required|image|max:2048'
     ]);
 
     // Apaga foto antiga, se existir
