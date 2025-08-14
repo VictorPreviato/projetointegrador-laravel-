@@ -40,7 +40,7 @@ class PostagemController extends Controller
             'cidade' => 'nullable|string|max:255',
             'estado' => 'nullable|string|max:255',
             'informacoes' => 'nullable|string',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048'
         ]);
 
         // Upload da foto (se houver)

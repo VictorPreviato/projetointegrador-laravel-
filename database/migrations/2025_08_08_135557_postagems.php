@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('postagem', function (Blueprint $table) {
     $table->id();
+    $table->foreignId('user_id')->constrained()->onDelete('cascade');
     $table->string('tipo_cadastro');
     $table->string('tipo_animal');
     $table->string('outro_animal')->nullable();
@@ -29,7 +30,7 @@ return new class extends Migration
 
     $table->string('informacoes')->nullable();
     $table->string('foto')->nullable();
-    $table->foreignId('user_id')->constrained()->onDelete('cascade');
+    
     $table->timestamps();
         });
     }
