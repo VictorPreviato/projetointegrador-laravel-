@@ -54,7 +54,14 @@ class PostagemController extends Controller
         // Criar a postagem
         Postagem::create($validated);
 
-        return redirect()->route('desaparecidos')->with('success', 'Postagem criada com sucesso!');
+           if (strtolower($validated['tipo_cadastro']) === 'doacao') {
+        return redirect()->route('adote')->with('success', 'Postagem de adoção criada com sucesso!');
+    } elseif (strtolower($validated['tipo_cadastro']) === 'perdido') {
+        return redirect()->route('desaparecidos')->with('success', 'Postagem de desaparecido criada com sucesso!');
+    } else {
+        // Caso não se encaixe em nenhum, volta pra home ou rota padrão
+        return redirect()->route('index')->with('success', 'Postagem criada com sucesso!');
+    }
     }
 
     /**
