@@ -99,6 +99,39 @@ class PostagemController extends Controller
     return view('desaparecidos', compact('postagens'));
 }
 
+public function adocao(Request $request)
+{
+    $query = Postagem::with('user')
+        ->where('tipo_cadastro', 'doacao'); // Filtra só doações
+
+    // Filtros opcionais
+    if ($request->filled('especie')) {
+        $query->where('tipo_animal', $request->especie);
+    }
+    if ($request->filled('sexo')) {
+        $query->where('genero', $request->sexo);
+    }
+    if ($request->filled('idade')) {
+        $query->where('idade', $request->idade);
+    }
+    if ($request->filled('porte')) {
+        $query->where('porte', $request->porte);
+    }
+    if ($request->filled('cep')) {
+        $query->where('cep', $request->cep);
+    }
+    if ($request->filled('cidade')) {
+        $query->where('cidade', $request->cidade);
+    }
+    if ($request->filled('estado')) {
+        $query->where('estado', $request->estado);
+    }
+
+    $postagens = $query->latest()->get();
+
+    return view('adote', compact('postagens'));
+}
+
 
     /**
      * Deletar postagem.
