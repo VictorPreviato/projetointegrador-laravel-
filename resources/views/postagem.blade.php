@@ -54,10 +54,16 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const tipoCadastro = document.getElementById('tipo_cadastro');
     const campoUltimaLocalizacao = document.getElementById('campo-ultima-localizacao');
+    const labelLocalizacao = document.getElementById('label-localizacao');
 
     tipoCadastro.addEventListener('change', function() {
-        if (this.value === 'perdido') {
+        if (this.value === 'perdido' || this.value === 'doacao') {
             campoUltimaLocalizacao.style.display = 'block';
+            if (this.value === 'perdido') {
+                labelLocalizacao.textContent = 'Última localização';
+            } else if (this.value === 'doacao') {
+                labelLocalizacao.textContent = 'Localização';
+            }
         } else {
             campoUltimaLocalizacao.style.display = 'none';
         }
@@ -287,7 +293,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <input type="text" name="contato" placeholder="Ex: Telefone; Email; Whatsapp." />
 
         <div id="campo-ultima-localizacao" style="display: none;">
-          <label for="ultima-localizacao">Última localização</label>
+          <label id="label-localizacao" for="ultima-localizacao">Última localização</label>
           <br>
           <label for="cep">CEP</label>
           @if($errors->has('ultima_localizacao'))

@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/postagem', [PostagemController::class, 'create'])->name('postagem.create');
     Route::post('/postagem', [PostagemController::class, 'store'])->name('postagem.store');
 });
+
 Route::get('/log', function () {
     return view('log');
 })->name('log');
@@ -58,11 +59,10 @@ Route::get('/cadastro', function () {
 Route::get('/log', function () {
     return view('log');
 })->name('log');
-Route::get('/adote', function () {
-    return view('adote');
-})->name('adote');
+
 
 Route::get('/desaparecidos', [PostagemController::class, 'desaparecidos'])->name('desaparecidos');
+Route::get('/adote', [PostagemController::class, 'adocao'])->name('adote');
 
 // Footer
 Route::get('/sobre', function () {
