@@ -5,7 +5,7 @@
 
         <section class="secao-texto">
             <p>
-                A Dot.me é uma plataforma dedicada a ajudar animais de estimação a encontrar novos lares. Aqui, você pode cadastrar pets para doação ou informar sobre animais perdidos, facilitando a conexão entre pessoas que desejam adotar e aquelas que precisam de ajuda para encontrar seus pets.
+                A Dotme é uma plataforma dedicada a ajudar animais de estimação a encontrar novos lares. Aqui, você pode cadastrar pets para doação ou informar sobre animais perdidos, facilitando a conexão entre pessoas que desejam adotar e aquelas que precisam de ajuda para encontrar seus pets.
             </p>
             <p>
                 Se você está interessado em adotar um pet, explore os cadastros disponíveis e entre em contato com os responsáveis. Se você perdeu um animal, cadastre-o aqui para que mais pessoas possam ajudar na busca.
@@ -18,13 +18,13 @@
         <section class="secao-nossa-historia">
             <h1>Nossa História</h1>
             <p>
-                A Dot.me nasceu da paixão por animais e do desejo de criar uma comunidade que apoie a adoção responsável. Desde o início, nosso objetivo tem sido conectar pessoas que amam animais com aqueles que precisam de um novo lar.
+                A Dotme nasceu da paixão por animais e do desejo de criar uma comunidade que apoie a adoção responsável. Desde o início, nosso objetivo tem sido conectar pessoas que amam animais com aqueles que precisam de um novo lar.
             </p>
         </section>
 
         <div class="caixa-alerta">
             <img src="IMG/ICONES/proibido.webp" class="icone-alerta" alt="Ícone de alerta" style="width: 50px; height: 50px;">
-            <p>A DOT.me não compactua com a venda de animais. Incentivamos a adoção responsável.</p>
+            <p>Nós não trabalhamos com venda de animais. Incentivamos a adoção responsável.</p>
         </div>
 
         <section class="secao-parcerias">

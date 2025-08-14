@@ -72,6 +72,7 @@
         <div class="card-post">
             
             @if($post->foto)
+            <a href="{{ route('postagem.show', $post->id) }}" class="linkpostprof">
                 <img src="{{ asset('storage/' . $post->foto) }}" alt="Foto da postagem">
             @endif
             <div id="infopostprof">
@@ -79,7 +80,7 @@
             <p> {{ $post->tipo_animal }} - {{ $post->tipo_cadastro }} </p>
             
             <small>Postado em {{ $post->created_at->format('d/m/Y') }}</small>
-
+            </a>
                <!-- Botão para excluir -->
                 <a href="#" 
                    onclick="event.preventDefault(); 

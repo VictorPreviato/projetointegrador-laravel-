@@ -22,19 +22,21 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-@if(session('success'))
-<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Sucesso!',
-        text: '{{ session('success') }}',
-        confirmButtonText: 'Ok',
-        confirmButtonColor: '#31403E',
-        timer: 4000,
-        timerProgressBar: true
-    });
-</script>
-@endif
+@foreach (['success_doacao', 'success_perdido'] as $key)
+    @if(session($key))
+        <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Sucesso!',
+            text: '{{ session($key) }}',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#31403E',
+            timer: 4000,
+            timerProgressBar: true
+        });
+        </script>
+    @endif
+@endforeach
 
 <script>
     // Substituir pelas coordenadas reais do post

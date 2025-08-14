@@ -1454,6 +1454,10 @@ textarea {
     color: var(--cor-4);
 }
  
+.linkpostprof{
+    color: var(--cor-4);
+    text-decoration: none;
+}
 
 /* CONFIG-USUARIO */
 
