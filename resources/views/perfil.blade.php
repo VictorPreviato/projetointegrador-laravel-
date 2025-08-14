@@ -62,7 +62,7 @@
             <p>{{ $user->email }}</p>
     
 
-            <h3><b>Post realizados</b></h3>
+            <h3><b>Postagens</b></h3>
          <div class="perfil-post">   
 @if($posts->isEmpty())
     <p>Você ainda não fez nenhuma postagem.</p>
@@ -75,8 +75,9 @@
                 <img src="{{ asset('storage/' . $post->foto) }}" alt="Foto da postagem">
             @endif
             <div id="infopostprof">
-            <h4>{{ $post->tipo_cadastro }} - {{ $post->tipo_animal }}</h4>
-            <p>{{ $post->informacoes }}</p>
+                <h4 class="tl">{{ $post->nome_pet ?? 'Sem nome' }}</h4>
+            <p> {{ $post->tipo_animal }} - {{ $post->tipo_cadastro }} </p>
+            
             <small>Postado em {{ $post->created_at->format('d/m/Y') }}</small>
 
                <!-- Botão para excluir -->
