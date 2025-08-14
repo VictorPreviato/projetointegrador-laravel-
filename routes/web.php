@@ -22,9 +22,12 @@ Route::middleware('auth')->group(function () {
         return view('config-perfil', compact('user'));
     })->name('config-perfil');
 
-    Route::get('/perfil', function () {
-        return view('perfil', ['user' => Auth::user()]);
-    })->name('perfil');
+ Route::get('/perfil', function () {
+    $user = Auth::user();
+    $posts = $user->postagens()->latest()->get();
+
+    return view('perfil', compact('user', 'posts'));
+})->name('perfil');
 
     Route::get('/logout', [DotmeController::class, 'logout'])->name('logout');
 

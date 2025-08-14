@@ -54,7 +54,7 @@ class PostagemController extends Controller
         // Criar a postagem
         Postagem::create($validated);
 
-        return redirect()->route('index')->with('success', 'Postagem criada com sucesso!');
+        return redirect()->route('desaparecidos')->with('success', 'Postagem criada com sucesso!');
     }
 
     /**

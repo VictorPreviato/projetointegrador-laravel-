@@ -181,4 +181,7 @@ class DotmeController extends Controller
   
     return redirect()->back()->with('success', 'Foto de perfil atualizada com sucesso!');
 }
+
+
+
 }
