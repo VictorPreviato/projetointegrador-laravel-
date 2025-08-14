@@ -36,17 +36,17 @@ Route::middleware('auth')->group(function () {
     Route::put('/usuario/update', [DotmeController::class, 'atualizarPerfil'])->name('usuario.update');
     Route::post('/perfil/foto', [DotmeController::class, 'salvarFoto'])->name('perfil.foto');
     Route::post('/perfil/remover-foto', [DotmeController::class, 'removerFoto'])->name('perfil.removerFoto');
+
+    Route::get('/postagem', [PostagemController::class, 'create'])->name('postagem.create');
+    Route::post('/postagem', [PostagemController::class, 'store'])->name('postagem.store');
+
+    Route::delete('postagem/{id}', [PostagemController::class, 'destroy'])->name('postagem.destroy');
 });
 
 // Rotas públicas
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-// Postagem
-Route::middleware('auth')->group(function () {
-    Route::get('/postagem', [PostagemController::class, 'create'])->name('postagem.create');
-    Route::post('/postagem', [PostagemController::class, 'store'])->name('postagem.store');
-});
 
 Route::get('/postagem/{id}', [PostagemController::class, 'show'])->name('postagem.show');
 

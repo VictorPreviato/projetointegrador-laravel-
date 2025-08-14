@@ -78,6 +78,22 @@
             <h4>{{ $post->tipo_cadastro }} - {{ $post->tipo_animal }}</h4>
             <p>{{ $post->informacoes }}</p>
             <small>Postado em {{ $post->created_at->format('d/m/Y') }}</small>
+
+               <!-- Botão para excluir -->
+                <a href="#" 
+                   onclick="event.preventDefault(); 
+                            if(confirm('Tem certeza que deseja excluir este post?')) {
+                                document.getElementById('delete-post-{{ $post->id }}').submit();
+                            }" 
+                   style="color:red;">Excluir</a>
+
+                <!-- Formulário oculto -->
+                <form id="delete-post-{{ $post->id }}" 
+                      action="{{ route('postagem.destroy', $post->id) }}" 
+                      method="POST" 
+                      style="display:none;">
+                    @csrf
+                    @method('DELETE')
             </div>
         </div>
        
