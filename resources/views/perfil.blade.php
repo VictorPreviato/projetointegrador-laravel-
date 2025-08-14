@@ -63,9 +63,28 @@
     
 
             <h3><b>Post realizados</b></h3>
-            {{-- Em breve: listar posts do usuário --}}
+         <div class="perfil-post">   
+@if($posts->isEmpty())
+    <p>Você ainda não fez nenhuma postagem.</p>
+@else
 
+    @foreach($posts as $post)
+        <div class="card-post">
+            
+            @if($post->foto)
+                <img src="{{ asset('storage/' . $post->foto) }}" alt="Foto da postagem">
+            @endif
+            <div id="infopostprof">
+            <h4>{{ $post->tipo_cadastro }} - {{ $post->tipo_animal }}</h4>
+            <p>{{ $post->informacoes }}</p>
+            <small>Postado em {{ $post->created_at->format('d/m/Y') }}</small>
+            </div>
+        </div>
+       
+    @endforeach
+@endif
 
+ </div>
    
 </main>
 

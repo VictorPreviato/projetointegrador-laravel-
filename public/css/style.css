@@ -1419,6 +1419,38 @@ textarea {
   transition: background-color 0.3s ease;
  
 }
+
+.perfil-post{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card-post{
+    
+    color: white;
+    border-radius: 20px;
+    width: 300px;
+    height: 350px;
+}
+
+.perfil-post h4{
+    color: white;
+}
+
+.perfil-post img{
+    border-radius: 20px 20px 0 0;
+    height: 290px;
+    width: 100%;
+    object-fit: cover;
+}
+
+#infopostprof{
+    padding: 10px 10px;
+    background-color: #2f4f4f;
+    height: 100px;
+    border-radius: 0 0 10px 10px;
+}
  
 /* button:hover {
  

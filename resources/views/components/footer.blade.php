@@ -20,6 +20,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#31403E',
+        timer: 4000,
+        timerProgressBar: true
+    });
+</script>
+@endif
+
 <script>
   document.querySelectorAll('.show-psswd').forEach(button => {
     const targetSelector = button.getAttribute('data-toggle-target')
