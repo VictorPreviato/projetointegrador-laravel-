@@ -36,9 +36,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/usuario/update', [DotmeController::class, 'atualizarPerfil'])->name('usuario.update');
     Route::post('/perfil/foto', [DotmeController::class, 'salvarFoto'])->name('perfil.foto');
     Route::post('/perfil/remover-foto', [DotmeController::class, 'removerFoto'])->name('perfil.removerFoto');
-
-    
- 
 });
 
 // Rotas públicas
@@ -50,6 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/postagem', [PostagemController::class, 'create'])->name('postagem.create');
     Route::post('/postagem', [PostagemController::class, 'store'])->name('postagem.store');
 });
+
+Route::get('/postagem/{id}', [PostagemController::class, 'show'])->name('postagem.show');
 
 Route::get('/log', function () {
     return view('log');

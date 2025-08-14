@@ -67,15 +67,17 @@
         <div class="card-wrapper swiper-wrapper">
             @forelse($desaparecidos as $pet)
                 <div class="card swiper-slide" id="cardani">
+                    <a href="{{ route('postagem.show', $pet->id) }}">
                     <div>
-                        <img src="{{ $pet->foto ? asset('storage/' . $pet->foto) : 'IMG/PET/default.jpg' }}" 
-                             alt="{{ $pet->nome_pet ?? 'Pet' }}">
+                        <img src="{{ $pet->foto ? asset('storage/' . $pet->foto) : asset('IMG/PET/default.jpg') }}" 
+                        alt="{{ $pet->nome_pet ?? 'Pet' }}">
                     </div>
                     <div class="card-content">
                         <h4 class="name">{{ $pet->nome_pet ?? 'Sem nome' }}</h4>
                         <p>Contato: {{ $pet->user->telefone ?? 'Não informado' }}</p>
                         <p>Última localização: {{ $pet->ultima_localizacao ?? 'Não informado' }}</p>
                     </div>
+                      </a>
                 </div>
             @empty
                 <h3 id="sempost">Nenhum post de desaparecidos no momento.</h3>

@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <p style="color: white">Envie uma ou mais fotos do pet</p>
     <div class="input-file-container">
         <label for="inputArquivo" class="custom-file-upload">Selecionar fotos</label>
-        <input type="file" name="foto" id="inputArquivo" accept="image/*">
+        <input type="file" name="foto" id="inputArquivo" accept="image/*" required>
     </div>
     <div id="preview-imagens" class="preview-imagens-container"></div>
 </div>
@@ -212,79 +212,6 @@ document.addEventListener('DOMContentLoaded', function() {
             <input type="text" name="idade" placeholder="Ex: 05 meses, 5 anos" />
           </div>
         </div>
- 
-        <label>Características do Pet (Tags)</label>
-<div class="tag-checkboxes">
-    <div class="tag-item">
-      <input type="checkbox" id="tag-castrado" name="tags[]" value="castrado">
-      <label for="tag-castrado">Castrado</label>
-    </div>
- 
-    <div class="tag-item">
-      <input type="checkbox" id="tag-vacinado" name="tags[]" value="vacinado">
-      <label for="tag-vacinado">Vacinado</label>
-    </div>
- 
-    <div class="tag-item">
-      <input type="checkbox" id="tag-porte-pequeno" name="tags[]" value="porte pequeno">
-      <label for="tag-porte-pequeno">Porte Pequeno</label>
-    </div>
- 
-    <div class="tag-item">
-      <input type="checkbox" id="tag-porte-medio" name="tags[]" value="porte médio">
-      <label for="tag-porte-medio">Porte Médio</label>
-    </div>
- 
-    <div class="tag-item">
-      <input type="checkbox" id="tag-porte-grande" name="tags[]" value="porte grande">
-      <label for="tag-porte-grande">Porte Grande</label>
-    </div>
- 
-    <div class="tag-item">
-      <input type="checkbox" id="tag-bom-criancas" name="tags[]" value="bom com crianças">
-      <label for="tag-bom-criancas">Bom com Crianças</label>
-    </div>
- 
-    <div class="tag-item">
-      <input type="checkbox" id="tag-adocao-urgente" name="tags[]" value="adoção urgente">
-      <label for="tag-adocao-urgente">Adoção Urgente</label>
-    </div>
- 
-    <div class="tag-item">
-      <input type="checkbox" id="tag-adestrado" name="tags[]" value="adestrado">
-      <label for="tag-adestrado">Adestrado</label>
-    </div>  
- 
-    <div class="tag-item">
-      <input type="checkbox" id="tag-boa-saude" name="tags[]" value="boa saúde">
-      <label for="tag-boa-saude">Boa Saúde</label>
-    </div>
- 
-    <div class="tag-item">
-      <input type="checkbox" id="tag-docil" name="tags[]" value="dócil">
-      <label for="tag-docil">Dócil</label>
-    </div>
- 
-    <div class="tag-item">
-      <input type="checkbox" id="tag-brincalhao" name="tags[]" value="brincalhão">
-      <label for="tag-brincalhao">Brincalhão</label>
-    </div>
- 
-    <div class="tag-item">
-      <input type="checkbox" id="tag-sociavel" name="tags[]" value="sociável">
-      <label for="tag-sociavel">Sociável</label>
-    </div>
- 
-    <div class="tag-item">
-      <input type="checkbox" id="tag-alegre" name="tags[]" value="alegre">
-      <label for="tag-alegre">Alegre</label>
-    </div>
- 
-    <div class="tag-item">
-      <input type="checkbox" id="tag-companheiro" name="tags[]" value="companheiro">
-      <label for="tag-companheiro">Companheiro</label>
-    </div>
-</div>
  
         <label>Contato com tutor</label>
         @if($errors->has('contato'))

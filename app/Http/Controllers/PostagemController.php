@@ -64,14 +64,6 @@ class PostagemController extends Controller
     }
     }
 
-    /**
-     * Exibir uma postagem.
-     */
-    public function show($id)
-    {
-        $postagem = Postagem::with('user')->findOrFail($id);
-        return view('postagens.show', compact('postagem'));
-    }
 
      public function desaparecidos(Request $request)
 {
@@ -156,4 +148,11 @@ public function adocao(Request $request)
 
         return redirect()->route('home')->with('success', 'Postagem excluída com sucesso!');
     }
+
+    public function show($id)
+{
+    $post = Postagem::with('user')->findOrFail($id);
+
+    return view('descricao', compact('post'));
+}
 }

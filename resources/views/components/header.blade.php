@@ -9,8 +9,9 @@
     <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-  <link rel="icon" type="image/x-icon" href="IMG/LOGOS/Logosn.svg">
-<link href="CSS/style.css" rel="stylesheet" >
+  <link rel="icon" type="image/x-icon" href="{{ asset('IMG/LOGOS/Logosn.svg') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="{{ asset('CSS/style.css') }}">
 
 </head>
 <body>
@@ -18,9 +19,9 @@
 <div class="headdesk"> <!-- Navbar Desktop -->
   <div>
     <a href="/"><img src="{{ asset('IMG/LOGOS/Logosn.svg') }}" alt="" class="logonav"></a>
-    <button onclick="document.location='adote'" class="bnav">Adote um Pet</button>
-    <button onclick="document.location='desaparecidos'" class="bnav">Desaparecidos</button>
-    <button onclick="document.location='sobre'" class="bnav">Sobre o Projeto</button>
+    <button onclick="document.location='{{ route('adote') }}'" class="bnav">Adote um Pet</button>
+    <button onclick="document.location='{{ route('desaparecidos') }}'" class="bnav">Desaparecidos</button>
+    <button onclick="document.location='{{ route('sobre') }}'" class="bnav">Sobre o Projeto</button>
   </div>
 
   <div class="user-actions">
@@ -62,8 +63,8 @@
       </div>
     @else
       {{-- Usuário não logado: mostrar botões padrão --}}
-      <button onclick="document.location='cadastro'" id="bcad">Cadastrar-se</button>
-      <button onclick="document.location='log'" id="blog">Login</button>
+      <button onclick="document.location='{{ route('cadastro') }}'" id="bcad">Cadastrar-se</button>
+      <button onclick="document.location='{{ route('log') }}'" id="blog">Login</button>
     @endif
   </div>
 </div>
@@ -115,8 +116,8 @@
 </a>
 <div>
         @else
-        <button onclick="document.location='log'" id="blog">Login</button>
-  <button onclick="document.location='cadastro'" id="bcad">Cadastrar-se</button>
+        <button onclick="document.location='{{ route('log') }}'" id="blog">Login</button>
+  <button onclick="document.location='{{ route('cadastro') }}'" id="bcad">Cadastrar-se</button>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       @endif

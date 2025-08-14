@@ -58,7 +58,7 @@
       @php $totalMostrados = 0; @endphp
       @foreach($postagens as $pet)
         @php $hidden = $totalMostrados < 6 ? '' : 'hidden'; @endphp
-        <div class="foto {{ $hidden }}">
+        <a href="{{ route('postagem.show', $pet->id) }}" class="foto {{ $hidden }}">
           <img src="{{ asset('storage/' . $pet->foto) }}" alt="{{ $pet->nome_pet ?? 'Pet' }}">
           <h3 class="tl">{{ $pet->nome_pet ?? 'Sem nome' }}</h3>
           <p class="tl">{{ $pet->ultima_localizacao }}</p>
@@ -66,7 +66,7 @@
           Dono: {{ $pet->user->name ?? 'Não informado' }}<br>
           Telefone: {{ $pet->user->telefone ?? 'Não informado' }}
           </p>
-        </div>
+        </a>
         @php $totalMostrados++; @endphp
       @endforeach
     @endif

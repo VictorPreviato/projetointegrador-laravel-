@@ -37,6 +37,22 @@
 @endif
 
 <script>
+    // Substituir pelas coordenadas reais do post
+    var lat = {{ $post->latitude ?? -23.6469595 }};
+    var lon = {{ $post->longitude ?? -46.7032713 }};
+
+    var map = L.map('map').setView([lat, lon], 17);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    var marker = L.marker([lat, lon]).addTo(map);
+    marker.bindPopup("{{ $post->endereco ?? 'Localização do pet' }}").openPopup();
+</script>
+
+<script>
   document.querySelectorAll('.show-psswd').forEach(button => {
     const targetSelector = button.getAttribute('data-toggle-target')
     const input = document.querySelector(targetSelector)
