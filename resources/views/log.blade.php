@@ -37,9 +37,9 @@
     </div>
  
     <div class="row">
-        <a style="color: var(--cor-1);" href="./altsenha-email.php">
-            <h7 class="text-log7">Esqueci minha senha</h7>
-        </a>
+               <a style="color: var(--cor-1);" href="{{ route('form-esqueci-senha') }}">
+    <span class="text-log7">Esqueci minha senha</span>
+</a>
  
         <h7 style="color: var(--cor-1);" class="checkbox-login">
             Manter-me conectado <input style="padding: 10px;" type="checkbox" name="remember">

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostagemController;
 use App\Http\Controllers\DepoimentoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SenhaController;
 
 
 
@@ -94,7 +95,27 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// alterar senha
+Route::get('/esqueci-senha', function () {
+    return view('alterarsenha-email');
+})->name('form-esqueci-senha');
 
+// Página para digitar o email
+Route::get('/esqueci-senha', function () {
+    return view('alterarsenha-email');
+})->name('form-esqueci-senha');
+
+// Verificação do email
+Route::post('/esqueci-senha', [SenhaController::class, 
+'verificaEmail'])->name('verifica-email');
+
+// Página para alterar senha (exibe formulário)
+Route::get('/alterar-senha/{email}', [SenhaController::class, 
+'formNovaSenha'])->name('form-nova-senha');
+
+// Atualiza senha
+Route::post('/alterar-senha', [SenhaController::class, 
+'alterar'])->name('alterar-senha'); 
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
