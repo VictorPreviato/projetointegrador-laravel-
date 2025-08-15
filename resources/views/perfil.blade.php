@@ -82,7 +82,7 @@
         </div>
       </a>
 
-      {{-- Form de excluir post: usar <button type="submit"> e FECHAR o form --}}
+      
       <form id="delete-post-{{ $post->id }}"
             action="{{ route('postagem.destroy', $post->id) }}"
             method="POST"
