@@ -18,8 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (arquivo.type.startsWith('image/')) {
                         const reader = new FileReader();
                         reader.onload = (e) => {
-                            const previewItem = document.createElement('div');
-                            previewItem.classList.add('preview-imagem-item');
                             const imagem = document.createElement('img');
                             imagem.src = e.target.result;
                             imagem.alt = arquivo.name;
