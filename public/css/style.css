@@ -1356,6 +1356,18 @@ form textarea {
   border-radius: 50%;
   object-fit: cover;
 }
+
+.dep-list{
+    display: flex;
+    justify-content: center;
+}
+
+.dep-item{
+    width: 300px;
+    background-color: var(--cor-4);
+    padding: 20px;
+    border-radius: 10px;
+}
  
 /* BOX OK */
 .info-b{
@@ -2761,8 +2773,8 @@ input[name=confirmar-nsenha]{
   .sitdesc{
     position: absolute;
     right: 15%;
-    top: 13%;
-    width: 25vw;
+    top: 20%;
+    width: 100px;
 }
 
 .descflex{
@@ -2771,6 +2783,7 @@ input[name=confirmar-nsenha]{
     align-items: center;
      row-gap: none;
      text-align: center;
+     margin-top: 150px;
 }
 
 #imgdesc{

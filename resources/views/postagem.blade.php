@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
         @if($errors->has('contato'))
         <span style="color:red;">{{ $errors->first('contato') }}</span>
         @endif
-        <input type="text" name="contato" placeholder="Ex: Telefone; Email; Whatsapp." />
+        <input type="text" id="telefoneMask" name="contato" placeholder="Ex: Telefone; Email; Whatsapp." />
 
         <div id="campo-ultima-localizacao" style="display: none;">
           <label id="label-localizacao" for="ultima-localizacao">Última localização</label>

@@ -57,52 +57,85 @@
     </section>
 
   
-            <h3><b>Informações</b></h3>
+            <h2><b>Informações</b></h2>
             <p>{{ $user->telefone ?? '(00) 00000-0000' }}</p>
             <p>{{ $user->email }}</p>
     
 
-            <h3><b>Postagens</b></h3>
-         <div class="perfil-post">   
+          <h2><b>Postagens</b></h2>
+<div class="perfil-post">
 @if($posts->isEmpty())
-    <p>Você ainda não fez nenhuma postagem.</p>
+  <p>Você ainda não fez nenhuma postagem.</p>
 @else
+  @foreach($posts as $post)
+    <div class="card-post">
 
-    @foreach($posts as $post)
-        <div class="card-post">
-            
-            @if($post->foto)
-            <a href="{{ route('postagem.show', $post->id) }}" class="linkpostprof">
-                <img src="{{ asset('storage/' . $post->foto) }}" alt="Foto da postagem">
-            @endif
-            <div id="infopostprof">
-                <h4 class="tl">{{ $post->nome_pet ?? 'Sem nome' }}</h4>
-            <p> {{ $post->tipo_animal }} - {{ $post->tipo_cadastro }} </p>
-            
-            <small>Postado em {{ $post->created_at->format('d/m/Y') }}</small>
-            </a>
-               <!-- Botão para excluir -->
+      <a href="{{ route('postagem.show', $post->id) }}" class="linkpostprof">
+        @if($post->foto)
+          <img src="{{ asset('storage/' . $post->foto) }}" alt="Foto da postagem">
+        @endif
+
+        <div id="infopostprof">
+          <h4 class="tl">{{ $post->nome_pet ?? 'Sem nome' }}</h4>
+          <p>{{ $post->tipo_animal }} - {{ $post->tipo_cadastro }}</p>
+          <small>Postado em {{ $post->created_at->format('d/m/Y') }}</small>
+        </div>
+      </a>
+
+      {{-- Form de excluir post: usar <button type="submit"> e FECHAR o form --}}
+      <form id="delete-post-{{ $post->id }}"
+            action="{{ route('postagem.destroy', $post->id) }}"
+            method="POST"
+            onsubmit="return confirm('Tem certeza que deseja excluir este post?');"
+            style="margin-top:.5rem;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" style="background:none;border:none;color:red;cursor:pointer;">
+          Excluir
+        </button>
+      </form>
+
+    </div>
+  @endforeach
+@endif
+</div>
+
+
+
+ </div>
+
+ <h2 ><b>Meus Depoimentos</b></h2>
+ <div class="dep-list">
+    
+
+    @if($depoimentos->isEmpty())
+        <p>Você ainda não publicou nenhum depoimento.</p>
+    @else
+        @foreach($depoimentos as $dep)
+            <div class="dep-item">
+                <h4>{{ $dep->titulo }}</h4>
+                <p>{{ $dep->depoimento }}</p>
+                <small>Publicado em {{ $dep->created_at->format('d/m/Y') }}</small>
+                
+                <!-- Botão de excluir -->
                 <a href="#" 
                    onclick="event.preventDefault(); 
-                            if(confirm('Tem certeza que deseja excluir este post?')) {
-                                document.getElementById('delete-post-{{ $post->id }}').submit();
+                            if(confirm('Tem certeza que deseja excluir este depoimento?')) {
+                                document.getElementById('delete-dep-{{ $dep->id }}').submit();
                             }" 
                    style="color:red;">Excluir</a>
 
-                <!-- Formulário oculto -->
-                <form id="delete-post-{{ $post->id }}" 
-                      action="{{ route('postagem.destroy', $post->id) }}" 
-                      method="POST" 
-                      style="display:none;">
+                <form id="delete-dep-{{ $dep->id }}" 
+                      action="{{ route('depoimentos.destroy', $dep->id) }}" 
+                      method="POST" style="display:none;">
                     @csrf
                     @method('DELETE')
+                </form>
             </div>
-        </div>
-       
-    @endforeach
-@endif
+        @endforeach
+    @endif
+</div>
 
- </div>
    
 </main>
 

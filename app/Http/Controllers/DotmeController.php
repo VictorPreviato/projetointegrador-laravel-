@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Depoimento;
 
 
 class DotmeController extends Controller
@@ -182,6 +183,26 @@ class DotmeController extends Controller
     return redirect()->back()->with('success', 'Foto de perfil atualizada com sucesso!');
 }
 
+public function perfil()
+{
+    $user = Auth::user();
+
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'Usuário não autenticado.');
+    }
+
+    $posts = $user->postagens()->latest()->get();
+
+    $depoimentos = Depoimento::where('user_id', $user->id)
+        ->latest()
+        ->get();
+
+    return view('perfil', [
+        'user' => $user,
+        'posts' => $posts,
+        'depoimentos' => $depoimentos
+    ]);
+}
 
 
 }

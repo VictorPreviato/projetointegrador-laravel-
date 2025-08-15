@@ -74,7 +74,7 @@
  <nav class="navbar bg-body-tertiary fixed-top"> <!-- Navbar Mobile --> 
   <div class="container-fluid">
     <a href="/">
-    <img src="IMG/LOGOS/Logosn.svg" alt="" class="logonav"></a>
+    <img src="{{ asset('IMG/LOGOS/Logosn.svg') }}" alt="" class="logonav"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

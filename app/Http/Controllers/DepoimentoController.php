@@ -23,4 +23,18 @@ class DepoimentoController extends Controller
 
         return redirect()->back()->with('success', 'Depoimento enviado com sucesso!');
     }
+
+    public function destroy($id)
+{
+    $depoimento = Depoimento::findOrFail($id);
+
+    // Garantir que só o dono possa apagar
+    if ($depoimento->user_id !== Auth::id()) {
+        return redirect()->back()->with('error', 'Você não tem permissão para apagar este depoimento.');
+    }
+
+    $depoimento->delete();
+
+    return redirect()->back()->with('success', 'Depoimento excluído com sucesso!');
+}
 }

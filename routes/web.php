@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 
 
 
+
 Route::get('/', function () {
     return view('index');
 })->name('index');
@@ -22,16 +23,14 @@ Route::middleware('auth')->group(function () {
         return view('config-perfil', compact('user'));
     })->name('config-perfil');
 
- Route::get('/perfil', function () {
-    $user = Auth::user();
-    $posts = $user->postagens()->latest()->get();
+ Route::get('/perfil', [DotmeController::class, 'perfil'])->name('perfil');
 
-    return view('perfil', compact('user', 'posts'));
-})->name('perfil');
 
     Route::get('/logout', [DotmeController::class, 'logout'])->name('logout');
 
     Route::post('/depoimentos', [DepoimentoController::class, 'store'])->name('depoimentos.store');
+    Route::delete('/depoimentos/{id}', [DepoimentoController::class, 'destroy'])->name('depoimentos.destroy');
+
 
     Route::put('/usuario/update', [DotmeController::class, 'atualizarPerfil'])->name('usuario.update');
     Route::post('/perfil/foto', [DotmeController::class, 'salvarFoto'])->name('perfil.foto');
@@ -39,7 +38,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/postagem', [PostagemController::class, 'create'])->name('postagem.create');
     Route::post('/postagem', [PostagemController::class, 'store'])->name('postagem.store');
-
     Route::delete('postagem/{id}', [PostagemController::class, 'destroy'])->name('postagem.destroy');
 });
 
