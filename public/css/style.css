@@ -1360,6 +1360,7 @@ form textarea {
 .dep-list{
     display: flex;
     justify-content: center;
+    gap: 10px;
 }
 
 .dep-item{
@@ -1367,6 +1368,10 @@ form textarea {
     background-color: var(--cor-4);
     padding: 20px;
     border-radius: 10px;
+}
+
+.profilposts{
+    display: flex;
 }
  
 /* BOX OK */

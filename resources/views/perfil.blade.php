@@ -104,6 +104,7 @@
 
  </div>
 
+ <div>
  <h2 ><b>Meus Depoimentos</b></h2>
  <div class="dep-list">
     
@@ -135,6 +136,7 @@
         @endforeach
     @endif
 </div>
+
 
    
 </main>
