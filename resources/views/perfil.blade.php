@@ -105,12 +105,12 @@
  </div>
 
  <div>
- <h2 ><b>Meus Depoimentos</b></h2>
+ <h2 ><b>Meu Depoimento</b></h2>
  <div class="dep-list">
     
 
     @if($depoimentos->isEmpty())
-        <p>Você ainda não publicou nenhum depoimento.</p>
+        <p>Você ainda não publicou um depoimento.</p>
     @else
         @foreach($depoimentos as $dep)
             <div class="dep-item">
@@ -143,7 +143,7 @@
 
 <div class="dep-container">
  
-<h2 class="h2-dep">Adicione um novo depoimento</h2>
+<h2 class="h2-dep">Adicione um depoimento</h2>
  
 <form action="{{ route('depoimentos.store') }}" method="POST">
    @csrf

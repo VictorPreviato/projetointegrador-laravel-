@@ -602,14 +602,16 @@ input[type=search] {
     scrollbar-width: none;
 }
 
-.content-placeholder .row .img {
+
+.img-homedepoi{
     flex-shrink: 0;
     position: absolute;
-    right: 2%;
-    top: 2%;
+    right: 4%;
+    top: 5%;
     width: calc(25px + 2vw);
     height: calc(25px + 2vw);
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .content-placeholder .row .img.placeholder {
@@ -626,7 +628,14 @@ input[type=search] {
     visibility: hidden;
 }
 
+.semdepoi-home{
+    position: absolute;
+    text-align: center;
+    bottom: 30%;
+}
+
 .cards-box h5{
+    margin-top: 8%;
     margin-bottom: 3%;
 }
 
@@ -2490,7 +2499,9 @@ input[name=confirmar-nsenha]{
     margin-top: 3%;
 }
 
-.content-placeholder .row .img {
+.img-homedepoi {
+    top: 3%;
+    right: 4%;
     width: calc(50px + 2vw);
     height: calc(50px + 2vw);
 }

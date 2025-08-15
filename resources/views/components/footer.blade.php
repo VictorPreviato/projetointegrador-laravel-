@@ -22,6 +22,21 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '{{ session('error') }}',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#E74C3C',
+        timer: 4000,
+        timerProgressBar: true
+    });
+</script>
+@endif
+
+
 @foreach (['success_doacao', 'success_perdido'] as $key)
     @if(session($key))
         <script>

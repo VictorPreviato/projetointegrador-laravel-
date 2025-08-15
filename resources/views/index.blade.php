@@ -134,8 +134,8 @@
                         <div class="row">
                             <h3>{{ $dep->user->name }}</h3>
                             @if($dep->user->foto)
-                                <div class="img">
-                                    <img src="{{ asset('storage/' . $dep->user->foto) }}" alt="Foto de {{ $dep->user->name }}" class="img">
+                                <div>
+                                    <img src="{{ asset('storage/' . $dep->user->foto) }}" alt="Foto de {{ $dep->user->name }}" class="img-homedepoi">
                                 </div>
                             @else
                                 <div class="img" data-letter="{{ strtoupper(substr($dep->user->name, 0, 1)) }} "  style="background: var(--cor-5);"></div>
@@ -146,7 +146,8 @@
                     </div>
                 </div>
                  @empty
-                <h4>Nenhum depoimento postado</h4>
+                <h4 class="semdepoi-home">Nenhum depoimento postado</h4>
+                
             @endforelse
 
         </div>
