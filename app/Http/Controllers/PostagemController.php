@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Postagem;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class PostagemController extends Controller
 {
@@ -40,7 +41,7 @@ class PostagemController extends Controller
             'cidade' => 'nullable|string|max:255',
             'estado' => 'nullable|string|max:255',
             'informacoes' => 'nullable|string',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048'
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048' 
         ]);
 
         // Upload da foto (se houver)

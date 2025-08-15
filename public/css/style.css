@@ -1365,7 +1365,7 @@ form textarea {
 
 .dep-item{
     width: 300px;
-    background-color: var(--cor-4);
+    background-color: var(--cor-2);
     padding: 20px;
     border-radius: 10px;
 }

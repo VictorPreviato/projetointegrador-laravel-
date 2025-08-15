@@ -128,7 +128,7 @@ class DotmeController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:6',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048'
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:20480' // 20 MB
         ]);
 
         // Atualiza campos
@@ -167,7 +167,7 @@ class DotmeController extends Controller
     }
 
     $request->validate([
-        'foto' => 'required|image|max:2048'
+        'foto' => 'required|image|max:20480' // 20 MB
     ]);
 
     // Apaga foto antiga, se existir
