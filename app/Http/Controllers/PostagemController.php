@@ -29,11 +29,11 @@ class PostagemController extends Controller
             'tipo_animal' => 'required|string|max:255',
             'outro_animal' => 'nullable|string|max:255',
             'tem_nome' => 'required|string|max:255',
-            'nome_pet' => 'nullable|string|max:255',
-            'raca' => 'nullable|string|max:255',
+            'nome_pet' => 'required|string|max:255',
+            'raca' => 'required|string|max:255',
             'porte' => 'required|string|max:255',
             'genero' => 'required|string|max:255',
-            'idade' => 'nullable|string|max:255',
+            'idade' => 'required|string|max:255',
             'contato' => 'required|string|max:255',
             'ultima_localizacao' => 'nullable|string|max:255',
             'cep' => 'nullable|string|max:9',
@@ -54,17 +54,16 @@ class PostagemController extends Controller
         // Criar a postagem
         Postagem::create($validated);
 
-        return redirect()->route('desaparecidos')->with('success', 'Postagem criada com sucesso!');
+           if (strtolower($validated['tipo_cadastro']) === 'doacao') {
+        return redirect()->route('adote')->with('success_doacao', 'Postagem de adoção criada com sucesso!');
+    } elseif (strtolower($validated['tipo_cadastro']) === 'perdido') {
+        return redirect()->route('desaparecidos')->with('success_perdido', 'Postagem de desaparecido criada com sucesso!');
+    } else {
+        // Caso não se encaixe em nenhum, volta pra home ou rota padrão
+        return redirect()->route('index')->with('success', 'Postagem criada com sucesso!');
+    }
     }
 
-    /**
-     * Exibir uma postagem.
-     */
-    public function show($id)
-    {
-        $postagem = Postagem::with('user')->findOrFail($id);
-        return view('postagens.show', compact('postagem'));
-    }
 
      public function desaparecidos(Request $request)
 {
@@ -147,6 +146,13 @@ public function adocao(Request $request)
 
         $postagem->delete();
 
-        return redirect()->route('home')->with('success', 'Postagem excluída com sucesso!');
+        return redirect()->route('perfil')->with('success', 'Postagem excluída com sucesso!');
     }
+
+    public function show($id)
+{
+    $post = Postagem::with('user')->findOrFail($id);
+
+    return view('descricao', compact('post'));
+}
 }
