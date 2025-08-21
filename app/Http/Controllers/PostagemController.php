@@ -164,7 +164,7 @@ public function adocao(Request $request)
 
         $postagem->delete();
 
-        return redirect()->route('perfil')->with('success', 'Postagem excluída com sucesso!');
+        return redirect()->route('perfil')->with('success_delpost', 'Postagem excluída com sucesso!');
     }
 
     public function show($id)

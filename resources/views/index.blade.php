@@ -139,7 +139,7 @@
                                     <img src="{{ asset('storage/' . $dep->user->foto) }}" alt="Foto de {{ $dep->user->name }}" class="img-homedepoi">
                                 </div>
                             @else
-                                <div class="img" data-letter="{{ strtoupper(substr($dep->user->name, 0, 1)) }} "  style="background: var(--cor-5);"></div>
+                                <div class="img" data-letter="{{ strtoupper(substr($dep->user->name, 0, 1)) }}" style="background: var(--cor-5);"></div>
                             @endif
                         </div>
                         <h5>{{ $dep->titulo }}</h5>
