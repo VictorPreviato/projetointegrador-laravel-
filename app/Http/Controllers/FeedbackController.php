@@ -11,10 +11,10 @@ public function store(Request $request)
 {
     // Validação básica
     $request->validate([
-        'name' => 'required|string|max:255',
+        'name' => ['required', 'string', 'max:255', 'regex:/^(?!.*(<script|<\/script|<\?|<\s*\/?\s*php)).*$/i'],
         'telefone' => 'nullable|string|max:20',
         'email' => 'required|email',
-        'comentario' => 'required|string',
+        'comentario' => ['required', 'string', 'regex:/^(?!.*(<script|<\/script|<\?|<\s*\/?\s*php)).*$/i'],
     ]);
 
     // Envia email
@@ -31,5 +31,13 @@ public function store(Request $request)
 
     // Redireciona pro index com success
     return redirect()->route('index')->with('success_feed', 'Feedback enviado com sucesso!');
+}
+
+ public function messages(): array
+{
+    return [
+        'name' => 'Formato de nome inválido.',
+        'comentario' => 'Formato de comentário inválido.',       
+    ];
 }
 }

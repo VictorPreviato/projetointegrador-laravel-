@@ -86,7 +86,7 @@
         @enderror
         <label>Senha atual:</label>
          <div class="redsenhaconf">
-        <input type="password" id="asenhaconf" name="current_password" placeholder="Digite sua senha atual">
+        <input type="password" id="asenhaconf" name="current_password" >
         <button class="show-psswd" type="button" data-toggle-target="#asenhaconf" id="passtogglelog">
                 <img src="./IMG/ICONSENHA/eye_open.svg" alt="">
          </div>
@@ -97,7 +97,7 @@
         <div class="campo">
             <label>Nova senha:</label>
             <div class="redsenhaconf">
-            <input type="password" id="nsenhaconf" name="password" placeholder="Digite a nova senha">
+            <input type="password" id="nsenhaconf" name="password">
             <button class="show-psswd" type="button" data-toggle-target="#nsenhaconf" id="passtogglelog">
                 <img src="./IMG/ICONSENHA/eye_open.svg" alt="">
             </button>
@@ -110,7 +110,7 @@
         <div class="campo">
             <label>Confirme a nova senha:</label>
              <div class="redsenhaconf">
-            <input type="password" id="cnsenhaconf" name="password_confirmation" placeholder="Confirme a nova senha">
+            <input type="password" id="cnsenhaconf" name="password_confirmation">
               <button class="show-psswd" type="button" data-toggle-target="#cnsenhaconf" id="passtogglelog">
                 <img src="./IMG/ICONSENHA/eye_open.svg" alt="">
             </button>
