@@ -37,7 +37,7 @@
     </div>
  
     <div class="row">
-        <a style="color: var(--cor-1);" href="./altsenha-email.php">
+        <a style="color: var(--cor-1);" href="#">
             <h7 class="text-log7">Esqueci minha senha</h7>
         </a>
  
