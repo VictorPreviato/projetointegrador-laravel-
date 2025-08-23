@@ -21,6 +21,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('foto')->nullable();
+            // coluna de pergunta secreta
+            $table->string('pergunta')->nullable();
+            $table->string('resposta_secreta')->nullable();
+
             $table->rememberToken();
             $table->timestamps();            
         });
