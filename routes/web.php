@@ -8,7 +8,7 @@ use App\Http\Controllers\PostagemController;
 use App\Http\Controllers\DepoimentoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SenhaController;
-
+use App\Http\Controllers\FeedbackController;
 
 
 Route::get('/', function () {
@@ -23,16 +23,12 @@ Route::middleware('auth')->group(function () {
         return view('config-perfil', compact('user'));
     })->name('config-perfil');
 
- Route::get('/perfil', function () {
-    $user = Auth::user();
-    $posts = $user->postagens()->latest()->get();
-
-    return view('perfil', compact('user', 'posts'));
-})->name('perfil');
+    Route::get('/perfil', [DotmeController::class, 'perfil'])->name('perfil');
 
     Route::get('/logout', [DotmeController::class, 'logout'])->name('logout');
 
     Route::post('/depoimentos', [DepoimentoController::class, 'store'])->name('depoimentos.store');
+    Route::delete('/depoimentos/{id}', [DepoimentoController::class, 'destroy'])->name('depoimentos.destroy');
 
     Route::put('/usuario/update', [DotmeController::class, 'atualizarPerfil'])->name('usuario.update');
     Route::post('/perfil/foto', [DotmeController::class, 'salvarFoto'])->name('perfil.foto');
@@ -45,6 +41,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Rotas públicas
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 

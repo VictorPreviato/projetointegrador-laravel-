@@ -18,7 +18,7 @@
             <input type="text" placeholder="Nome Completo*" required name="name" value="{{ old('name') }}">
         </div>
         <div class="col-6">
-            <input type="date" required name="data_nasc" required value="{{ old('data_nasc') }}">
+            <input type="date" required name="data_nasc" required value="{{ old('data_nasc') }}" max="9999-12-31">
         </div>
     </div>
     <div class="row">
@@ -94,6 +94,6 @@
 </div>
 </form>
 
-<p style="text-align: center;">Ja possui cadastro? <b><a href="" style="color: var(--cor-3);">Acesse aqui!</a></b></p>
+<p style="text-align: center;">Ja possui cadastro? <b><a href="{{ route('log') }}" style="color: var(--cor-3);">Acesse aqui!</a></b></p>
 
 @include("components.footer")

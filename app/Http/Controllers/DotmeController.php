@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Depoimento;
 
 
 class DotmeController extends Controller
@@ -18,18 +19,17 @@ class DotmeController extends Controller
     {
         if ($request->method() == "POST") {
             $data = $request->all();
-            $data['password'] = bcrypt($data['password']);         
+            $data['password'] = bcrypt($data['password']);
 
-    // Criptografa a resposta secreta, se tiver
-        if (!empty($data['resposta_secreta'])) {
-            $data['resposta_secreta'] = md5($data['resposta_secreta']);
-        } else {
-            $data['resposta_secreta'] = null;       
-         }
+            // Criptografa a resposta secreta, se tiver
+            if (!empty($data['resposta_secreta'])) {
+                $data['resposta_secreta'] = md5($data['resposta_secreta']);
+            } else {
+                $data['resposta_secreta'] = null;
+            }
 
-        // Salva a pergunta secreta
-        $data['pergunta'] = $data['pergunta'] ?? null;
-
+            // Salva a pergunta secreta
+            $data['pergunta'] = $data['pergunta'] ?? null;
 
             // Upload de foto se existir
             if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
@@ -67,6 +67,7 @@ class DotmeController extends Controller
 
     // Logout
     public function logout()
+
     {
         Session::forget(['user', 'user_id']);
         Auth::logout();
@@ -77,11 +78,13 @@ class DotmeController extends Controller
     // Remover foto de perfil
     public function removerFoto()
     {
+
         $user = Auth::user();
 
         if ($user->foto && Storage::disk('public')->exists($user->foto)) {
             Storage::disk('public')->delete($user->foto);
             $user->foto = null;
+            /** @var User|null $user */
             $user->save();
         }
 
@@ -89,56 +92,78 @@ class DotmeController extends Controller
     }
 
     public function update(Request $request)
-{
-    /** @var \App\Models\Dotme|null $user */
-    $user = Auth::user();
+    {
+        /** @var \App\Models\Dotme|null $user */
+        $user = Auth::user();
 
-    if (!$user) {
-        return redirect()->route('login')->with('error', 'Usuário não autenticado.');
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Usuário não autenticado.');
+        }
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255', 'regex:/^(?!.*(<script|<\/script|<\?|<\s*\/?\s*php)).*$/i'],
+            'telefone' => ['required', 'regex:/^\(\d{2}\)\s?\d{4,5}-\d{4}$/'],
+            'email' => ['required', 'email', 'confirmed', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'unique:users,email,' . $user->id],
+            'data_nasc' => ['required', 'date'],
+        ]);
+
+        $user->name = $request->name;
+        $user->telefone = $request->telefone;
+        $user->email = $request->email;
+        $user->data_nasc = $request->data_nasc;
+        $user->save();
+
+        return redirect()->route('config-perfil')->with('success', 'Perfil atualizado com sucesso!');
     }
 
-    $request->validate([
-        'name' => ['required', 'string', 'max:255', 'regex:/^(?!.*(<script|<\/script|<\?|<\s*\/?\s*php)).*$/i'],
-        'telefone' => ['required', 'regex:/^\(\d{2}\)\s?\d{4,5}-\d{4}$/'],
-        'email' => ['required', 'email', 'confirmed', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'unique:users,email,' . $user->id],
-        'data_nasc' => ['required', 'date'],
-    ]);
 
-    $user->name = $request->name;
-    $user->telefone = $request->telefone;
-    $user->email = $request->email;
-    $user->data_nasc = $request->data_nasc;
-    $user->save();
+    public function editarPerfil()
+    {
+        $user = Auth::user(); // ou auth()->user()
 
-    return redirect()->route('config-perfil')->with('success', 'Perfil atualizado com sucesso!');
-}
+        if (!$user) {
+            // Caso o usuário não exista, redireciona para login (opcional)
+            return redirect()->route('login')->with('error', 'Usuário não encontrado.');
+        }
 
- public function editarPerfil()
-{
-    $user = Auth::user(); // ou auth()->user()
-    
-    if (!$user) {
-        // Caso o usuário não exista, redireciona para login (opcional)
-        return redirect()->route('login')->with('error', 'Usuário não encontrado.');
+        return view('config-perfil', compact('user'));
     }
-
-    return view('config-perfil', compact('user'));
-}
 
     public function atualizarPerfil(Request $request)
     {
+
         $user = Auth::user();
 
         // Validação dos campos
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|min:6',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'password' => [
+                'nullable',
+                'confirmed',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/'
+            ],
+            'current_password' => $request->filled('password') ? 'required' : 'nullable',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+        ], [
+            'password.confirmed' => 'O campo de confirmação da senha não corresponde.',
+            'password.regex' => 'A senha deve ter no mínimo 8 caracteres, incluindo pelo menos: 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.',
+            'current_password.required' => 'Você deve informar sua senha atual para alterá-la.',
         ]);
+
+
+        if ($request->filled('password')) {
+            if (!Hash::check($request->current_password, $user->password)) {
+                return back()->withErrors(['current_password' => 'A senha atual informada está incorreta.']);
+            }
+            $user->password = Hash::make($request->password);
+        }
+
 
         // Atualiza campos
         $user->name = $request->name;
+        $user->telefone = $request->telefone;
+        $user->data_nasc = $request->data_nasc;
         $user->email = $request->email;
 
         if ($request->filled('password')) {
@@ -157,33 +182,54 @@ class DotmeController extends Controller
             $user->foto = $nomeArquivo; // só nome do arquivo, sem 'fotos/' na frente
 
         }
-
+        /** @var User|null $user */
         $user->save();
-
-        return redirect()->route('config-perfil')->with('success', 'Perfil atualizado com sucesso!');
+        return redirect()->route('config-perfil')->with('success_config', 'Perfil atualizado com sucesso!');
     }
 
     public function salvarFoto(Request $request)
-{
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    if (!$user) {
-        return redirect()->route('login')->with('error', 'Usuário não autenticado.');
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Usuário não autenticado.');
+        }
+
+        $request->validate([
+            'foto' => 'required|image|max:20480' // 20 MB
+        ]);
+
+        // Apaga foto antiga, se existir
+        if ($user->foto && Storage::disk('public')->exists($user->foto)) {
+            Storage::disk('public')->delete($user->foto);
+        }
+
+        // Salva nova foto e armazena caminho completo
+        $user->foto = $request->file('foto')->store('fotos', 'public');
+        /** @var User|null $user */
+        $user->save();
+
+        return redirect()->back()->with('success', 'Foto de perfil atualizada com sucesso!');
     }
 
-    $request->validate([
-        'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-    ]);
+    public function perfil()
+    {
+        $user = Auth::user();
 
-    // Apaga foto antiga, se existir
-    if ($user->foto && Storage::disk('public')->exists($user->foto)) {
-        Storage::disk('public')->delete($user->foto);
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Usuário não autenticado.');
+        }
+
+        $posts = $user->postagens()->latest()->get();
+
+        $depoimentos = Depoimento::where('user_id', $user->id)
+            ->latest()
+            ->get();
+
+        return view('perfil', [
+            'user' => $user,
+            'posts' => $posts,
+            'depoimentos' => $depoimentos
+        ]);
     }
-
-    // Salva nova foto e armazena caminho completo
-    $user->foto = $request->file('foto')->store('fotos', 'public');
-    $user->save();
-
-    return redirect()->back()->with('success', 'Foto de perfil atualizada com sucesso!');
-}
 }
