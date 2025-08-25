@@ -20,7 +20,7 @@
                 <h1>Ajude um pet a encontrar uma nova família</h1>
                 <h5>Conheça os animais para adoção na sua região</h5>
             </div>
-            <button id="bcar1">Verificar</button>
+            <button id="bcar1" onclick="document.location='{{ route('adote') }}' ">Verificar</button>
             <img src="IMG/HOME/CARINI/pexels-alinaskazka-24740464.jpg" class="d-block" alt="...">
             <div class="carousel-caption d-none d-md-block">
             </div>
@@ -100,12 +100,12 @@
         <h1>Descubra como unimos quem quer adotar, ajudar e encontrar pets perdidos. Clique e saiba como nosso projeto transforma vidas!
         </h1>
     </div>
-    <button>Leia Sobre</button>
+    <button onclick="document.location='{{ route('sobre') }}' ">Leia Sobre</button>
 </div>
 
 
 <!-- Depoimentos -->
-<h1 class="h1depoi">Depoimentos</h1>
+<h1 class="h1depoi" id="h1depoi">Depoimentos</h1>
 
 <div class="depoi">
     <div class="tdepoi">
@@ -176,5 +176,15 @@
         </form>
     </div>
 </div>
+
+<script>
+    const botao = document.getElementById("bcar2");
+    const alvo = document.getElementById("h1depoi");
+
+    botao.addEventListener("click", () => {
+        alvo.scrollIntoView({ behavior: "smooth" });
+    });
+</script>
+
 
 @include("components.footer")

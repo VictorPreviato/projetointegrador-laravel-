@@ -1,7 +1,7 @@
 @include("components.header")
 
 <div class="cont-apoie">
-        <h1>Bem vindo à Dot.me!</h1>
+        <h1>Bem vindo à Dotme!</h1>
 
         <section class="secao-texto">
             <p>
@@ -45,7 +45,7 @@
 
         <section class="secao-contato">
             <h2>Fale conosco!</h2>
-            <p>Escreva para dot_me@hotmail.com para assuntos de parcerias.</p>
+            <p>Escreva para stdotme@gmail.com para assuntos de parcerias.</p>
         </section>
     </div>
 
