@@ -86,11 +86,23 @@
             <p>{{ $post->user->email }}</p>
         </div>
 
-        <button id="contdono" onclick="window.location.href='mailto:{{ $post->user->email }}'">
-            Contate o dono
-        </button>
+        <button id="contdono" onclick="toggleChat()">Contate o dono</button>
     </div>
 </div>
+
+<div id="chat-widget" class="chat-closed">
+    <div class="chat-header" onclick="toggleChat()">Chat com o dono</div>
+    <div class="chat-body">
+        <div id="chat-messages"></div>
+        <div class="chat-input">
+            <input type="text" id="chat-text" placeholder="Digite sua mensagem...">
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+</div>
+
+
+
 
 
 

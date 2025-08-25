@@ -40,7 +40,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/postagem', [PostagemController::class, 'create'])->name('postagem.create');
     Route::post('/postagem', [PostagemController::class, 'store'])->name('postagem.store');
     Route::delete('postagem/{id}', [PostagemController::class, 'destroy'])->name('postagem.destroy');
+    
 });
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/chat/{user}', [ChatController::class, 'index'])->name('chat.index');
+    Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
+});
+
 
 // Rotas públicas
 

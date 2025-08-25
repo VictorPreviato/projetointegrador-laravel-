@@ -1,5 +1,60 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+#chat-widget {
+    position: fixed;
+    bottom: 10px;
+    right: 15px;
+    width: 300px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,.2);
+    font-family: Arial, sans-serif;
+}
+
+.chat-header {
+    background: #ff914d;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 12px 12px 0 0;
+}
+
+.chat-body {
+    display: none;
+    height: 300px;
+    flex-direction: column;
+}
+
+#chat-widget.open .chat-body {
+    display: flex;
+}
+
+#chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.chat-input {
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+
+.chat-input input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+}
+
+.chat-input button {
+    border: none;
+    background: #ff914d;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
 
 * {
     margin: 0;

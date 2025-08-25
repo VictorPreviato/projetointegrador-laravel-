@@ -1,5 +1,6 @@
+
 <div class="footer">
-  <img src="IMG/LOGOS/DotPetLogT.png" alt="" class="logofoot">
+  <img src=" {{ asset('IMG/LOGOS/DotPetLogT.png') }}" alt="" class="logofoot">
   <div class="linkfoot">
     <a href="">Campanhas</a>
     <a href="{{ route('contato') }}">Contato</a>
@@ -21,6 +22,79 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+<script>
+    // Definindo o dono do post como destinatário
+    var receiverId = "{{ $post->user->id }}";
+    console.log("Receiver ID carregado:", receiverId);
+
+    // Abre/fecha o chat
+    function toggleChat() {
+        console.log("Toggle chat");
+        document.getElementById("chat-widget").classList.toggle("open");
+        if (document.getElementById("chat-widget").classList.contains("open")) {
+            loadMessages();
+        }
+    }
+
+    // Carrega mensagens via AJAX
+    function loadMessages() {
+        console.log("Carregando mensagens...");
+        fetch(`/chat/${receiverId}`)
+            .then(res => {
+                if (!res.ok) throw new Error("Erro ao carregar mensagens: " + res.status);
+                return res.json();
+            })
+            .then(messages => {
+                let chat = document.getElementById("chat-messages");
+                chat.innerHTML = "";
+                messages.forEach(m => {
+                    let div = document.createElement("div");
+                    div.style.marginBottom = "8px";
+                    div.textContent = (m.sender_id == {{ auth()->id() }})
+                                      ? "Você: " + m.message
+                                      : "Dono: " + m.message;
+                    chat.appendChild(div);
+                });
+                chat.scrollTop = chat.scrollHeight;
+            })
+            .catch(err => console.error(err));
+    }
+
+    // Envia mensagem
+    function sendMessage() {
+        let text = document.getElementById("chat-text").value;
+        if (text.trim() === "") return;
+
+        console.log("Enviando mensagem:", text);
+
+        fetch("/chat/send", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                receiver_id: receiverId,
+                message: text
+            })
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("Erro ao enviar mensagem: " + res.status);
+            return res.json();
+        })
+        .then(data => {
+            console.log("Mensagem enviada com sucesso:", data);
+            document.getElementById("chat-text").value = "";
+            loadMessages();
+        })
+        .catch(err => console.error(err));
+    }
+</script>
+
+
 
 @if(session('error'))
 <script>
