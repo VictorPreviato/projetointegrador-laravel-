@@ -1,6 +1,6 @@
 @include("components.header")
 
-<h1 class="titulo-faq">Várias pessoas também perguntam</h1>
+<h1 class="titulo-faq">Perguntas frequentes</h1>
 
 <div class="div-faq">
 <section class="section-faq" >

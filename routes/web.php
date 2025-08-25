@@ -10,8 +10,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FeedbackController;
 
 
-
-
 Route::get('/', function () {
     return view('index');
 })->name('index');
