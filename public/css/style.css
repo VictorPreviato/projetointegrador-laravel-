@@ -2884,8 +2884,9 @@ input[name=confirmar-nsenha]{
 
 #map{
     border-radius: 20px;
-    width: 80vw;
-    height: 20vh;
+    width: 90vw;
+    height: 30vh;
+    margin: 0 auto;
 }
 
 .descdono{

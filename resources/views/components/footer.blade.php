@@ -1,5 +1,5 @@
 <div class="footer">
-  <img src="IMG/LOGOS/DotPetLogT.png" alt="" class="logofoot">
+  <img src="{{ asset('IMG/LOGOS/DotPetLogT.png') }}" alt="" class="logofoot">
   <div class="linkfoot">
     <a href="">Campanhas</a>
     <a href="{{ route('contato') }}">Contato</a>
@@ -21,6 +21,8 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 @if(session('error'))
 <script>

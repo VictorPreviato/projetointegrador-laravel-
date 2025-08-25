@@ -69,6 +69,10 @@
                 {{ $post->cidade ?? '' }} - 
                 {{ $post->estado ?? '' }} 
                 {{ $post->cep ?? '' }}</p>
+
+                @if($post->cidade && $post->estado)
+    <div id="map"></div>
+@endif
         </div>
 
     </div>
@@ -91,6 +95,37 @@
         </button>
     </div>
 </div>
+
+
+ 
+ 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    @if($post->cidade && $post->estado)
+        var endereco = "{{ $post->bairro . ', ' . $post->cidade . ' - ' . $post->estado }}";
+ 
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(endereco)}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.length > 0) {
+                    var lat = data[0].lat;
+                    var lon = data[0].lon;
+ 
+                    var map = L.map('map').setView([lat, lon], 15);
+ 
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                    }).addTo(map);
+ 
+                    L.marker([lat, lon]).addTo(map)
+                        .bindPopup("Local aproximado")
+                        .openPopup();
+                }
+            })
+            .catch(err => console.error("Erro ao buscar localização:", err));
+    @endif
+});
+</script>
 
 
 

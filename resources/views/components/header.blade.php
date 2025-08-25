@@ -11,6 +11,7 @@
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>  
   <link rel="icon" type="image/x-icon" href="{{ asset('IMG/LOGOS/Logosn.svg') }}">
   <link rel="stylesheet" href="{{ asset('CSS/style.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
 </head>
 <body>
