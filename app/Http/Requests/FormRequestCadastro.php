@@ -27,6 +27,8 @@ class FormRequestCadastro extends FormRequest
                     'confirmed',
                     'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/'
                 ],
+                'pergunta' => ['required', 'in:1,2,3,4'],
+                'resposta_secreta' => ['required', 'string', 'min:2'],
 
             ];
         }
@@ -42,8 +44,7 @@ class FormRequestCadastro extends FormRequest
         'email.unique' => 'Este e-mail já foi cadastrado.',
         'email.confirmed' => 'O campo de confirmação do e-mail não corresponde.',
         'password.confirmed' => 'O campo de confirmação da senha não corresponde.',
-        'password.regex' => 'A senha deve ter no mínimo 8 caracteres, incluindo pelo menos: 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.',
-       
+        'password.regex' => 'A senha deve ter no mínimo 8 caracteres, incluindo pelo menos: 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.'       
     ];
 }
 }
