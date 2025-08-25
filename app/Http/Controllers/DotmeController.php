@@ -21,6 +21,17 @@ class DotmeController extends Controller
             $data = $request->all();
             $data['password'] = bcrypt($data['password']);
 
+            // Criptografa a resposta secreta, se tiver
+        if (!empty($data['resposta_secreta'])) {
+            $data['resposta_secreta'] = md5($data['resposta_secreta']);
+        } else {
+            $data['resposta_secreta'] = null;       
+         }
+
+        // Salva a pergunta secreta
+        $data['pergunta'] = $data['pergunta'] ?? null;
+
+
             // Upload de foto se existir
             if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
                 $data['foto'] = $request->file('foto')->store('fotos', 'public');

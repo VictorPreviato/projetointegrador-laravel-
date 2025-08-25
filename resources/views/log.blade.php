@@ -37,7 +37,7 @@
     </div>
  
     <div class="row">
-        <a style="color: var(--cor-1);" href="#">
+        <a style="color: var(--cor-1);" href="{{ route('senha.alterar') }}">
             <h7 class="text-log7">Esqueci minha senha</h7>
         </a>
  

@@ -33,12 +33,17 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'pergunta' => 'required|integer',
+            'resposta_secreta' => strtolower($request->resposta_secreta),
+
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'pergunta' => $request->pergunta, // Salva o ID da pergunta
+            'resposta_secreta' => strtolower($request->resposta_secreta), // normaliza
         ]);
 
         event(new Registered($user));

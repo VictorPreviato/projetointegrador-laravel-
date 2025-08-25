@@ -8,6 +8,7 @@ use App\Http\Controllers\PostagemController;
 use App\Http\Controllers\DepoimentoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\SenhaController;
 
 
 Route::get('/', function () {
@@ -92,6 +93,44 @@ Route::post('cadastro', [DotmeController::class,
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// alterar senha
+Route::get('/esqueci-senha', function () {
+    return view('alterarsenha-email');
+})->name('form-esqueci-senha');
+
+// Página para digitar o email
+Route::get('/esqueci-senha', function () {
+    return view('alterarsenha-email');
+})->name('form-esqueci-senha');
+
+// Verificação do email
+Route::post('/esqueci-senha', [SenhaController::class, 
+'verificaEmail'])->name('verifica-email');
+
+
+// Página da pergunta secreta
+Route::get('/pergunta-secreta/{email}', [SenhaController::class, 
+'formPerguntaSecreta'])->name('form-pergunta-secreta');
+
+// Verificação da resposta
+Route::post('/verifica-resposta-secreta', [SenhaController::class,
+ 'verificaRespostaSecreta'])->name('verifica-resposta-secreta');
+
+////teste////
+Route::post('/verifica-email', [SenhaController::class,
+ 'verificaEmail'])->name('verifica-email');
+
+ Route::get('/alterar-senha/{email}', [SenhaController::class, 
+ 'formNovaSenha'])->name('form-nova-senha');
+
+// Página de verificação de e-mail para redefinir senha
+Route::get('/alterarsenha-email', [SenhaController::class, 
+'formEmail'])->name('senha.alterar');
+
+// Atualiza senha
+Route::post('/alterar-senha', [SenhaController::class, 
+'alterar'])->name('alterar-senha'); 
 
 
 
