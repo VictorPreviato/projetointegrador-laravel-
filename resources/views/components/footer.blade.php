@@ -1,5 +1,5 @@
 <div class="footer">
-  <img src="IMG/LOGOS/DotPetLogT.png" alt="" class="logofoot">
+  <img src="{{ asset('IMG/LOGOS/DotPetLogT.png') }}" alt="" class="logofoot">
   <div class="linkfoot">
     <a href="">Campanhas</a>
     <a href="{{ route('contato') }}">Contato</a>

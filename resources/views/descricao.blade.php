@@ -71,7 +71,7 @@
                 {{ $post->cep ?? '' }}</p>
 
                 @if($post->cidade && $post->estado)
-    <div id="map" style="width:600px; height:400px; border-radius:12px;"></div>
+    <div id="map"></div>
 @endif
         </div>
 
