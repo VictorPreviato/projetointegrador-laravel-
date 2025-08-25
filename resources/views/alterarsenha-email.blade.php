@@ -1,22 +1,22 @@
 @include("components.header")
 
 <div class="caixa-senha">
-    <h1 class="tsenha" style="text-align: center;">Redefinição de senha</h1>
+    <h1 class="tsenha" style="text-align: center; margin-top:200px;">Redefinição de senha</h1>
     <p class="psenha" style="margin-bottom: 50px;">
         Confirme seu e-mail no campo abaixo para enviarmos um código de redefinição de senha
     </p>
-    <div class="col-12" style="text-align: center;">
-        <div class="row">
+    <div class="col-12" style="text-align: center; margin-bottom:150px;">
+    
             <form method="POST" action="{{ route('verifica-email') }}">
                 @csrf
                 <input type="email" name="email" placeholder="E-mail" required>
                 
                 <div class="bt-senha" style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">                                                    
-                    <a href="{{ route('log') }}" class="but-casenha"><b>Cancelar</b></a>
+                       <button onclick="document.location=' {{ route('log') }}'" class="but-casenha" type="button"><b>Cancelar</b></button>
                     <button type="submit" class="but-csenha"><b>Confirmar</b></button>
                 </div>
             </form>
-        </div>
+  
 
         @if ($errors->has('email'))
             <p style="color:red; margin-top: 15px;">{{ $errors->first('email') }}</p>

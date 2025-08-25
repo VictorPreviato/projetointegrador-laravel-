@@ -1,7 +1,7 @@
 @include("components.header")
 
-<div class="caixa-senha">
-    <h1 style="text-align: center;">Pergunta Secreta</h1>
+
+    <h1 style="text-align: center; margin-top:300px;">Pergunta Secreta</h1>
     <p style="text-align: center;">Responda corretamente para redefinir sua senha</p>
 
     <form method="POST" action="{{ route('verifica-resposta-secreta') }}">
@@ -19,11 +19,11 @@
                 <p style="color:red;">{{ $message }}</p>
             @enderror
 
-            <div style="margin-top: 20px;">
+            <div style="margin-top: 20px; margin-bottom:250px;">
                 <button type="submit" class="but-csenha">Confirmar</button>
             </div>
         </div>
     </form>
-</div>
+
 
 @include("components.footer")

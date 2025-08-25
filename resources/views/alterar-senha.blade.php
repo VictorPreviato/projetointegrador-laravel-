@@ -1,7 +1,7 @@
 @include("components.header")
 
 
-<div class="caixa-rsenha">
+
     <h1 class="trsenha" style="text-align: center;">Redefinição de senha</h1>
     <p class="prsenha" style="margin-bottom: 50px;">Digite a nova senha no campo abaixo para a alteração</p>
 
@@ -29,18 +29,15 @@
                     @endforeach
                 </ul>
             @endif
-
-            <div class="bt-rsenha" style="margin-top: 20px;">
-                <div>
-                    <a href="{{ route('log') }}" class="but-casenha"><b>Cancelar</b></a>
-                </div>
-                <div>
+         
+                    <button onclick="document.location=' {{ route('log') }}'" 
+                    class="but-casenha" type="button"><b>Cancelar</b></button>
+          
                     <button class="but-rcsenha" type="submit"><b>Confirmar</b></button>
-                </div>
-            </div>
+          
         </form>
     </div>
 </div>
-</div>
+
 
 @include("components.footer")

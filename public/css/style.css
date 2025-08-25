@@ -883,9 +883,6 @@ text-align: center;
     background-color: #31403E;
     color: #F5F5F5;
     font-size: 16px;    
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2vw;
 }
 
 
@@ -2201,23 +2198,19 @@ summary::-webkit-details-marker {
     margin-right:auto;
 }
  
-.caixa-senha{
- 
-    padding: 20px;
-    border: 2px solid black;
-    border-radius: 10px;
-    width: 50vw;
-    margin-left: auto;
-    margin-right: auto;
-   
+.caixa-senha input{
+    width: 30vw;
 }
+
+.caixa-senha{
+    margin: 0 auto;
+}
+
  
 .psenha{
     width: 20vw;
     text-align: center;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 50px auto;
 }
  
 .but-csenha{
@@ -2229,13 +2222,10 @@ summary::-webkit-details-marker {
     border-radius: 8px;
     background-color: #31403E;
     color: #F5F5F5;
-    font-size: 16px;
-    margin: 10px;  
-     
+    font-size: 16px;  
 }
  
 .but-casenha{
- 
     border: none;
     outline: none;
     width: 15vw;
@@ -2243,19 +2233,10 @@ summary::-webkit-details-marker {
     border-radius: 8px;
     background-color: #777777;
     color: #F5F5F5;
-    font-size: 16px;  
-    margin: 10px;  
-   
-   
-}
+    font-size: 16px;
  
-.bt-senha{
- 
-    display: flex;
-    gap: 5vw;
-    justify-content: center ;
-     
 }
+
 
 /* <<<<< ALTSENHA(REDEFINIÇÃO DA SENHA) >>>>> */
 
@@ -2271,14 +2252,17 @@ summary::-webkit-details-marker {
    
 }
 
-input[name=nova-senha]{
-
-    width: 25vw;
+#nova-senha{
+    width: 30vw;
+    margin: 10px auto;
+    position: relative;
 }
 
-input[name=confirmar-nsenha]{
+#confirmar-nsenha{
 
-    width: 25vw;
+    width: 30vw;
+    margin: 10px  auto;
+    position: relative;
 }
  
 .prsenha{
@@ -2320,15 +2304,7 @@ input[name=confirmar-nsenha]{
     margin: 10px;   
 }
 
-#nova-senhatoggle{
-    right: 26%;
-    top: 25%;
-}
 
-#confirmar-nsenhatoggle{
-    right: 26%;
-    top: 25%;
-}
 
 .but-rcasenha:hover{
     background-color: rgba(119, 119, 119, 0.8);
@@ -2632,9 +2608,14 @@ input[name=confirmar-nsenha]{
     .img-altemail{
     width: 50vw;
     }
- 
+
+    .caixa-senha input{
+        width: 80vw;
+    }
+
     .caixa-senha{
     width: 80vw;
+    
 }
 
 .psenha{
@@ -2660,7 +2641,7 @@ input[name=confirmar-nsenha]{
  
 .bt-senha{
     display: block;
-    gap: 5vw; 
+
 }
 
 #email-password{
@@ -2677,13 +2658,13 @@ input[name=confirmar-nsenha]{
     width: 70vw;
 }
 
-input[name=nova-senha]{
-    width: 70vw;
+#nova-senha{
+    width: 90vw;
 }
 
-input[name=confirmar-nsenha]{
+#confirmar-nsenha{
 
-    width: 70vw;
+    width: 90vw;
 }
 
 .bt-rsenha div{
