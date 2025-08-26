@@ -54,14 +54,14 @@
         <div class="col-6 pass">
               <input type="password" name="password" id="password" placeholder="Crie sua senha*" required>
   <button class="show-psswd" type="button" data-toggle-target="#password">
-    <img src="./IMG/ICONSENHA/eye_open.svg" alt="">
+    <img src="{{ asset('./IMG/ICONSENHA/eye_open.svg') }}" alt="">
   </button>
          
         </div>
         <div class="col-6 pass">
               <input type="password" placeholder="Confirme sua senha*" name="password_confirmation" id="confirm-password" required>
   <button class="show-psswd" type="button" data-toggle-target="#confirm-password">
-    <img src="./IMG/ICONSENHA/eye_open.svg" alt="">
+    <img src="{{ asset('./IMG/ICONSENHA/eye_open.svg') }}" alt="">
   </button>
         </div>
                         <!-- Pergunta Secreta -->

@@ -31,7 +31,7 @@
         <div class="col-12 log-input">
             <input type="password" name="password" placeholder="Senha" id="login-password" required>
             <button class="show-psswd" type="button" data-toggle-target="#login-password" id="passtogglelog">
-                <img src="./IMG/ICONSENHA/eye_open.svg" alt="">
+                <img src="{{ asset('./IMG/ICONSENHA/eye_open.svg') }}" alt="">
             </button>
         </div>
     </div>

@@ -88,7 +88,7 @@
          <div class="redsenhaconf">
         <input type="password" id="asenhaconf" name="current_password" >
         <button class="show-psswd" type="button" data-toggle-target="#asenhaconf" id="passtogglelog">
-                <img src="./IMG/ICONSENHA/eye_open.svg" alt="">
+                <img src="{{ asset('./IMG/ICONSENHA/eye_open.svg') }}" alt="">
          </div>
     </div>
 </div>
@@ -99,7 +99,7 @@
             <div class="redsenhaconf">
             <input type="password" id="nsenhaconf" name="password">
             <button class="show-psswd" type="button" data-toggle-target="#nsenhaconf" id="passtogglelog">
-                <img src="./IMG/ICONSENHA/eye_open.svg" alt="">
+                <img src="{{ asset('./IMG/ICONSENHA/eye_open.svg') }}" alt="">
             </button>
               @error('password')
         <div class="text-danger">{{ $message }}</div>
@@ -112,7 +112,7 @@
              <div class="redsenhaconf">
             <input type="password" id="cnsenhaconf" name="password_confirmation">
               <button class="show-psswd" type="button" data-toggle-target="#cnsenhaconf" id="passtogglelog">
-                <img src="./IMG/ICONSENHA/eye_open.svg" alt="">
+                <img src="{{ asset('./IMG/ICONSENHA/eye_open.svg') }}" alt="">
             </button>
              </div>
         </div>
