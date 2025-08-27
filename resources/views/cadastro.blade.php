@@ -85,7 +85,7 @@
         <div>
 
         <div>
-        <input type="checkbox" required> Estou de acordo com os <b><a href="" style="color: var(--cor-3);">termos de privacidade</a></b>
+        <input type="checkbox" required> Estou de acordo com os <b><a href="{{ route('privacidade') }}" target="_blank" style="color: var(--cor-3);">termos de privacidade</a></b>
         </div>
         <div>
             <input type="submit" class="" name="but-cad" value="Criar Conta">

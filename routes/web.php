@@ -62,6 +62,9 @@ Route::get('/log', function () {
     return view('log');
 })->name('log');
 
+Route::get('/privacidade', function () {
+    return view('privacidade');
+})->name('privacidade');
 
 Route::get('/desaparecidos', [PostagemController::class, 'desaparecidos'])->name('desaparecidos');
 Route::get('/adote', [PostagemController::class, 'adocao'])->name('adote');
