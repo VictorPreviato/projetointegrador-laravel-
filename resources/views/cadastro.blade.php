@@ -94,6 +94,6 @@
 </div>
 </form>
 
-<p style="text-align: center;">Ja possui cadastro? <b><a href="" style="color: var(--cor-3);">Acesse aqui!</a></b></p>
+<p style="text-align: center;">Ja possui cadastro? <b><a href="{{ route('log') }}" style="color: var(--cor-3);">Acesse aqui!</a></b></p>
 
 @include("components.footer")
