@@ -923,8 +923,8 @@ text-align: center;
 }
 
 .preview-imagem-item {
-    width: 60px; 
-    height: 60px; 
+    width: 200px; 
+    height: 200px; 
     overflow: hidden; 
     border: 1px solid #ddd; 
     border-radius: 5px; 
@@ -2746,6 +2746,10 @@ summary::-webkit-details-marker {
   display: flex;
   padding: 10px;
   gap: 1px;
+}
+
+#preview-imagens{
+    display: none;
 }
 
 .left-panel{
