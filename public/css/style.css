@@ -1216,7 +1216,7 @@ form textarea {
 
 #imgdesc{
     height: 50vh;
-    width: 25vw;
+    width: 28vw;
     object-fit: cover;
     border-radius: 15px;
 }
