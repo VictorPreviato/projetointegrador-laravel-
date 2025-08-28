@@ -40,7 +40,7 @@
           
         </form>
     </div>
-</div>
+
 
 
 @include("components.footer")

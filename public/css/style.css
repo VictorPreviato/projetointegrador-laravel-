@@ -2249,6 +2249,12 @@ summary::-webkit-details-marker {
  
 }
 
+@media (min-width:991px){
+    .trsenha{
+        margin-top: 200px;
+    }
+}
+
 
 /* <<<<< ALTSENHA(REDEFINIÇÃO DA SENHA) >>>>> */
 
