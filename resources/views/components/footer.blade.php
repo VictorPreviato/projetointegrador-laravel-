@@ -1,7 +1,7 @@
 <div class="footer">
   <img src="{{ asset('IMG/LOGOS/DotPetLogT.png') }}" alt="" class="logofoot">
   <div class="linkfoot">
-    <a href="">Campanhas</a>
+    <a href="{{ route('campanha') }}">Campanhas</a>
     <a href="{{ route('contato') }}">Contato</a>
     <a href="{{ route('sobre') }}">Sobre o Projeto</a>
     <a href="{{ route('faq') }}">FAQ</a>
