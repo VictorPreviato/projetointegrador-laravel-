@@ -69,8 +69,8 @@
         input.type = input.type === 'password' ? 'text' : 'password'
 
         icon.src = icon.src.includes('eye_open')
-          ? './IMG/ICONSENHA/eye_closed.svg'
-          : './IMG/ICONSENHA/eye_open.svg'
+          ? '{{ asset('./IMG/ICONSENHA/eye_closed.svg') }}'
+          : '{{ asset('./IMG/ICONSENHA/eye_open.svg') }}'
       }
     })
   })

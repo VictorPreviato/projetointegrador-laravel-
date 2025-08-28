@@ -2330,6 +2330,16 @@ summary::-webkit-details-marker {
      
 }
 
+.dvnsenhaconf{
+    position: relative;
+}
+
+#nsenhatoggleconf{
+    left: 63%;
+    top: 35%;
+    width: 10px;
+}
+
 /* <<<<< Mobile - Retrato >>>>>*/
 
 @media (max-width:991px) {
@@ -2644,8 +2654,6 @@ summary::-webkit-details-marker {
     height:50px;
     font-size: 12px;  
 }
-
-.but-rcsenha{}
  
 .but-casenha{
     width: 90vw;
@@ -2655,7 +2663,6 @@ summary::-webkit-details-marker {
  
 .bt-senha{
     display: block;
-
 }
 
 #email-password{

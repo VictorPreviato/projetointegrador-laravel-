@@ -10,9 +10,11 @@
             @csrf
             <input type="hidden" name="email" value="{{ $email }}">
 
-            <div>
+            <div class="dvnsenhaconf">
                 <input type="password" id="nova-senha" name="nova_senha" placeholder="Nova senha" required>               
-
+                <button class="show-psswd" type="button" data-toggle-target="#nova-senha" id="nsenhatoggleconf">
+    <img src="{{ asset('./IMG/ICONSENHA/eye_open.svg') }}" alt="">
+  </button>
             </div>
 
             <div >
