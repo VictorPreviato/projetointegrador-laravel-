@@ -2644,9 +2644,11 @@ summary::-webkit-details-marker {
     height:50px;
     font-size: 12px;  
 }
+
+.but-rcsenha{}
  
 .but-casenha{
-    width: 95%;
+    width: 90vw;
     height:50px;
     font-size: 12px;      
 }
