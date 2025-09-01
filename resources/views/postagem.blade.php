@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
         @if($errors->has('nome_pet'))
       <span style="color:red;">{{ $errors->first('nome_pet') }}</span>
       @endif
-        <input type="text" id="nome_pet" name="nome_pet" value="{{ old('nome_pet') }}" placeholder="Digite o nome do pet" />
+        <input type="text" id="nome_pet" name="nome_pet" value="{{ old('nome_pet') }}" placeholder="Digite o nome do pet" oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')"/>
       </div>
  
 
