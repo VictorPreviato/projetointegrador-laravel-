@@ -78,6 +78,9 @@ Route::get('/adote', [PostagemController::class, 'adocao'])->name('adote');
 Route::get('/sobre', function () {
     return view('sobre');
 })->name('sobre');
+Route::get('/campanha', function () {
+    return view('campanha');
+})->name('campanha');
 Route::get('/contato', function () {
     return view('contato');
 })->name('contato');
