@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <select name="tipo_cadastro" id="tipo_cadastro" onchange="gerenciarCamposPerdido()">
           <option value="" disabled selected>Ex: Doação, Perdido</option>
           <option value="perdido" {{ old('tipo_cadastro') == 'perdido' ? 'selected' : '' }}>Perdido</option>
-        <option value="doacao" {{ old('tipo_cadastro') == 'doacao' ? 'selected' : '' }}>Doação</option>
+          <option value="doacao" {{ old('tipo_cadastro') == 'doacao' ? 'selected' : '' }}>Doação</option>
         </select>
         
 
@@ -242,14 +242,15 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="campos-lado-a-lado">
           <div>
             <label for="genero">Gênero</label>
-            @if($errors->has('genero'))
-            <span style="color:red;">{{ $errors->first('genero') }}</span>
-            @endif
+            
             <select name="genero" id="genero">
               <option value="" disabled selected>Selecione</option>
               <option value="macho" {{ old('genero') == 'macho' ? 'selected' : '' }}>Macho</option>
               <option value="femea" {{ old('genero') == 'femea' ? 'selected' : '' }}>Fêmea</option>
             </select>
+            @if($errors->has('genero'))
+            <span style="color:red;">{{ $errors->first('genero') }}</span>
+            @endif
           </div>
  
 
@@ -257,10 +258,10 @@ document.addEventListener('DOMContentLoaded', function() {
         <!-- Idadde -->
           <div>
             <label for="idade">Idade</label>
-            @if($errors->has('idade'))
+             <input type="text" name="idade" id="idade" placeholder="Ex: 2 anos, filhote" value="{{ old('idade') }}"/>
+             @if($errors->has('idade'))
             <span style="color:red;">{{ $errors->first('idade') }}</span>
             @endif
-             <input type="text" name="idade" id="idade" placeholder="Ex: 2 anos, filhote" />
           </div>
         </div>
 
@@ -273,18 +274,18 @@ document.addEventListener('DOMContentLoaded', function() {
           <span style="color:red;">{{ $errors->first('ultima_localizacao') }}</span>
           @endif
           <label for="cep">CEP</label>
-          <input id="cepMask" type="text" name="cep" placeholder="Digite o CEP" />
+          <input id="cepMask" type="text" name="cep" placeholder="Digite o CEP" value="{{ old('cep') }}"/>
 
            <label for="estado">Estado</label>
-         <input type="text" name="estado" id="estado" readonly />
+         <input type="text" name="estado" id="estado" readonly value="{{ old('estado') }}"/>
 
          <label for="cidade">Cidade</label>
-         <input type="text" name="cidade" id="cidade" readonly />
+         <input type="text" name="cidade" id="cidade" readonly value="{{ old('cidade') }}"/>
 
         <br><br>
 
          <label for="bairro">Bairro</label>
-         <input type="text" name="bairro" id="bairro" readonly />
+         <input type="text" name="bairro" id="bairro" readonly value="{{ old('bairro') }}"/>
 
         <!-- Campo oculto para enviar a localização completa -->
         <input type="hidden" name="ultima_localizacao" id="ultima-localizacao" />
@@ -295,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
         <!-- Informações adicionais -->
-        <textarea name="informacoes" id="informacoes" rows="4">{{ old('informacoes') }}</textarea>
+        <textarea name="informacoes" id="informacoes" rows="4" value="{{ old('informacoes') }}"></textarea>
  
         <button type="submit" class="botao-publicar">Publicar</button>
       </form>
