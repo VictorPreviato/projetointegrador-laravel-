@@ -18,7 +18,7 @@
             <input type="text" placeholder="Nome Completo*" required name="name" value="{{ old('name') }}">
         </div>
         <div class="col-6">
-            <input type="date" required name="data_nasc" required value="{{ old('data_nasc') }}">
+            <input type="date" required name="data_nasc" required value="{{ old('data_nasc') }} " max="2025-12-31" >
         </div>
     </div>
     <div class="row">
