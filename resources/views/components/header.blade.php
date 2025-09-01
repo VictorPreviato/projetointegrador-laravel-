@@ -21,7 +21,7 @@
     <a href="/"><img src="{{ asset('IMG/LOGOS/Logosn.svg') }}" alt="" class="logonav"></a>
     <button onclick="document.location='{{ route('adote') }}'" class="bnav">Adote um Pet</button>
     <button onclick="document.location='{{ route('desaparecidos') }}'" class="bnav">Desaparecidos</button>
-    <button onclick="document.location='{{ route('sobre') }}'" class="bnav">Sobre o Projeto</button>
+    <button onclick="document.location='{{ route('campanha') }}'" class="bnav">Campanhas</button>
   </div>
 
   <div class="user-actions">
@@ -142,7 +142,7 @@
             <a class="nav-link" href="{{ route('desaparecidos')}}">Desaparecidos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="sobre">Sobre o Projeto</a>
+            <a class="nav-link" href="{{ route('campanha')}}">Campanhas</a>
           </li>
         </ul>
       </div>
