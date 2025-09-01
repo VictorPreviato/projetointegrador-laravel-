@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <p style="color: white">Envie uma foto do pet</p>
     <div id="preview-imagens" class="preview-imagens-container"></div>
     <div class="input-file-container">
-        <label for="inputArquivo" class="custom-file-upload">Selecionar foto</label>
+        <!-- <label for="inputArquivo" class="custom-file-upload">Selecionar foto</label> -->
         <input type="file" name="foto" id="inputArquivo" accept="image/*" required>
     </div>
     
