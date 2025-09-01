@@ -818,6 +818,62 @@ input[name="but-cad"]:hover {
     background-color: rgba(49, 64, 62, 0.9);
 }
 
+.custom-select {
+  position: relative;
+  user-select: none;
+}
+
+.custom-select-trigger {
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.custom-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+  display: none;
+  z-index: 10;
+}
+
+.custom-option {
+  display: block;   /* <<< força cada opção em linha separada */
+  padding: 10px;
+  cursor: pointer;
+  white-space: normal; /* <<< permite quebrar texto longo */
+}
+
+.custom-option:hover {
+  background: #f1f1f1;
+}
+
+.resposta-secreta{
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Mobile até 991px */
+@media (max-width: 991px) {
+  .custom-select-trigger {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .custom-option {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
 
 /* <<<<< LOGIN >>>>> */
 
@@ -1383,7 +1439,7 @@ form textarea {
 
 .fperposttt button{
     position: absolute;
-    right: 0px;
+    right: 10px;
     color: white;
     border: none;
     background-color: #2f4f4f;
