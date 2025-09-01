@@ -167,10 +167,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <!-- Tipo de cadastro -->
         <label for="tipo_cadastro">Tipo de cadastro</label>
-        @if($errors->has('tipo_cadastro'))
-        <span style="color:red;">{{ $errors->first('tipo_cadastro') }}</span>
-        @endif
-        <select name="tipo_cadastro" id="tipo_cadastro" onchange="gerenciarCamposPerdido()">
+        
+        <select name="tipo_cadastro" id="tipo_cadastro" onchange="gerenciarCamposPerdido()" required>
           <option value="" disabled selected>Ex: Doação, Perdido</option>
           <option value="perdido" {{ old('tipo_cadastro') == 'perdido' ? 'selected' : '' }}>Perdido</option>
         <option value="doacao" {{ old('tipo_cadastro') == 'doacao' ? 'selected' : '' }}>Doação</option>
@@ -180,10 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <!-- Tipo de animal -->
         <label for="tipo_animal">Tipo de animal</label>
-        @if($errors->has('tipo_animal'))
-        <span style="color:red;">{{ $errors->first('tipo_animal') }}</span>
-        @endif
-        <select name="tipo_animal" id="tipo_animal" onchange="verificarOutroTipo()">
+        <select name="tipo_animal" id="tipo_animal" onchange="verificarOutroTipo()" required>
           <option value="" disabled selected>Ex: Cachorro, Gato</option>
           <option value="cachorro" {{ old('tipo_animal') == 'cachorro' ? 'selected' : '' }}>Cachorro</option>
           <option value="gato" {{ old('tipo_animal') == 'gato' ? 'selected' : '' }}>Gato</option>

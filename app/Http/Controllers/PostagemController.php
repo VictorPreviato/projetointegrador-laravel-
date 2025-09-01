@@ -39,7 +39,7 @@ class PostagemController extends Controller
             'tipo_animal' => 'required|string|max:255',
             'outro_animal' => 'nullable|string|max:255',
             'tem_nome' => 'required|string|max:255',
-            'nome_pet' => 'required|string|max:255',
+            'nome_pet' => 'nullable|string|max:255',
             'raca' => 'nullable|string|max:255',
             'porte' => 'required|string|max:255',
             'genero' => 'required|string|max:255',
