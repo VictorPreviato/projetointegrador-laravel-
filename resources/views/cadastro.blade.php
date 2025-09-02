@@ -15,7 +15,7 @@
             <div class="text-danger">{{ $message }}</div>
         @enderror
         <div class="col-6">
-            <input type="text" placeholder="Nome Completo*" required name="name" value="{{ old('name') }}">
+            <input type="text" placeholder="Nome Completo*" required name="name" value="{{ old('name') }}" oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')">
         </div>
         <div class="col-6">
             <input type="date" required name="data_nasc" required value="{{ old('data_nasc') }} " max="2025-12-31" >
