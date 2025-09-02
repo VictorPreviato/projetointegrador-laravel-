@@ -1805,7 +1805,7 @@ summary::-webkit-details-marker {
     align-items: center; /* Centraliza os itens filhos (seções) horizontalmente */
     /* REMOVIDO: text-align: center; aqui. É melhor aplicar diretamente aos elementos de texto. */
 }
-
+ 
 /* Estilo para o H1 dentro do .cont-apoie */
 .cont-apoie h1 {
     color: #333;
@@ -1815,7 +1815,7 @@ summary::-webkit-details-marker {
     text-align: center; /* CENTRALIZADO: Título principal */
     position: relative;
 }
-
+ 
 /* Seções de Texto (Bem Vindo e Nossa História) e outras seções */
 .secao-texto,
 .secao-nossa-historia,
@@ -1825,9 +1825,9 @@ summary::-webkit-details-marker {
     margin-bottom: 30px; /* Espaço padrão entre as seções */
     border-bottom: none;
     padding-bottom: 0;
-    text-align: center; /* CENTRALIZADO: Todo o conteúdo de texto nestas seções */
+    text-align: right; /* CENTRALIZADO: Todo o conteúdo de texto nestas seções */
 }
-
+ 
 .secao-texto p,
 .secao-nossa-historia p,
 .secao-contato p {
@@ -1837,7 +1837,30 @@ summary::-webkit-details-marker {
     line-height: 1.5;
     /* text-align: center; herdado das seções pai, mas pode ser explícito se necessário */
 }
-
+ 
+.caixa-ver-sobre{
+ 
+    display: flex;
+    gap: 30px;
+}
+ 
+.text-ver-sobre{
+ 
+ 
+text-align: left;
+ 
+}
+ 
+ 
+.caixa-azu-sobre{
+   
+   
+    display: flex;
+    gap: 30px;
+}
+ 
+ 
+ 
 /* Subtítulos (Nossa História, Parcerias, Fale Conosco) */
 .secao-nossa-historia h2,
 .secao-parcerias h2,
@@ -1849,7 +1872,7 @@ summary::-webkit-details-marker {
     position: relative;
     padding-bottom: 0;
 }
-
+ 
 /* Caixa de Alerta */
 .caixa-alerta {
     background-color: transparent;
@@ -1863,13 +1886,13 @@ summary::-webkit-details-marker {
     box-shadow: none;
     text-align: center; /* CENTRALIZADO: Texto da caixa de alerta */
 }
-
+ 
 .caixa-alerta i {
     color: #e74c3c;
     font-size: 1.5em;
     margin-right: 10px;
 }
-
+ 
 .caixa-alerta p {
     color: #333;
     margin: 0;
@@ -1877,7 +1900,7 @@ summary::-webkit-details-marker {
     font-size: 1em;
     /* text-align: center; herdado do pai */
 }
-
+ 
 /* Seção Parcerias */
 .secao-parcerias p {
     font-size: 1em;
@@ -1886,7 +1909,7 @@ summary::-webkit-details-marker {
     margin-bottom: 15px;
     /* text-align: center; herdado da seção pai */
 }
-
+ 
 .secao-parcerias h3 {
     font-size: 1.2em;
     color: #333;
@@ -1894,7 +1917,7 @@ summary::-webkit-details-marker {
     margin-bottom: 15px;
     /* text-align: center; herdado da seção pai */
 }
-
+ 
 .grid-parcerias {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1906,7 +1929,7 @@ summary::-webkit-details-marker {
     border-radius: 8px;
     /* justify-content: center; <<< Removido, pois align-items: center no pai e text-align: center na seção já cuidam disso melhor para o grid como um todo */
 }
-
+ 
 .item-parceiro {
     background-color: #ffffff;
     border: none;
@@ -1919,103 +1942,36 @@ summary::-webkit-details-marker {
     font-size: 0.9em;
     text-align: center;
 }
-
-/* Ajustes Responsivos */
-@media (max-width: 768px) {
-    .cont-apoie {
-        padding: 15px 0;
-        width: 95%;
-    }
-
-    .cont-apoie h1 {
-        font-size: 2em;
-        padding: 0 15px 20px 15px;
-    }
-
-    .secao-texto,
-    .secao-nossa-historia,
-    .caixa-alerta,
-    .secao-parcerias,
-    .secao-contato {
-        padding: 0 15px;
-    }
-
-    .secao-nossa-historia h2,
-    .secao-parcerias h2,
-    .secao-contato h2 {
-        font-size: 1.6em;
-    }
-
-    .secao-parcerias h3 {
-        font-size: 1.1em;
-    }
-
-    .grid-parcerias {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        padding: 15px;
-    }
-
-    .item-parceiro {
-        height: 80px;
-    }
-
-    .caixa-alerta {
-        padding: 10px 15px;
-        margin: 20px 0;
-    }
-
-    .caixa-alerta i {
-        font-size: 1.5em;
-        margin-right: 10px;
-    }
+ 
+.Pets-sobre{
+ 
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
-
-@media (max-width: 480px) {
-    .cont-apoie {
-        padding: 10px 0;
-        width: 98%;
-    }
-
-    .cont-apoie h1 {
-        font-size: 1.6em;
-        padding: 0 10px 15px 10px;
-    }
-
-    .secao-texto,
-    .secao-nossa-historia,
-    .caixa-alerta,
-    .secao-parcerias,
-    .secao-contato {
-        padding: 0 10px;
-    }
-
-    .secao-nossa-historia h2,
-    .secao-parcerias h2,
-    .secao-contato h2 {
-        font-size: 1.4em;
-    }
-
-    .secao-parcerias h3 {
-        font-size: 1.1em;
-    }
-
-    .grid-parcerias {
-        grid-template-columns: 1fr;
-        gap: 8px;
-        padding: 10px;
-    }
-
-    .item-parceiro {
-        height: 60px;
-    }
-
-    .caixa-alerta i {
-        font-size: 1.2em;
-        margin-right: 8px;
-    }
+ 
+ 
+ 
+ 
+.dogV-sobre{
+ 
+    width: 250px;
+    height: 480px;
+    border-radius: 20px;
+    object-fit: cover;
+   
 }
-
+ 
+.dogA-sobre{
+ 
+    width: 250px;
+    height: 300px;
+    border-radius: 20px;
+    object-fit: cover;
+   
+}
 
 
 
