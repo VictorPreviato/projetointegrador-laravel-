@@ -153,12 +153,13 @@ document.addEventListener('DOMContentLoaded', function() {
           @endif
         <div class="upload-box">
     <span>📷</span>
-    <p style="color: white">Envie uma ou mais fotos do pet</p>
+    <p style="color: white">Envie uma foto do pet</p>
+    <div id="preview-imagens" class="preview-imagens-container"></div>
     <div class="input-file-container">
-        <label for="inputArquivo" class="custom-file-upload">Selecionar fotos</label>
+        <!-- <label for="inputArquivo" class="custom-file-upload">Selecionar foto</label> -->
         <input type="file" name="foto" id="inputArquivo" accept="image/*" required>
     </div>
-    <div id="preview-imagens" class="preview-imagens-container"></div>
+    
 </div>
         </div>
         
@@ -166,10 +167,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <!-- Tipo de cadastro -->
         <label for="tipo_cadastro">Tipo de cadastro</label>
-        @if($errors->has('tipo_cadastro'))
-        <span style="color:red;">{{ $errors->first('tipo_cadastro') }}</span>
-        @endif
-        <select name="tipo_cadastro" id="tipo_cadastro" onchange="gerenciarCamposPerdido()">
+        
+        <select name="tipo_cadastro" id="tipo_cadastro" onchange="gerenciarCamposPerdido()" required>
           <option value="" disabled selected>Ex: Doação, Perdido</option>
           <option value="perdido" {{ old('tipo_cadastro') == 'perdido' ? 'selected' : '' }}>Perdido</option>
           <option value="doacao" {{ old('tipo_cadastro') == 'doacao' ? 'selected' : '' }}>Doação</option>
@@ -179,10 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <!-- Tipo de animal -->
         <label for="tipo_animal">Tipo de animal</label>
-        @if($errors->has('tipo_animal'))
-        <span style="color:red;">{{ $errors->first('tipo_animal') }}</span>
-        @endif
-        <select name="tipo_animal" id="tipo_animal" onchange="verificarOutroTipo()">
+        <select name="tipo_animal" id="tipo_animal" onchange="verificarOutroTipo()" required>
           <option value="" disabled selected>Ex: Cachorro, Gato</option>
           <option value="cachorro" {{ old('tipo_animal') == 'cachorro' ? 'selected' : '' }}>Cachorro</option>
           <option value="gato" {{ old('tipo_animal') == 'gato' ? 'selected' : '' }}>Gato</option>
@@ -193,10 +189,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <!-- Tem nome -->
          <label for="tem_nome">O pet tem nome?</label>
-         @if($errors->has('tem_nome'))
-         <span style="color:red;">{{ $errors->first('tem_nome') }}</span>
-         @endif
-      <select id="tem_nome" name="tem_nome">
+        
+      <select id="tem_nome" name="tem_nome" required>
         <option value="">Selecione</option>
         <option value="sim" {{ old('tem_nome') == 'sim' ? 'selected' : '' }}>Sim</option>
         <option value="nao" {{ old('tem_nome') == 'não' ? 'selected' : '' }}>Não</option>
@@ -210,26 +204,20 @@ document.addEventListener('DOMContentLoaded', function() {
         @if($errors->has('nome_pet'))
       <span style="color:red;">{{ $errors->first('nome_pet') }}</span>
       @endif
-        <input type="text" id="nome_pet" name="nome_pet" value="{{ old('nome_pet') }}" placeholder="Digite o nome do pet" />
+        <input type="text" id="nome_pet" name="nome_pet" value="{{ old('nome_pet') }}" placeholder="Digite o nome do pet" oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')"/>
       </div>
  
 
 
       <!-- Raça -->
        <label>Raça</label>
-      @if($errors->has('raca'))
-      <span style="color:red;">{{ $errors->first('raca') }}</span>
-      @endif
-        <input type="text" name="raca" id="raca" value="{{ old('raca') }}" placeholder="Ex: Labrador, Vira-lata" />
+      <input type="text" name="raca" id="raca" value="{{ old('raca') }}" placeholder="Ex: Labrador, Vira-lata" />
 
 
 
       <!-- Porte do animal -->
         <label for="porte">Porte do animal</label>
-        @if($errors->has('porte'))
-        <span style="color:red;">{{ $errors->first('porte') }}</span>
-        @endif
-        <select name="porte" id="porte">
+        <select name="porte" id="porte" required>
         <option value="">Selecione</option>
         <option value="grande" {{ old('porte') == 'grande' ? 'selected' : '' }}>Grande</option>
         <option value="medio" {{ old('porte') == 'medio' ? 'selected' : '' }}>Médio</option>
@@ -243,14 +231,11 @@ document.addEventListener('DOMContentLoaded', function() {
           <div>
             <label for="genero">Gênero</label>
             
-            <select name="genero" id="genero">
+            <select name="genero" id="genero" required>
               <option value="" disabled selected>Selecione</option>
               <option value="macho" {{ old('genero') == 'macho' ? 'selected' : '' }}>Macho</option>
               <option value="femea" {{ old('genero') == 'femea' ? 'selected' : '' }}>Fêmea</option>
             </select>
-            @if($errors->has('genero'))
-            <span style="color:red;">{{ $errors->first('genero') }}</span>
-            @endif
           </div>
  
 
@@ -258,10 +243,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <!-- Idadde -->
           <div>
             <label for="idade">Idade</label>
-             <input type="text" name="idade" id="idade" placeholder="Ex: 2 anos, filhote" value="{{ old('idade') }}"/>
-             @if($errors->has('idade'))
-            <span style="color:red;">{{ $errors->first('idade') }}</span>
-            @endif
+             <input type="text" name="idade" id="idade" placeholder="Ex: 2 anos, filhote" value="{{ old('idade') }}" required/>
           </div>
         </div>
 
@@ -269,12 +251,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <div id="campo-ultima-localizacao" style="display: none;">
           <label id="label-localizacao" for="ultima-localizacao">Última localização</label>
           <br>
-          
-          @if($errors->has('ultima_localizacao'))
-          <span style="color:red;">{{ $errors->first('ultima_localizacao') }}</span>
-          @endif
+
           <label for="cep">CEP</label>
-          <input id="cepMask" type="text" name="cep" placeholder="Digite o CEP" value="{{ old('cep') }}"/>
+          <input id="cepMask" type="text" name="cep" placeholder="Digite o CEP" value="{{ old('cep') }}" required/>
 
            <label for="estado">Estado</label>
          <input type="text" name="estado" id="estado" readonly value="{{ old('estado') }}"/>

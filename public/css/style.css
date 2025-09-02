@@ -818,6 +818,63 @@ input[name="but-cad"]:hover {
     background-color: rgba(49, 64, 62, 0.9);
 }
 
+.custom-select {
+  position: relative;
+  user-select: none;
+}
+
+.custom-select-trigger {
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.custom-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+  display: none;
+  z-index: 10;
+}
+
+.custom-option {
+  display: block;   /* <<< força cada opção em linha separada */
+  padding: 10px;
+  cursor: pointer;
+  white-space: normal; /* <<< permite quebrar texto longo */
+}
+
+.custom-option:hover {
+  background: #f1f1f1;
+}
+
+.resposta-secreta{
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Mobile até 991px */
+@media (max-width: 991px) {
+  .custom-select-trigger {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .custom-option {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+
 /* <<<<< LOGIN >>>>> */
 
 .caixa{
@@ -921,9 +978,11 @@ text-align: center;
     justify-content: center; 
 }
 
+
+
 .preview-imagem-item {
-    width: 60px; 
-    height: 60px; 
+    width: 200px; 
+    height: 200px; 
     overflow: hidden; 
     border: 1px solid #ddd; 
     border-radius: 5px; 
@@ -1215,7 +1274,7 @@ form textarea {
 
 #imgdesc{
     height: 50vh;
-    width: 22vw;
+    width: 28vw;
     object-fit: cover;
     border-radius: 15px;
 }
@@ -1374,6 +1433,28 @@ form textarea {
     margin: 0 auto;
 }
 
+.fperposttt{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.fperposttt button{
+    position: absolute;
+    right: 10px;
+    color: white;
+    border: none;
+    background-color: #2f4f4f;
+    padding: 5px;
+    border-radius: 5px;
+    height: 35px;
+    top: 10px;  
+}
+
+.fperposttt button:hover{
+    background-color: rgba(47, 79, 79, .9);
+}
+
 .profilposts{
     display: flex;
 }
@@ -1461,6 +1542,7 @@ textarea {
 .perfil-post img{
     border-radius: 20px 20px 0 0;
     width: 100%;
+    height: 250px;
     object-fit: cover;
 }
 
@@ -1663,10 +1745,7 @@ details {
     transition: all 0.3s ease-in-out;
     border: 1px solid #dcdcdc;
 }
- 
-details[open] {
-    background-color: #e8f6ff;
-}
+
  
 details[open] summary::after {
     transform: rotate(180deg);
@@ -1676,7 +1755,7 @@ details p {
     line-height: 1.6;
     margin-top: 10px;
     font-size: 0.95em;
-    color: var(--cor-1)
+    color: var(--cor-1);
 }
  
 details:hover {
@@ -1726,7 +1805,7 @@ summary::-webkit-details-marker {
     align-items: center; /* Centraliza os itens filhos (seções) horizontalmente */
     /* REMOVIDO: text-align: center; aqui. É melhor aplicar diretamente aos elementos de texto. */
 }
-
+ 
 /* Estilo para o H1 dentro do .cont-apoie */
 .cont-apoie h1 {
     color: #333;
@@ -1736,7 +1815,7 @@ summary::-webkit-details-marker {
     text-align: center; /* CENTRALIZADO: Título principal */
     position: relative;
 }
-
+ 
 /* Seções de Texto (Bem Vindo e Nossa História) e outras seções */
 .secao-texto,
 .secao-nossa-historia,
@@ -1746,9 +1825,9 @@ summary::-webkit-details-marker {
     margin-bottom: 30px; /* Espaço padrão entre as seções */
     border-bottom: none;
     padding-bottom: 0;
-    text-align: center; /* CENTRALIZADO: Todo o conteúdo de texto nestas seções */
+    text-align: right; /* CENTRALIZADO: Todo o conteúdo de texto nestas seções */
 }
-
+ 
 .secao-texto p,
 .secao-nossa-historia p,
 .secao-contato p {
@@ -1758,7 +1837,30 @@ summary::-webkit-details-marker {
     line-height: 1.5;
     /* text-align: center; herdado das seções pai, mas pode ser explícito se necessário */
 }
-
+ 
+.caixa-ver-sobre{
+ 
+    display: flex;
+    gap: 30px;
+}
+ 
+.text-ver-sobre{
+ 
+ 
+text-align: left;
+ 
+}
+ 
+ 
+.caixa-azu-sobre{
+   
+   
+    display: flex;
+    gap: 30px;
+}
+ 
+ 
+ 
 /* Subtítulos (Nossa História, Parcerias, Fale Conosco) */
 .secao-nossa-historia h2,
 .secao-parcerias h2,
@@ -1770,7 +1872,7 @@ summary::-webkit-details-marker {
     position: relative;
     padding-bottom: 0;
 }
-
+ 
 /* Caixa de Alerta */
 .caixa-alerta {
     background-color: transparent;
@@ -1784,13 +1886,13 @@ summary::-webkit-details-marker {
     box-shadow: none;
     text-align: center; /* CENTRALIZADO: Texto da caixa de alerta */
 }
-
+ 
 .caixa-alerta i {
     color: #e74c3c;
     font-size: 1.5em;
     margin-right: 10px;
 }
-
+ 
 .caixa-alerta p {
     color: #333;
     margin: 0;
@@ -1798,7 +1900,7 @@ summary::-webkit-details-marker {
     font-size: 1em;
     /* text-align: center; herdado do pai */
 }
-
+ 
 /* Seção Parcerias */
 .secao-parcerias p {
     font-size: 1em;
@@ -1807,7 +1909,7 @@ summary::-webkit-details-marker {
     margin-bottom: 15px;
     /* text-align: center; herdado da seção pai */
 }
-
+ 
 .secao-parcerias h3 {
     font-size: 1.2em;
     color: #333;
@@ -1815,7 +1917,7 @@ summary::-webkit-details-marker {
     margin-bottom: 15px;
     /* text-align: center; herdado da seção pai */
 }
-
+ 
 .grid-parcerias {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1827,7 +1929,7 @@ summary::-webkit-details-marker {
     border-radius: 8px;
     /* justify-content: center; <<< Removido, pois align-items: center no pai e text-align: center na seção já cuidam disso melhor para o grid como um todo */
 }
-
+ 
 .item-parceiro {
     background-color: #ffffff;
     border: none;
@@ -1840,103 +1942,36 @@ summary::-webkit-details-marker {
     font-size: 0.9em;
     text-align: center;
 }
-
-/* Ajustes Responsivos */
-@media (max-width: 768px) {
-    .cont-apoie {
-        padding: 15px 0;
-        width: 95%;
-    }
-
-    .cont-apoie h1 {
-        font-size: 2em;
-        padding: 0 15px 20px 15px;
-    }
-
-    .secao-texto,
-    .secao-nossa-historia,
-    .caixa-alerta,
-    .secao-parcerias,
-    .secao-contato {
-        padding: 0 15px;
-    }
-
-    .secao-nossa-historia h2,
-    .secao-parcerias h2,
-    .secao-contato h2 {
-        font-size: 1.6em;
-    }
-
-    .secao-parcerias h3 {
-        font-size: 1.1em;
-    }
-
-    .grid-parcerias {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        padding: 15px;
-    }
-
-    .item-parceiro {
-        height: 80px;
-    }
-
-    .caixa-alerta {
-        padding: 10px 15px;
-        margin: 20px 0;
-    }
-
-    .caixa-alerta i {
-        font-size: 1.5em;
-        margin-right: 10px;
-    }
+ 
+.Pets-sobre{
+ 
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
-
-@media (max-width: 480px) {
-    .cont-apoie {
-        padding: 10px 0;
-        width: 98%;
-    }
-
-    .cont-apoie h1 {
-        font-size: 1.6em;
-        padding: 0 10px 15px 10px;
-    }
-
-    .secao-texto,
-    .secao-nossa-historia,
-    .caixa-alerta,
-    .secao-parcerias,
-    .secao-contato {
-        padding: 0 10px;
-    }
-
-    .secao-nossa-historia h2,
-    .secao-parcerias h2,
-    .secao-contato h2 {
-        font-size: 1.4em;
-    }
-
-    .secao-parcerias h3 {
-        font-size: 1.1em;
-    }
-
-    .grid-parcerias {
-        grid-template-columns: 1fr;
-        gap: 8px;
-        padding: 10px;
-    }
-
-    .item-parceiro {
-        height: 60px;
-    }
-
-    .caixa-alerta i {
-        font-size: 1.2em;
-        margin-right: 8px;
-    }
+ 
+ 
+ 
+ 
+.dogV-sobre{
+ 
+    width: 250px;
+    height: 480px;
+    border-radius: 20px;
+    object-fit: cover;
+   
 }
-
+ 
+.dogA-sobre{
+ 
+    width: 250px;
+    height: 300px;
+    border-radius: 20px;
+    object-fit: cover;
+   
+}
 
 
 
@@ -2158,6 +2193,16 @@ summary::-webkit-details-marker {
     }
 }
 
+/* PRIVACIDADE */
+
+.priv{
+    width: 900px;
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 5%;
+}
+
 
 /* <<<<< FOOTER >>>>> */
 
@@ -2235,6 +2280,12 @@ summary::-webkit-details-marker {
     color: #F5F5F5;
     font-size: 16px;
  
+}
+
+@media (min-width:991px){
+    .trsenha{
+        margin-top: 200px;
+    }
 }
 
 
@@ -2317,6 +2368,28 @@ summary::-webkit-details-marker {
     justify-content: center ;
      
 }
+
+.dvnsenha{
+    position: relative;
+}
+
+#nsenhatoggle{
+    left: 63%;
+    top: 35%;
+    width: 10px;
+}
+
+.dvnsenhaconf{
+    position: relative;
+}
+
+#nsenhaconftoggle{
+    left: 63%;
+    top: 35%;
+    width: 10px; 
+}
+
+
 
 /* <<<<< Mobile - Retrato >>>>>*/
 
@@ -2634,14 +2707,13 @@ summary::-webkit-details-marker {
 }
  
 .but-casenha{
-    width: 95%;
+    width: 90vw;
     height:50px;
     font-size: 12px;      
 }
  
 .bt-senha{
     display: block;
-
 }
 
 #email-password{
@@ -2693,12 +2765,24 @@ summary::-webkit-details-marker {
     font-size: 12px;      
 }
 
+#nsenhatoggle{
+    left: 83%;
+}
+
+#nsenhaconftoggle{
+    left: 83%;
+}
+
 /* Mobile - Postagem */
 
 .postcont {
   display: flex;
   padding: 10px;
   gap: 1px;
+}
+
+#preview-imagens{
+    display: none;
 }
 
 .left-panel{
@@ -2834,6 +2918,7 @@ summary::-webkit-details-marker {
 #imgdesc{
     height: 30vh;
     width: 80vw;
+   
 }
 
 .desccontent div{
@@ -2955,6 +3040,47 @@ summary::-webkit-details-marker {
     .card-post img{
         width: 100%;
         height: 200px;
+    }
+
+
+
+.fperposttt button{
+    position: absolute;
+    right: 0px;
+    padding: 5px;
+    border-radius: 5px;
+    height: 35px;
+    top: 0px;
+    
+}
+
+    /* Mobile - Privacidade */
+
+    .priv{
+ 
+        width: 350px;
+    }
+   
+    .priv-h2{
+        font-size: 25px;
+        margin-top: 5%;
+    }
+ 
+    .priv-h3{
+        font-size: 20px;
+        margin-top: 5%;
+    }
+ 
+    .priv-p{
+        font-size: medium;
+        margin-top: 3%;
+        text-align: justify;
+    }
+ 
+    .priv-li{
+        font-size: medium;
+        margin-top: 3%;
+        text-align: justify;
     }
 
 

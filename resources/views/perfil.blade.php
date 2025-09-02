@@ -62,7 +62,11 @@
             <p>{{ $user->email }}</p>
     
 
-          <h2><b>Postagens</b></h2>
+<div class="fperposttt">
+ <div > <h2><b>Postagens</b></h2></div> 
+ <div><button onclick="document.location='postagem' ">Novo post</button> </div>
+</div>
+
 <div class="perfil-post">
 @if($posts->isEmpty())
   <p>Você ainda não fez nenhuma postagem.</p>
@@ -79,21 +83,25 @@
           <h4 class="tl">{{ $post->nome_pet ?? 'Sem nome' }}</h4>
           <p>{{ $post->tipo_animal }} - {{ $post->tipo_cadastro }}</p>
           <small>Postado em {{ $post->created_at->format('d/m/Y') }}</small>
+          <a href="#" 
+                   onclick="event.preventDefault(); 
+                            if(confirm('Tem certeza que deseja excluir este post?')) {
+                                document.getElementById('delete-post-{{ $post->id }}').submit();
+                            }" 
+                   style="color:white;">Excluir</a>
+
+                <form id="delete-post-{{ $post->id }}" 
+                      action="{{ route('postagem.destroy', $post->id) }}" 
+                      method="POST" style="display:none;">
+                    @csrf
+                    @method('DELETE')
+                </form>
         </div>
       </a>
 
       
-      <form id="delete-post-{{ $post->id }}"
-            action="{{ route('postagem.destroy', $post->id) }}"
-            method="POST"
-            onsubmit="return confirm('Tem certeza que deseja excluir este post?');"
-            style="margin-top:.5rem;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" style="background:none;border:none;color:red;cursor:pointer;">
-          Excluir
-        </button>
-      </form>
+    
+
 
     </div>
   @endforeach
@@ -117,8 +125,6 @@
                 <h4>{{ $dep->titulo }}</h4>
                 <p>{{ $dep->depoimento }}</p>
                 <small>Publicado em {{ $dep->created_at->format('d/m/Y') }}</small>
-                </div>
-                <!-- Botão de excluir -->
                 <a href="#" 
                    onclick="event.preventDefault(); 
                             if(confirm('Tem certeza que deseja excluir este depoimento?')) {
@@ -132,6 +138,9 @@
                     @csrf
                     @method('DELETE')
                 </form>
+                </div>
+                <!-- Botão de excluir -->
+                
             
         @endforeach
     @endif
@@ -155,7 +164,7 @@
  
    
  
-    <button class="button-dep" type="submit">Postar</button>
+    <button class="button-dep" type="submit">Enviar</button>
  
   </form>
 </div>

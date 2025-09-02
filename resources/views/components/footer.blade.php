@@ -1,7 +1,7 @@
 <div class="footer">
   <img src="{{ asset('IMG/LOGOS/DotPetLogT.png') }}" alt="" class="logofoot">
   <div class="linkfoot">
-    <a href="{{ route('campanha') }}">Campanhas</a>
+    <a href="{{ route('privacidade') }}">Privacidade</a>
     <a href="{{ route('contato') }}">Contato</a>
     <a href="{{ route('sobre') }}">Sobre o Projeto</a>
     <a href="{{ route('faq') }}">FAQ</a>
@@ -69,8 +69,8 @@
         input.type = input.type === 'password' ? 'text' : 'password'
 
         icon.src = icon.src.includes('eye_open')
-          ? './IMG/ICONSENHA/eye_closed.svg'
-          : './IMG/ICONSENHA/eye_open.svg'
+          ? '{{ asset('./IMG/ICONSENHA/eye_closed.svg') }}'
+          : '{{ asset('./IMG/ICONSENHA/eye_open.svg') }}'
       }
     })
   })

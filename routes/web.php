@@ -9,6 +9,7 @@ use App\Http\Controllers\DepoimentoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SenhaController;
+use App\Http\Controllers\ContatoController;
 
 
 Route::get('/', function () {
@@ -43,6 +44,10 @@ Route::middleware('auth')->group(function () {
 
 // Rotas públicas
 
+Route::get('/contato', [ContatoController::class, 'create'])->name('contato');
+Route::post('/contato', [ContatoController::class, 'store'])->name('contato.store');
+
+
 Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -62,6 +67,9 @@ Route::get('/log', function () {
     return view('log');
 })->name('log');
 
+Route::get('/privacidade', function () {
+    return view('privacidade');
+})->name('privacidade');
 
 Route::get('/desaparecidos', [PostagemController::class, 'desaparecidos'])->name('desaparecidos');
 Route::get('/adote', [PostagemController::class, 'adocao'])->name('adote');

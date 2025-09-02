@@ -18,7 +18,7 @@
             <input type="text" placeholder="Nome Completo*" required name="name" value="{{ old('name') }}">
         </div>
         <div class="col-6">
-            <input type="date" required name="data_nasc" required value="{{ old('data_nasc') }}">
+            <input type="date" required name="data_nasc" required value="{{ old('data_nasc') }} " max="2025-12-31" >
         </div>
     </div>
     <div class="row">
@@ -67,25 +67,27 @@
                         <!-- Pergunta Secreta -->
                          
          
-       <div>
-    <h1 style="text-align: center;">Escolha uma pergunta secreta</h1>
-    <p>Responda a pergunta de forma correta para ter acesso à alteração de senha.</p>
+<div class="custom-select-container">
+  <h1 style="text-align: center;">Escolha uma pergunta secreta</h1>
+  <p>Responda a pergunta de forma correta para ter acesso à alteração de senha.</p>
 
-    
-        <select class="pergunta-secreta" name="pergunta" required>
-            <option value="" disabled selected>Escolha sua pergunta</option>
-            <option value="1">Qual o nome do seu heroi favorito?</option>
-            <option value="2">Qual o nome do seu primeiro animal de estimação?</option>
-            <option value="3">Qual o nome da sua mãe?</option>
-            <option value="4">Qual o nome da sua escola primária?</option>
-        </select>
-         <input class="resposta-secreta" type="text" placeholder="Resposta*" name="resposta_secreta" required>
+  <div class="custom-select" id="perguntaSelect">
+    <div class="custom-select-trigger">Escolha sua pergunta</div>
+    <div class="custom-options">
+      <span class="custom-option" data-value="1">Qual o nome do seu herói favorito?</span>
+      <span class="custom-option" data-value="2">Qual o nome do seu primeiro animal de estimação?</span>
+      <span class="custom-option" data-value="3">Qual o nome da sua mãe?</span>
+      <span class="custom-option" data-value="4">Qual o nome da sua escola primária?</span>
+    </div>
+  </div>
 
+  <input type="hidden" name="pergunta" id="perguntaInput">
+
+  <input class="resposta-secreta" type="text" placeholder="Resposta*" name="resposta_secreta" required>
+</div>
 
         <div>
-
-        <div>
-        <input type="checkbox" required> Estou de acordo com os <b><a href="" style="color: var(--cor-3);">termos de privacidade</a></b>
+        <input type="checkbox" required> Estou de acordo com os <b><a href="{{ route('privacidade') }}" target="_blank" style="color: var(--cor-3);">termos de privacidade</a></b>
         </div>
         <div>
             <input type="submit" class="" name="but-cad" value="Criar Conta">
@@ -94,6 +96,35 @@
 </div>
 </form>
 
-<p style="text-align: center;">Ja possui cadastro? <b><a href="" style="color: var(--cor-3);">Acesse aqui!</a></b></p>
+<p style="text-align: center;">Ja possui cadastro? <b><a href="{{ route('log') }}" style="color: var(--cor-3);">Acesse aqui!</a></b></p>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+  const select = document.getElementById("perguntaSelect");
+  const trigger = select.querySelector(".custom-select-trigger");
+  const options = select.querySelector(".custom-options");
+  const hiddenInput = document.getElementById("perguntaInput");
+
+  trigger.addEventListener("click", () => {
+    options.style.display = options.style.display === "block" ? "none" : "block";
+  });
+
+  select.querySelectorAll(".custom-option").forEach(option => {
+    option.addEventListener("click", () => {
+      trigger.textContent = option.textContent;
+      hiddenInput.value = option.dataset.value;
+      options.style.display = "none";
+    });
+  });
+
+  // fecha se clicar fora
+  document.addEventListener("click", e => {
+    if (!select.contains(e.target)) {
+      options.style.display = "none";
+    }
+  });
+});
+
+</script>
 
 @include("components.footer")

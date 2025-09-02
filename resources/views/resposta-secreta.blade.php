@@ -13,11 +13,13 @@
             <!-- aqui ele ta chamando a variavel das perguntas -->
            <p>{{ $pergunta }}</p>
 
-            <input type="text" name="resposta_secreta" placeholder="Sua resposta" required>
-
-            @error('resposta_secreta')
+              @error('resposta_secreta')
                 <p style="color:red;">{{ $message }}</p>
             @enderror
+
+            <input type="text" name="resposta_secreta" placeholder="Sua resposta" required>
+
+         
 
             <div style="margin-top: 20px; margin-bottom:250px;">
                 <button type="submit" class="but-csenha">Confirmar</button>

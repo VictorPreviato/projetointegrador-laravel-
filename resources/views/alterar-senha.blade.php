@@ -10,14 +10,18 @@
             @csrf
             <input type="hidden" name="email" value="{{ $email }}">
 
-            <div>
+            <div class="dvnsenha">
                 <input type="password" id="nova-senha" name="nova_senha" placeholder="Nova senha" required>               
-
+                <button class="show-psswd" type="button" data-toggle-target="#nova-senha" id="nsenhatoggle">
+    <img src="{{ asset('./IMG/ICONSENHA/eye_open.svg') }}" alt="">
+  </button>
             </div>
 
-            <div >
+            <div class="dvnsenhaconf" >
                 <input type="password" id="confirmar-nsenha" name="nova_senha_confirmation" placeholder="Confirmar a senha" required>               
-                   
+                <button class="show-psswd" type="button" data-toggle-target="#confirmar-nsenha" id="nsenhaconftoggle">
+    <img src="{{ asset('./IMG/ICONSENHA/eye_open.svg') }}" alt="">
+  </button>   
                
             </div>
 
@@ -36,7 +40,7 @@
           
         </form>
     </div>
-</div>
+
 
 
 @include("components.footer")

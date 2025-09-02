@@ -9,7 +9,12 @@
     
             <form method="POST" action="{{ route('verifica-email') }}">
                 @csrf
+                
+        @if ($errors->has('email'))
+            <p style="color:red; margin-top: 15px;">{{ $errors->first('email') }}</p>
+        @endif
                 <input type="email" name="email" placeholder="E-mail" required>
+                
                 
                 <div class="bt-senha" style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">                                                    
                        <button onclick="document.location=' {{ route('log') }}'" class="but-casenha" type="button"><b>Cancelar</b></button>
@@ -18,9 +23,6 @@
             </form>
   
 
-        @if ($errors->has('email'))
-            <p style="color:red; margin-top: 15px;">{{ $errors->first('email') }}</p>
-        @endif
     </div>
 </div>
 
