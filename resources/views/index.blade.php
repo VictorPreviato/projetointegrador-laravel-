@@ -165,7 +165,7 @@
         <form action="{{ route('feedback.store') }}" method="post">
             @csrf
            
-            <input type="text" name="name" placeholder="Nome Completo*">
+            <input type="text" name="name" placeholder="Nome Completo*" oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')">
              @error('name')
             <div class="text-danger">{{ $message }}</div>
         @enderror
