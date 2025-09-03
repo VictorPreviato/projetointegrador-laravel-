@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <select name="tipo_cadastro" id="tipo_cadastro" onchange="gerenciarCamposPerdido()" required>
           <option value="" disabled selected>Ex: Doação, Perdido</option>
           <option value="perdido" {{ old('tipo_cadastro') == 'perdido' ? 'selected' : '' }}>Perdido</option>
-        <option value="doacao" {{ old('tipo_cadastro') == 'doacao' ? 'selected' : '' }}>Doação</option>
+          <option value="doacao" {{ old('tipo_cadastro') == 'doacao' ? 'selected' : '' }}>Doação</option>
         </select>
         
 
@@ -189,10 +189,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <!-- Tem nome -->
          <label for="tem_nome">O pet tem nome?</label>
-         @if($errors->has('tem_nome'))
-         <span style="color:red;">{{ $errors->first('tem_nome') }}</span>
-         @endif
-      <select id="tem_nome" name="tem_nome">
+        
+      <select id="tem_nome" name="tem_nome" required>
         <option value="">Selecione</option>
         <option value="sim" {{ old('tem_nome') == 'sim' ? 'selected' : '' }}>Sim</option>
         <option value="nao" {{ old('tem_nome') == 'não' ? 'selected' : '' }}>Não</option>
@@ -213,19 +211,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
       <!-- Raça -->
        <label>Raça</label>
-      @if($errors->has('raca'))
-      <span style="color:red;">{{ $errors->first('raca') }}</span>
-      @endif
-        <input type="text" name="raca" id="raca" value="{{ old('raca') }}" placeholder="Ex: Labrador, Vira-lata" />
+      <input type="text" name="raca" id="raca" value="{{ old('raca') }}" placeholder="Ex: Labrador, Vira-lata" />
 
 
 
       <!-- Porte do animal -->
         <label for="porte">Porte do animal</label>
-        @if($errors->has('porte'))
-        <span style="color:red;">{{ $errors->first('porte') }}</span>
-        @endif
-        <select name="porte" id="porte">
+        <select name="porte" id="porte" required>
         <option value="">Selecione</option>
         <option value="grande" {{ old('porte') == 'grande' ? 'selected' : '' }}>Grande</option>
         <option value="medio" {{ old('porte') == 'medio' ? 'selected' : '' }}>Médio</option>
@@ -238,10 +230,8 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="campos-lado-a-lado">
           <div>
             <label for="genero">Gênero</label>
-            @if($errors->has('genero'))
-            <span style="color:red;">{{ $errors->first('genero') }}</span>
-            @endif
-            <select name="genero" id="genero">
+            
+            <select name="genero" id="genero" required>
               <option value="" disabled selected>Selecione</option>
               <option value="macho" {{ old('genero') == 'macho' ? 'selected' : '' }}>Macho</option>
               <option value="femea" {{ old('genero') == 'femea' ? 'selected' : '' }}>Fêmea</option>
@@ -253,10 +243,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <!-- Idadde -->
           <div>
             <label for="idade">Idade</label>
-            @if($errors->has('idade'))
-            <span style="color:red;">{{ $errors->first('idade') }}</span>
-            @endif
-             <input type="text" name="idade" id="idade" placeholder="Ex: 2 anos, filhote" />
+             <input type="text" name="idade" id="idade" placeholder="Ex: 2 anos, filhote" value="{{ old('idade') }}" required/>
           </div>
         </div>
 
@@ -264,23 +251,20 @@ document.addEventListener('DOMContentLoaded', function() {
         <div id="campo-ultima-localizacao" style="display: none;">
           <label id="label-localizacao" for="ultima-localizacao">Última localização</label>
           <br>
-          
-          @if($errors->has('ultima_localizacao'))
-          <span style="color:red;">{{ $errors->first('ultima_localizacao') }}</span>
-          @endif
+
           <label for="cep">CEP</label>
-          <input id="cepMask" type="text" name="cep" placeholder="Digite o CEP" />
+          <input id="cepMask" type="text" name="cep" placeholder="Digite o CEP" value="{{ old('cep') }}" required/>
 
            <label for="estado">Estado</label>
-         <input type="text" name="estado" id="estado" readonly />
+         <input type="text" name="estado" id="estado" readonly value="{{ old('estado') }}"/>
 
          <label for="cidade">Cidade</label>
-         <input type="text" name="cidade" id="cidade" readonly />
+         <input type="text" name="cidade" id="cidade" readonly value="{{ old('cidade') }}"/>
 
         <br><br>
 
          <label for="bairro">Bairro</label>
-         <input type="text" name="bairro" id="bairro" readonly />
+         <input type="text" name="bairro" id="bairro" readonly value="{{ old('bairro') }}"/>
 
         <!-- Campo oculto para enviar a localização completa -->
         <input type="hidden" name="ultima_localizacao" id="ultima-localizacao" />
@@ -291,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
         <!-- Informações adicionais -->
-        <textarea name="informacoes" id="informacoes" rows="4">{{ old('informacoes') }}</textarea>
+        <textarea name="informacoes" id="informacoes" rows="4" value="{{ old('informacoes') }}"></textarea>
  
         <button type="submit" class="botao-publicar">Publicar</button>
       </form>
