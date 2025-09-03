@@ -43,7 +43,7 @@ class ContatoController extends Controller
         });
 
         // 3. Redireciona com sucesso
-        return redirect()->route('contato')->with('success', 'Mensagem enviada com sucesso!');
+        return redirect()->route('contato')->with('success_contato', 'Mensagem enviada com sucesso!');
     }
 
     /**

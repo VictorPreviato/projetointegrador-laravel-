@@ -3,14 +3,7 @@
 <section class="formulario-contato-fundo">
 <div class="container-form">
 <h1>Contate-nos</h1>
-{{-- Diretiva Blade @if para a mensagem de sucesso --}}
-@if (session('success'))
-<div class="alert alert-success">
-{{ session('success') }}
-</div>
-@endif
 <form action="{{ route('contato.store') }}" method="POST" class="formulario￾contato">
-{{-- Adiciona o token de segurança CSRF --}}
 @csrf
 <div class="campo-grupo">
 <label for="nome" class="label-flutuante"></label>
