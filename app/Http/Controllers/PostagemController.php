@@ -54,15 +54,14 @@ class PostagemController extends Controller
         ]);
         
 
-        // Upload da foto (se houver)
         if ($request->hasFile('foto')) {
             $validated['foto'] = $request->file('foto')->store('fotos', 'public');
         }
 
-        // Associar usuário logado
+        
         $validated['user_id'] = Auth::id();
 
-        // Criar a postagem
+    
         Postagem::create($validated);
 
            if (strtolower($validated['tipo_cadastro']) === 'doacao') {
