@@ -34,7 +34,7 @@
         <option value="grande" {{ request('porte') === 'grande' ? 'selected' : '' }}>Grande</option>
       </select>
 
-      <input type="text" id="cep" name="cep" placeholder="Digite o CEP" maxlength="9"
+      <input type="text" id="cepMask" name="cep" placeholder="Digite o CEP" maxlength="9"
              value="{{ request('cep') }}" onblur="buscarCEP()">
 
       <input type="text" id="cidade" name="cidade" placeholder="Cidade"
