@@ -243,7 +243,12 @@ document.addEventListener('DOMContentLoaded', function() {
         <!-- Idadde -->
           <div>
             <label for="idade">Idade</label>
-             <input type="text" name="idade" id="idade" placeholder="Ex: 2 anos, filhote" value="{{ old('idade') }}" required/>
+              <select name="idade" id="idade" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="filhote" {{ old('idade') == 'filhote' ? 'selected' : '' }}>Filhote</option>
+              <option value="adulto" {{ old('idade') == 'adulto' ? 'selected' : '' }}>Adulto</option>
+              <option value="idoso" {{ old('idade') == 'idoso' ? 'selected' : '' }}>Idoso</option>
+            </select>
           </div>
         </div>
 
