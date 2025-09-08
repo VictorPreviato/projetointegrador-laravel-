@@ -42,7 +42,7 @@ class FormRequestCadastro extends FormRequest
         'email.unique' => 'Este e-mail já foi cadastrado.',
         'email.confirmed' => 'O campo de confirmação do e-mail não corresponde.',
         'password.confirmed' => 'O campo de confirmação da senha não corresponde.',
-        'password.regex' => 'A senha deve ter no mínimo 8 caracteres, incluindo pelo menos: 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.',
+        'password.regex' => 'A senha não segue o padrão de segurança.',
        
     ];
 }

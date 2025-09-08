@@ -777,13 +777,26 @@ input[type=search] {
     width: 50vw;
 }
 
-#cardform .col-6 input {
+#teste{
+    margin-bottom: 0px;
+}
+
+#cardform .inputcol6cad {
     width: 100%;
     height: 60px;
     border-radius: 10px;
     border: 2px solid var(--cor-2);
     padding-left: 10px;
     margin-bottom: 3vh;
+    margin-right: 10px;
+}
+
+#cardform .a{
+     width: 100%;
+    height: 60px;
+    border-radius: 10px;
+    border: 2px solid var(--cor-2);
+    padding-left: 10px;
     margin-right: 10px;
 }
 
@@ -814,7 +827,7 @@ input[name="but-cad"] {
 .show-psswd{
   position: absolute;
   right: 1rem;
-  top: 20%;
+  top: 30%;
   background-color: transparent;
   border: none;
 }
@@ -2664,7 +2677,7 @@ text-align: left;
 
 
     #cardform {
-        width: 95%;
+        width: 100%;
     }
 
     #cardform .col-6 input {
@@ -2674,6 +2687,10 @@ text-align: left;
 
     #cardform .col-12 input {
         font-size: 14px;
+    }
+    
+    .show-psswd{
+        top: 30%;
     }
 
     /* Mobile - Login */

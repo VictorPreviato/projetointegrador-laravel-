@@ -170,7 +170,7 @@
             <div class="text-danger">{{ $message }}</div>
         @enderror
             <input id="telefoneMask" type="text" name="telefone" placeholder="(00) 00000-0000">
-            <input type="email" name="email" placeholder="E-mail*">
+            <input type="email" name="email" placeholder="E-mail*" required>
             <textarea name="comentario" cols="50" rows="10" placeholder="Comentários*"></textarea>
             <button type="submit">Enviar</button>
         </form>

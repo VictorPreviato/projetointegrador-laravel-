@@ -15,10 +15,10 @@
             <div class="text-danger">{{ $message }}</div>
         @enderror
         <div class="col-6">
-            <input type="text" placeholder="Nome Completo*" required name="name" value="{{ old('name') }}" oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')">
+            <input class="inputcol6cad" type="text" placeholder="Nome Completo*" required name="name" value="{{ old('name') }}" oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')">
         </div>
         <div class="col-6">
-            <input type="date" required name="data_nasc" required value="{{ old('data_nasc') }} " max="2025-12-31" >
+            <input class="inputcol6cad" type="date" required name="data_nasc" required value="{{ old('data_nasc') }} " max="2025-12-31" >
         </div>
     </div>
     <div class="row">
@@ -26,10 +26,10 @@
             <div class="text-danger">{{ $message }}</div>
         @enderror
         <div class="col-6">
-            <input id="cpfMask" type="text" placeholder="CPF*" name="cpf" required value="{{ old('cpf') }}">
+            <input class="inputcol6cad" id="cpfMask" type="text" placeholder="CPF*" name="cpf" required value="{{ old('cpf') }}">
         </div>
         <div class="col-6">
-            <input id="telefoneMask" type="text" placeholder="Telefone celular*" name="telefone" value="{{ old('telefone') }}">
+            <input class="inputcol6cad" id="telefoneMask" type="text" placeholder="Telefone celular*" name="telefone" value="{{ old('telefone') }}">
             
         </div>
     </div>
@@ -52,18 +52,22 @@
             <div class="text-danger">{{ $message }}</div>
         @enderror
         <div class="col-6 pass">
-              <input type="password" name="password" id="password" placeholder="Crie sua senha*" required>
+              <input class="a" type="password" name="password" id="password" placeholder="Crie sua senha*" required>
   <button class="show-psswd" type="button" data-toggle-target="#password">
     <img src="{{ asset('./IMG/ICONSENHA/eye_open.svg') }}" alt="">
   </button>
+
          
         </div>
         <div class="col-6 pass">
-              <input type="password" placeholder="Confirme sua senha*" name="password_confirmation" id="confirm-password" required>
+              <input class="a" type="password" placeholder="Confirme sua senha*" name="password_confirmation" id="confirm-password" required>
   <button class="show-psswd" type="button" data-toggle-target="#confirm-password">
     <img src="{{ asset('./IMG/ICONSENHA/eye_open.svg') }}" alt="">
   </button>
         </div>
+
+          <small>A senha deve ter no mínimo 8 caracteres, incluindo: 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.
+  </small>
                         <!-- Pergunta Secreta -->
                          
          
