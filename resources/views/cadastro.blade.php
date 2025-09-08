@@ -83,8 +83,14 @@
 
   <input type="hidden" name="pergunta" id="perguntaInput">
 
+    
+
   <input class="resposta-secreta" type="text" placeholder="Resposta*" name="resposta_secreta" required>
 </div>
+  @error('resposta_secreta')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
+
 
         <div>
         <input type="checkbox" required> Estou de acordo com os <b><a href="{{ route('privacidade') }}" target="_blank" style="color: var(--cor-3);">termos de privacidade</a></b>
@@ -105,14 +111,18 @@
   const options = select.querySelector(".custom-options");
   const hiddenInput = document.getElementById("perguntaInput");
 
+  // abre/fecha lista
   trigger.addEventListener("click", () => {
     options.style.display = options.style.display === "block" ? "none" : "block";
   });
 
+  // quando escolher opção
   select.querySelectorAll(".custom-option").forEach(option => {
     option.addEventListener("click", () => {
       trigger.textContent = option.textContent;
       hiddenInput.value = option.dataset.value;
+      hiddenInput.setCustomValidity(""); // limpa erro de required
+      select.classList.remove("invalid"); // remove borda vermelha se estava
       options.style.display = "none";
     });
   });
@@ -123,6 +133,18 @@
       options.style.display = "none";
     }
   });
+
+  // valida antes do submit
+  const form = select.closest("form");
+  if (form) {
+    form.addEventListener("submit", e => {
+      if (!hiddenInput.value) {
+        hiddenInput.setCustomValidity("Por favor, escolha uma pergunta.");
+        select.classList.add("invalid"); // adiciona borda vermelha
+        e.preventDefault(); // bloqueia envio
+      }
+    });
+  }
 });
 
 </script>
