@@ -92,7 +92,7 @@ public function verificaRespostaSecreta(Request $request)
     {
         $request->validate([
             'email' => 'required|email|exists:users,email',
-            'nova_senha' => 'required|min:3|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/',
+            'nova_senha' => 'required|min:3|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,100}$/',
         ]);
 
         DB::table('users')

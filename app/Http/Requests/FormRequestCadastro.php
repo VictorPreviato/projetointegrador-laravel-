@@ -25,7 +25,7 @@ class FormRequestCadastro extends FormRequest
                     'required',
                     'max:100',
                     'confirmed',
-                    'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/'
+                    'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,100}$/'
                 ],
 
             ];

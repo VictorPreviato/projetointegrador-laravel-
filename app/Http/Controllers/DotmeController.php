@@ -118,7 +118,7 @@ class DotmeController extends Controller
     'password' => [
         'nullable',
         'confirmed',
-        'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/'
+        'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,100}$/'
     ],
     'current_password' => $request->filled('password') ? 'required' : 'nullable',
     'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',

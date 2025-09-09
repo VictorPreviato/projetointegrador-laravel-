@@ -66,7 +66,7 @@
   </button>
         </div>
 
-          <small>A senha deve ter no mínimo 8 caracteres, incluindo: 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial.
+          <small>A senha deve ter no mínimo 8 caracteres, incluindo: <b style="color:#31403E;">1 letra maiúscula, 1 letra minúscula e 1 número.</b>
   </small>
                         <!-- Pergunta Secreta -->
                          

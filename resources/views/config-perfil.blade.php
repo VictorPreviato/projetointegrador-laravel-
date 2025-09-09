@@ -101,12 +101,14 @@
             <button class="show-psswd" type="button" data-toggle-target="#nsenhaconf" id="passtogglelog">
                 <img src="{{ asset('./IMG/ICONSENHA/eye_open.svg') }}" alt="">
             </button>
+            
               @error('password')
         <div class="text-danger">{{ $message }}</div>
     @enderror
             </div>
 
         </div>
+        
         <div class="campo">
             <label>Confirme a nova senha:</label>
              <div class="redsenhaconf">
@@ -115,8 +117,10 @@
                 <img src="{{ asset('./IMG/ICONSENHA/eye_open.svg') }}" alt="">
             </button>
              </div>
-        </div>
+             
+        </div>    
     </div>
+    <small>A senha deve ter no mínimo 8 caracteres, incluindo: <b style="color:#31403E;">1 letra maiúscula, 1 letra minúscula e 1 número.</b>
 
 
     <div class="botoes">
