@@ -18,7 +18,7 @@
             <input class="inputcol6cad" type="text" placeholder="Nome Completo*" required name="name" value="{{ old('name') }}" oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')">
         </div>
         <div class="col-6">
-            <input class="inputcol6cad" type="date" required name="data_nasc" required value="{{ old('data_nasc') }} " max="2025-12-31" >
+            <input class="inputcol6cad" type="date" required name="data_nasc" required value="{{ old('data_nasc') }}" max="2025-12-31" >
         </div>
     </div>
     <div class="row">
@@ -76,7 +76,7 @@
   <p>Responda a pergunta de forma correta para ter acesso à alteração de senha.</p>
 
   <div class="custom-select" id="perguntaSelect">
-    <div class="custom-select-trigger">Escolha sua pergunta</div>
+    <div class="custom-select-trigger">Escolha sua pergunta*</div>
     <div class="custom-options">
       <span class="custom-option" data-value="1">Qual o nome do seu herói favorito?</span>
       <span class="custom-option" data-value="2">Qual o nome do seu primeiro animal de estimação?</span>

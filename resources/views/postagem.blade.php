@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         <!-- Tipo de cadastro -->
-        <label for="tipo_cadastro">Tipo de cadastro</label>
+        <label for="tipo_cadastro">Tipo de cadastro*</label>
         
         <select name="tipo_cadastro" id="tipo_cadastro" onchange="gerenciarCamposPerdido()" required>
           <option value="" disabled selected>Ex: Doação, Perdido</option>
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         <!-- Tipo de animal -->
-        <label for="tipo_animal">Tipo de animal</label>
+        <label for="tipo_animal">Tipo de animal*</label>
         <select name="tipo_animal" id="tipo_animal" onchange="verificarOutroTipo()" required>
           <option value="" disabled selected>Ex: Cachorro, Gato</option>
           <option value="cachorro" {{ old('tipo_animal') == 'cachorro' ? 'selected' : '' }}>Cachorro</option>
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         <!-- Tem nome -->
-         <label for="tem_nome">O pet tem nome?</label>
+         <label for="tem_nome">O pet tem nome?*</label>
         
       <select id="tem_nome" name="tem_nome" required>
         <option value="">Selecione</option>
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
       <!-- Porte do animal -->
-        <label for="porte">Porte do animal</label>
+        <label for="porte">Porte do animal*</label>
         <select name="porte" id="porte" required>
         <option value="">Selecione</option>
         <option value="grande" {{ old('porte') == 'grande' ? 'selected' : '' }}>Grande</option>
@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Gênero -->
         <div class="campos-lado-a-lado">
           <div>
-            <label for="genero">Gênero</label>
+            <label for="genero">Gênero*</label>
             
             <select name="genero" id="genero" required>
               <option value="" disabled selected>Selecione</option>
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <!-- Idadde -->
           <div>
-            <label for="idade">Idade</label>
+            <label for="idade">Idade*</label>
               <select name="idade" id="idade" required>
               <option value="" disabled selected>Selecione</option>
               <option value="filhote" {{ old('idade') == 'filhote' ? 'selected' : '' }}>Filhote</option>
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <label id="label-localizacao" for="ultima-localizacao">Última localização</label>
           <br>
 
-          <label for="cep">CEP</label>
+          <label for="cep">CEP*</label>
           <input id="cepMask" type="text" name="cep" placeholder="Digite o CEP" value="{{ old('cep') }}" required/>
 
            <label for="estado">Estado</label>
