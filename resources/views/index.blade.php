@@ -165,13 +165,11 @@
         <form action="{{ route('feedback.store') }}" method="post">
             @csrf
            
-            <input type="text" name="name" placeholder="Nome Completo*" oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')">
-             @error('name')
-            <div class="text-danger">{{ $message }}</div>
-        @enderror
+            <input type="text" name="name" placeholder="Nome Completo*" oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')" required>
+
             <input id="telefoneMask" type="text" name="telefone" placeholder="(00) 00000-0000">
             <input type="email" name="email" placeholder="E-mail*" required>
-            <textarea name="comentario" cols="50" rows="10" placeholder="Comentários*"></textarea>
+            <textarea name="comentario" cols="50" rows="10" placeholder="Comentários*" required></textarea>
             <button type="submit">Enviar</button>
         </form>
     </div>

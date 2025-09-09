@@ -85,11 +85,11 @@
     </div>
   </div>
 
-  <input type="hidden" name="pergunta" id="perguntaInput">
+  <input type="hidden" name="pergunta" id="perguntaInput" value="{{ old('pergunta') }}">
 
     
 
-  <input class="resposta-secreta" type="text" placeholder="Resposta*" name="resposta_secreta" required>
+  <input class="resposta-secreta" type="text" placeholder="Resposta*" name="resposta_secreta" value="{{ old('resposta_secreta') }}" required>
 </div>
   @error('resposta_secreta')
         <span class="text-danger">{{ $message }}</span>
@@ -119,6 +119,15 @@
   trigger.addEventListener("click", () => {
     options.style.display = options.style.display === "block" ? "none" : "block";
   });
+
+  // Se já existir valor vindo do old()
+    if (hiddenInput.value) {
+        const selected = select.querySelector(`.custom-option[data-value="${hiddenInput.value}"]`);
+        if (selected) {
+            trigger.textContent = selected.textContent;
+            trigger.classList.add("selected");
+        }
+    }
 
   // quando escolher opção
   select.querySelectorAll(".custom-option").forEach(option => {

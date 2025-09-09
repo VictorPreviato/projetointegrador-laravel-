@@ -182,7 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
           <option value="" disabled selected>Ex: Cachorro, Gato</option>
           <option value="cachorro" {{ old('tipo_animal') == 'cachorro' ? 'selected' : '' }}>Cachorro</option>
           <option value="gato" {{ old('tipo_animal') == 'gato' ? 'selected' : '' }}>Gato</option>
-          <option value="outro" {{ old('tipo_animal') == 'outro' ? 'selected' : '' }}>Outro</option>
         </select>
  
 
