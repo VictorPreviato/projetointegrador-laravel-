@@ -83,12 +83,15 @@
           <h4 class="tl">{{ $post->nome_pet ?? 'Sem nome' }}</h4>
           <p>{{ $post->tipo_animal }} - {{ $post->tipo_cadastro }}</p>
           <small>Postado em {{ $post->created_at->format('d/m/Y') }}</small>
-          <a href="#" 
+           <a href="{{ route('postagem.edit', $post->id) }}" style="color:white; ">
+          Editar</a>
+          <a href="#"
                    onclick="event.preventDefault(); 
                             if(confirm('Tem certeza que deseja excluir este post?')) {
                                 document.getElementById('delete-post-{{ $post->id }}').submit();
                             }" 
-                   style="color:white;">Excluir</a>
+                   style="color:red; margin-left:2px">Excluir</a>
+                   
 
                 <form id="delete-post-{{ $post->id }}" 
                       action="{{ route('postagem.destroy', $post->id) }}" 

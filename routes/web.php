@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/postagem', [PostagemController::class, 'create'])->name('postagem.create');
     Route::post('/postagem', [PostagemController::class, 'store'])->name('postagem.store');
     Route::delete('postagem/{id}', [PostagemController::class, 'destroy'])->name('postagem.destroy');
+    Route::get('/postagem/{id}/edit', [PostagemController::class, 'edit'])->name('postagem.edit');
+    Route::put('/postagem/{id}', [PostagemController::class, 'update'])->name('postagem.update');
 
     Route::delete('/excluir-conta', [DotmeController::class, 'excluirConta'])->name('usuario.excluir');
 });

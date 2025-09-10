@@ -29,7 +29,7 @@
             <input class="inputcol6cad" id="cpfMask" type="text" placeholder="CPF*" name="cpf" required value="{{ old('cpf') }}">
         </div>
         <div class="col-6">
-            <input class="inputcol6cad" id="telefoneMask" type="text" placeholder="Telefone celular*" name="telefone" value="{{ old('telefone') }}">
+            <input class="inputcol6cad" id="telefoneMask" type="text" placeholder="Telefone celular*" name="telefone" value="{{ old('telefone') }}" required>
             
         </div>
     </div>

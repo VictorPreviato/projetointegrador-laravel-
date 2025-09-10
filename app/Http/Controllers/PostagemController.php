@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Postagem;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 
 class PostagemController extends Controller
@@ -73,6 +74,54 @@ class PostagemController extends Controller
         return redirect()->route('index')->with('success', 'Postagem criada com sucesso!');
     }
     }
+
+    // Exibir formulário de edição
+public function edit($id)
+{
+    $postagem = Postagem::findOrFail($id);
+
+    // Verifica se pertence ao usuário logado
+    if ($postagem->user_id !== Auth::id()) {
+        return redirect()->route('perfil')->with('error', 'Você não tem permissão para editar esta postagem.');
+    }
+
+    return view('postagem-edit', compact('postagem'));
+}
+
+// Atualizar postagem no banco
+public function update(Request $request, $id)
+{
+    $postagem = Postagem::findOrFail($id);
+
+    if ($postagem->user_id !== Auth::id()) {
+        return redirect()->route('perfil')->with('error', 'Você não tem permissão para editar esta postagem.');
+    }
+
+    $validated = $request->validate([
+    'tipo_cadastro' => 'required|string|max:255',
+    'tipo_animal'   => 'required|string|max:255',
+    'nome_pet'      => 'nullable|string|max:255',
+    'raca'          => 'nullable|string|max:255',
+    'porte'         => 'required|string|max:255',
+    'genero'        => 'required|string|max:255',
+    'idade'         => 'required|string|max:255',
+    'informacoes'   => 'nullable|string',
+    'foto'          => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+]);
+
+    // Atualizar foto (se o usuário enviar outra)
+    if ($request->hasFile('foto')) {
+        if ($postagem->foto && Storage::disk('public')->exists($postagem->foto)) {
+            Storage::disk('public')->delete($postagem->foto);
+        }
+        $validated['foto'] = $request->file('foto')->store('fotos', 'public');
+    }
+
+    $postagem->update($validated);
+
+    return redirect()->route('perfil')->with('success', 'Postagem atualizada com sucesso!');
+}
+
 
 
      public function desaparecidos(Request $request)
