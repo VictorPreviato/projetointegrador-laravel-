@@ -83,6 +83,7 @@
           <h4 class="tl">{{ $post->nome_pet ?? 'Sem nome' }}</h4>
           <p>{{ $post->tipo_animal }} - {{ $post->tipo_cadastro }}</p>
           <small>Postado em {{ $post->created_at->format('d/m/Y') }}</small>
+          <div>
            <a href="{{ route('postagem.edit', $post->id) }}" style="color:white; ">
           Editar</a>
           <a href="#"
@@ -90,7 +91,7 @@
                             if(confirm('Tem certeza que deseja excluir este post?')) {
                                 document.getElementById('delete-post-{{ $post->id }}').submit();
                             }" 
-                   style="color:red; margin-left:2px">Excluir</a>
+                   style="color:#FF6B35; margin-left:5px">Excluir</a>
                    
 
                 <form id="delete-post-{{ $post->id }}" 
@@ -99,6 +100,7 @@
                     @csrf
                     @method('DELETE')
                 </form>
+                </div>
         </div>
       </a>
 
