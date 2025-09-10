@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="input-file-container">
         <!-- <label for="inputArquivo" class="custom-file-upload">Selecionar foto</label> -->
         <input type="file" name="foto" id="inputArquivo" accept="image/*" required>
-    
+</div>
     
 </div>
         </div>
