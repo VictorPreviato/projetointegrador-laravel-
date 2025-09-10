@@ -13,7 +13,7 @@
         <!-- Foto -->
         <div class="upload-box">
     <span>📷</span>
-    <p>Altere a foto do pet (opcional)</p>
+    <p style="color:white;">Altere a foto do pet (opcional)</p>
 
     <div id="preview-imagens" class="preview-imagens-container">
         @if($postagem->foto)

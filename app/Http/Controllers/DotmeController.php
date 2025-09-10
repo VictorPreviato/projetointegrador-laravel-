@@ -240,7 +240,7 @@ public function excluirConta()
     // Excluir usuário do banco
     $user->delete();
 
-    return redirect()->route('index')->with('success', 'Sua conta foi excluída com sucesso.');
+    return redirect()->route('index')->with('succes_deluser', 'Sua conta foi excluída com sucesso.');
 }
 
 
