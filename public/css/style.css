@@ -1687,6 +1687,10 @@ textarea {
  
 }
 
+.btn-danger{
+    width: 300px;
+}
+
 .botoes button {
   padding: 10px 20px;
   border: none;
@@ -3032,6 +3036,16 @@ text-align: left;
         height: 100px;
     }
 
+    .botoes{
+        margin: 0 auto;
+    }
+
+      .btn-danger{
+        width: 100%;
+        margin-top: 20px;
+       
+    }
+
     /* Mobile - Perfil */
 
     .profile-cont img{
@@ -3070,6 +3084,7 @@ text-align: left;
         height: 200px;
     }
 
+  
 
 
 .fperposttt button{

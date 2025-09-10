@@ -129,6 +129,15 @@
     </div>
 </form>
 
+<div >
+<form action="{{ route('usuario.excluir') }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.');">
+    @csrf
+    @method('DELETE')
+
+    <button type="submit" class="btn btn-danger">Excluir minha conta</button>
+</form>
+</div>
+
 
 </body>
 

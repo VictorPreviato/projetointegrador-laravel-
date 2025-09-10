@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/postagem', [PostagemController::class, 'create'])->name('postagem.create');
     Route::post('/postagem', [PostagemController::class, 'store'])->name('postagem.store');
     Route::delete('postagem/{id}', [PostagemController::class, 'destroy'])->name('postagem.destroy');
+
+    Route::delete('/excluir-conta', [DotmeController::class, 'excluirConta'])->name('usuario.excluir');
 });
 
 // Rotas públicas

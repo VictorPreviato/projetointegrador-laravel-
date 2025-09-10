@@ -210,5 +210,38 @@ public function perfil()
     ]);
 }
 
+public function excluirConta()
+{
+    $user = Auth::user();
+
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'Usuário não autenticado.');
+    }
+
+    // Apagar foto de perfil, se existir
+    if ($user->foto && Storage::disk('public')->exists($user->foto)) {
+        Storage::disk('public')->delete($user->foto);
+    }
+
+    // Apagar posts do usuário (se tiver relacionamento)
+    if (method_exists($user, 'postagens')) {
+        $user->postagens()->delete();
+    }
+
+    // Apagar depoimentos relacionados
+    if (method_exists($user, 'depoimentos')) {
+        $user->depoimentos()->delete();
+    }
+
+    // Logout do usuário antes de excluir
+    Auth::logout();
+    Session::forget(['user', 'user_id']);
+
+    // Excluir usuário do banco
+    $user->delete();
+
+    return redirect()->route('index')->with('success', 'Sua conta foi excluída com sucesso.');
+}
+
 
 }
