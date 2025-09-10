@@ -119,7 +119,7 @@ public function update(Request $request, $id)
 
     $postagem->update($validated);
 
-    return redirect()->route('perfil')->with('success', 'Postagem atualizada com sucesso!');
+    return redirect()->route('perfil')->with('success_attpost', 'Postagem atualizada com sucesso!');
 }
 
 

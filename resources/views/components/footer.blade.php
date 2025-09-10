@@ -39,7 +39,7 @@
 @endif
 
 
-@foreach (['success_doacao', 'success_perdido', 'success_config', 'success_depoi', 'success_exdepoi', 'success_feed', 'success_delpost', 'success_contato'] as $key)
+@foreach (['success_doacao', 'success_perdido', 'success_config', 'success_depoi', 'success_exdepoi', 'success_feed', 'success_delpost', 'success_contato', 'success_attpost'] as $key)
     @if(session($key))
         <script>
         Swal.fire({

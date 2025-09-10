@@ -1,5 +1,7 @@
 @include("components.header")
 
+
+
 <h1 style="text-align: center;">Editar Postagem</h1>
 
 <main class="container postcont">
@@ -7,11 +9,11 @@
     <form method="POST" action="{{ route('postagem.update', $postagem->id) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-
+<div class="left-panel">
         <!-- Foto -->
         <div class="upload-box">
     <span>📷</span>
-    <p x'>Altere a foto do pet (opcional)</p>
+    <p>Altere a foto do pet (opcional)</p>
 
     <div id="preview-imagens" class="preview-imagens-container">
         @if($postagem->foto)
@@ -26,6 +28,8 @@
         <input type="file" name="foto" id="inputArquivo" accept="image/*">
     </div>
 </div>
+</div>
+
 
 
         <!-- Tipo de cadastro -->
@@ -76,6 +80,8 @@
         <!-- Informações -->
         <label>Informações adicionais</label>
         <textarea name="informacoes" rows="4">{{ $postagem->informacoes }}</textarea>
+
+        
 
         <button type="submit" class="botao-publicar">Salvar Alterações</button>
     </form>
