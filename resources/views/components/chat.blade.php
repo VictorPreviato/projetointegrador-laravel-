@@ -151,5 +151,6 @@ document.getElementById('sendMessageForm').addEventListener('submit', function(e
 });
 
 
+
 </script>
 @endauth

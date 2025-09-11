@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Conversa;
-use App\Models\User;
+use App\Models\User;    
+use App\Models\Mensagem;
 
 class ChatController extends Controller
 {
@@ -64,14 +65,14 @@ public function send(Request $request)
 
     $conversa = Conversa::findOrFail($request->conversa_id);
 
-    $mensagem = $conversa->mensagens()->create([
+      $mensagem = Mensagem::create([
+        'conversa_id' => $request->conversa_id,
         'user_id' => auth()->id(),
         'conteudo' => $request->conteudo,
     ]);
 
-    $mensagem->load('user');
-
-    return view('components.chat-message', ['msg' => $mensagem]);
+    $html = view('partials.mensagem', ['msg' => $mensagem])->render();
+    return response($html);
 }
 
 }
