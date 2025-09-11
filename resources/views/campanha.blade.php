@@ -18,19 +18,28 @@
         </div>
 
         <!-- Campanhas específicas -->
+         <h3>Campanha de doação de ração</h3>
         <div class="campanha">
-            <h3>Campanha de doação de ração</h3>
-            <p class="sem-ativa">Nenhuma ativa no momento</p>
+          <a href="https://institutoadimax.org.br/racao-solidaria/"> <img  class="camp" src="{{ asset('IMG/CAMPANHAS/imagem.png') }}" alt="Blog Setembro Vermelho" > </a>
+                <a href="https://www.petz.com.br/blog/doar-racao/"> <img class="camp" src="{{ asset('IMG/CAMPANHAS/blogpetz.png.png') }}" alt="" class="" > </a>
+                <a href="https://sinpatinhas.mma.gov.br/home-primeiro-acesso"> <img class="camp" src="{{ asset('IMG/CAMPANHAS/sinpatinhas.png') }}" alt="" class="" > </a>
         </div>
 
-        <div class="campanha">
-            <h3>Campanha de vacina para PET</h3>
-            <p class="sem-ativa">Nenhuma ativa no momento</p>
+        <h3>Campanha de vacina para PET</h3>
+        <div class="campanha"> 
+            <a href="https://www.nuxcell.com.br/conscientizacao-e-prevencao-de-doencas-cardiacas-em-animais/"> <img  class="camp" src="{{ asset('IMG/CAMPANHAS/blog-setembro-vermelho.jpg') }}" alt="Blog Setembro Vermelho" > </a>
+                <a href="https://www.gov.br/mma/pt-br/composicao/sbio/dpda/programas-e-Projetos/propatinhas"> <img class="camp" src="{{ asset('IMG/CAMPANHAS/propatinhas.png') }}" alt="" class="" > </a>
+                <a href="https://sinpatinhas.mma.gov.br/home-primeiro-acesso"> <img class="camp" src="{{ asset('IMG/CAMPANHAS/sinpatinhas.png') }}" alt="" class="" > </a>
         </div>
 
+         <h3>Campanhas gerais sobre PET</h3>
         <div class="campanha">
-            <h3>Campanha de castração do PET</h3>
-            <p class="sem-ativa">Nenhuma ativa no momento</p>
+                <a href="https://www.nuxcell.com.br/conscientizacao-e-prevencao-de-doencas-cardiacas-em-animais/"> <img  class="camp" src="{{ asset('IMG/CAMPANHAS/blog-setembro-vermelho.jpg') }}" alt="Blog Setembro Vermelho" > </a>
+                <a href="https://www.gov.br/mma/pt-br/composicao/sbio/dpda/programas-e-Projetos/propatinhas"> <img class="camp" src="{{ asset('IMG/CAMPANHAS/propatinhas.png') }}" alt="" class="" > </a>
+                <a href="https://sinpatinhas.mma.gov.br/home-primeiro-acesso"> <img class="camp" src="{{ asset('IMG/CAMPANHAS/sinpatinhas.png') }}" alt="" class="" > </a>
+                
+                
+        </div>
         </div>
     </div>
 
