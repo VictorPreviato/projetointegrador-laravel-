@@ -1,3 +1,7 @@
+@auth
+    @include('components.chat')
+@endauth
+
 <div class="footer">
   <img src="{{ asset('IMG/LOGOS/DotPetLogT.png') }}" alt="" class="logofoot">
   <div class="linkfoot">

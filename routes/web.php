@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SenhaController;
 use App\Http\Controllers\ContatoController;
+use App\Http\Controllers\ChatController;
 
 
 Route::get('/', function () {
@@ -44,9 +45,16 @@ Route::middleware('auth')->group(function () {
     Route::put('/postagem/{id}', [PostagemController::class, 'update'])->name('postagem.update');
 
     Route::delete('/excluir-conta', [DotmeController::class, 'excluirConta'])->name('usuario.excluir');
+
+   
 });
 
 // Rotas públicas
+
+ Route::get('/chat/start/{userId}', [App\Http\Controllers\ChatController::class, 'start']);
+ Route::get('/chat/fetch/{conversa}', [ChatController::class, 'fetch'])->name('chat.fetch');
+ Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
+
 
 Route::get('/contato', [ContatoController::class, 'create'])->name('contato');
 Route::post('/contato', [ContatoController::class, 'store'])->name('contato.store');

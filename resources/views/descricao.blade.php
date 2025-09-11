@@ -90,9 +90,28 @@
             <p>{{ $post->user->email }}</p>
         </div>
 
-        <button id="contdono" onclick="window.location.href='mailto:{{ $post->user->email }}'">
-            Contate o dono
-        </button>
+     <button class="btn btn-primary" onclick="startChat({{ $post->user->id }})">
+    Entrar em contato com {{ $post->user->name }}
+</button>
+
+<script>
+function startChat(userId) {
+    fetch(`/chat/start/${userId}`)
+        .then(res => res.json())
+        .then(data => {
+            // abre sidebar
+            document.getElementById('chatSidebar').classList.add('active');
+
+            // carrega conversa
+            fetch(`/chat/fetch/${data.conversa_id}`)
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('chatMessages').innerHTML = html;
+                });
+        });
+}
+</script>
+
     </div>
 </div>
 
@@ -127,6 +146,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-
+@include('components.chat')
 
 @include("components.footer")
