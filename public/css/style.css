@@ -1850,7 +1850,6 @@ summary::-webkit-details-marker {
 .secao-parcerias,
 .secao-contato {
     padding: 0 20px; /* Preenchimento horizontal para o conteúdo das seções */
-    margin-bottom: 30px; /* Espaço padrão entre as seções */
     border-bottom: none;
     padding-bottom: 0;
     text-align: right; /* CENTRALIZADO: Todo o conteúdo de texto nestas seções */

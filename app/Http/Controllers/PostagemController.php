@@ -51,7 +51,7 @@ class PostagemController extends Controller
             'estado' => 'nullable|string|max:255',
             'bairro' => 'nullable|string|max:255',
             'informacoes' => 'nullable|string',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048' 
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:20480' 
         ]);
         
 
@@ -106,7 +106,7 @@ public function update(Request $request, $id)
     'genero'        => 'required|string|max:255',
     'idade'         => 'required|string|max:255',
     'informacoes'   => 'nullable|string',
-    'foto'          => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+    'foto'          => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:20480',
 ]);
 
     // Atualizar foto (se o usuário enviar outra)
