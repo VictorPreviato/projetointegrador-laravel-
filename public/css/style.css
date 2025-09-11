@@ -3249,7 +3249,10 @@ text-align: left;
         height: 200px;
     }
 
-  
+    .dep-item{
+        width: 300px;
+    }
+
 
 
 .fperposttt button{
@@ -3290,6 +3293,12 @@ text-align: left;
         margin-top: 3%;
         text-align: justify;
     }
+
+    /* Mobile - Chat */
+
+.chat-sidebar {
+width: 90vw;
+}
 
 
     /* Mobile - Footer */
@@ -3361,10 +3370,7 @@ text-align: left;
         height: 100px;
     }
 
-    .cardepoi .card{
-        height: 50vh;
-    }
-
+  
     /* Postagem - Mobile (Paisagem) */
 
     .upload-box{
