@@ -46,15 +46,18 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/excluir-conta', [DotmeController::class, 'excluirConta'])->name('usuario.excluir');
 
+    Route::get('/chat/start/{userId}', [App\Http\Controllers\ChatController::class, 'start']);
+    Route::get('/chat/fetch/{conversa}', [ChatController::class, 'fetch'])->name('chat.fetch');
+    Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
+ 
+
+
    
 });
 
 // Rotas públicas
 
- Route::get('/chat/start/{userId}', [App\Http\Controllers\ChatController::class, 'start']);
- Route::get('/chat/fetch/{conversa}', [ChatController::class, 'fetch'])->name('chat.fetch');
- Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
-
+ 
 
 Route::get('/contato', [ContatoController::class, 'create'])->name('contato');
 Route::post('/contato', [ContatoController::class, 'store'])->name('contato.store');

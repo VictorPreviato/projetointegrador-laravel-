@@ -68,6 +68,16 @@ function toggleChat() {
 //     document.getElementById('chatListView').style.display = 'block';
 // });
 
+document.addEventListener('click', function(e) {
+    const sidebar = document.getElementById('chatSidebar');
+    const toggle = document.querySelector('.chat-toggle');
+
+    // se o clique NÃO foi no sidebar e nem no botão toggle
+    if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+        sidebar.classList.remove('active');
+    }
+});
+
 // Abrir conversa
 let currentConversaId = null;
 let lastMessageId = 0;
