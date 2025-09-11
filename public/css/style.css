@@ -1370,16 +1370,16 @@ form textarea {
     text-align: center;
 }
 
-#contdono{
+.contdono{
     background-color: var(--cor-1);
     border-radius: 20px;
     color: white;
-    width: 200px;
+    width: 250px;
     height: 60px;
     margin-top: 50%;
 }
 
-#contdono:hover{
+.contdono:hover{
     background-color: rgba(49, 64, 62, 0.9);
 }
 
@@ -2260,7 +2260,7 @@ text-align: left;
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #0095f6;
+    background: var(--cor-1);
     color: #fff;
     border-radius: 50%;
     width: 55px;
@@ -3166,7 +3166,7 @@ text-align: left;
     text-align: center;
 }
 
-#contdono{
+.contdono{
     margin-top: 5%;
 }
 

@@ -90,8 +90,8 @@
             <p>{{ $post->user->email }}</p>
         </div>
 
-     <button class="btn btn-primary" onclick="startChat({{ $post->user->id }})">
-    Entrar em contato com {{ $post->user->name }}
+     <button class="contdono" onclick="startChat({{ $post->user->id }})">
+    Fale com {{ $post->user->name }}
 </button>
 
 <script>
