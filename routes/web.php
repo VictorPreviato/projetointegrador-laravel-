@@ -50,8 +50,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/chat/fetch/{conversa}', [ChatController::class, 'fetch'])->name('chat.fetch');
     Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
  
-
-
    
 });
 

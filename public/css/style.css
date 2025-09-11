@@ -2260,9 +2260,8 @@ text-align: left;
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: var(--cor-1);
-    color: #fff;
-    border-radius: 50%;
+    background: var(--cor-3);
+    border-radius: 10px;
     width: 55px;
     height: 55px;
     display: flex;
@@ -2284,8 +2283,8 @@ text-align: left;
     right: 20px;
     width: 350px;
     max-height: 500px;
-    background: #1e1e1e;
-    color: #fff;
+    background: white;
+    color: var(--cor-1);
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     display: none;
@@ -2304,8 +2303,8 @@ text-align: left;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    border-bottom: 1px solid #333;
-    background: #2a2a2a;
+    height: 60px;
+    background: white;
 }
 
 .chat-header h4 {
@@ -2332,7 +2331,7 @@ text-align: left;
 }
 
 .conversa-item:hover {
-    background: #2c2c2c;
+    background: rgba(218, 220, 222, 0.5);
 }
 
 .chat-messages {
@@ -2351,26 +2350,19 @@ text-align: left;
 
 .chat-messages input[name="conteudo"] {
     flex: 1;
-    padding: 8px 12px;
-    border-radius: 20px;
+  
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
     border: none;
     outline: none;
 }
 
-.chat-messages button[type="submit"] {
-    background: #0095f6;
-    border: none;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-}
 
 .message.me {
     text-align: right;
     align-self: flex-end;
-    background: #0095f6;
-    color: #fff;
+    background: var(--cor-1);
+    color: var(--cor-4);
     padding: 6px 12px;
     border-radius: 12px;
     margin-bottom: 6px;
@@ -2381,8 +2373,8 @@ text-align: left;
 .message.you {
     text-align: left;
     align-self: flex-start;
-    background: #2c2c2c;
-    color: #fff;
+    background: var(--cor-2);
+    color: var(--cor-1);
     padding: 6px 12px;
     border-radius: 12px;
     margin-bottom: 6px;
@@ -2397,22 +2389,6 @@ text-align: left;
     margin-bottom: 15px;
 }
 
-.chat-badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: red;
-    color: white;
-    font-size: 12px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    border: 2px solid #fff;
-}
 
 /* <<<<< FOOTER >>>>> */
 

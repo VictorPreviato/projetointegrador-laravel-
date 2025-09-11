@@ -65,14 +65,17 @@ public function send(Request $request)
 
     $conversa = Conversa::findOrFail($request->conversa_id);
 
-      $mensagem = Mensagem::create([
-        'conversa_id' => $request->conversa_id,
-        'user_id' => auth()->id(),
-        'conteudo' => $request->conteudo,
-    ]);
+     $mensagem = Mensagem::create([
+    'conversa_id' => $request->conversa_id,
+    'user_id' => auth()->id(),
+    'conteudo' => $request->conteudo,
+    'lida' => false,
+]);
 
     $html = view('partials.mensagem', ['msg' => $mensagem])->render();
     return response($html);
 }
+
+
 
 }

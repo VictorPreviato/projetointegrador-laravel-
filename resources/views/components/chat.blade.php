@@ -35,7 +35,7 @@
     <!-- TELA DE CHAT -->
     <div id="chatMessagesView" class="chat-messages" style="display:none;">
         <div class="chat-header">
-            <button id="backToList"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EFEFEF"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg></button>
+            <button id="backToList"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg></button>
             <h4 id="chatUserName"></h4>
             <!-- <button id="minimizeChatMessages"><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#EFEFEF"><path d="M240-120v-66.67h480.67V-120H240Z"/></svg></button> -->
         </div>
@@ -46,13 +46,15 @@
             @csrf
             <input type="hidden" name="conversa_id" id="conversaIdInput" value="">
             <input type="text" name="conteudo" placeholder="Mensagem..." style="flex:1; margin-right:10px; width:10px;" required>
-            <button type="submit">Enviar</button>
+
         </form>
     </div>
 </div>
 
 <div class="chat-toggle" onclick="toggleChat()">
     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EFEFEF"><path d="M80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>
+
+     <span id="chatBadge" class="chat-badge" style="display:none;">0</span>
 </div>
 
 
@@ -77,6 +79,8 @@ document.addEventListener('click', function(e) {
         sidebar.classList.remove('active');
     }
 });
+
+
 
 // Abrir conversa
 let currentConversaId = null;
@@ -154,6 +158,29 @@ document.getElementById('sendMessageForm').addEventListener('submit', function(e
         this.reset();
         let chatDiv = document.getElementById('chatMessages');
         chatDiv.scrollTop = chatDiv.scrollHeight;
+    });
+});
+
+document.querySelectorAll('.conversa-item').forEach(item => {
+    item.addEventListener('click', () => {
+        currentConversaId = item.dataset.id;
+        lastMessageId = 0;
+
+        document.getElementById('chatListView').style.display = "none";
+        document.getElementById('chatMessagesView').style.display = "flex";
+
+        document.getElementById('conversaIdInput').value = currentConversaId;
+        document.getElementById('chatUserName').innerText = item.querySelector("strong").innerText;
+
+        loadChat(currentConversaId, true);
+
+        // marca mensagens como lidas
+        fetch(`/chat/read/${currentConversaId}`, {
+            method: 'POST',
+            headers: {
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        }).then(() => updateChatBadge());
     });
 });
 
