@@ -2350,7 +2350,7 @@ text-align: left;
 
 .chat-messages input[name="conteudo"] {
     flex: 1;
-  
+    width: 250px;
     border-radius: 5px;
     box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
     border: none;
@@ -2387,6 +2387,55 @@ text-align: left;
 
 #chatUserName{
     margin-bottom: 15px;
+}
+
+#emojiPicker span {
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px;
+}
+#emojiPicker span:hover {
+    background: #444;
+    border-radius: 6px;
+    
+}
+#sendMessageForm {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+#emojiButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#emojiPicker {
+  display: none;                 /* JS controla */
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 colunas */
+  gap: 6px;
+  align-items: center;
+  justify-items: center;
+}
+
+#emojiPicker .emoji-item {
+  display: inline-flex !important;
+  width: 34px !important;
+  height: 34px !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+#emojiPicker .emoji-item:hover {
+  background: rgba(255,255,255,0.06);
 }
 
 
