@@ -6,7 +6,7 @@
     <div id="chatListView" class="chat-list">
         <div class="chat-header">
             <h4>Mensagens</h4>
-            <button id="minimizeChat">–</button>
+           
         </div>
         <div id="chatList">
             @php
@@ -35,9 +35,9 @@
     <!-- TELA DE CHAT -->
     <div id="chatMessagesView" class="chat-messages" style="display:none;">
         <div class="chat-header">
-            <button id="backToList">←</button>
+            <button id="backToList"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EFEFEF"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg></button>
             <h4 id="chatUserName"></h4>
-            <button id="minimizeChatMessages">–</button>
+            <!-- <button id="minimizeChatMessages"><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#EFEFEF"><path d="M240-120v-66.67h480.67V-120H240Z"/></svg></button> -->
         </div>
 
         <div id="chatMessages" style="flex:1; overflow-y:auto;"></div>
@@ -62,14 +62,11 @@ function toggleChat() {
 }
 
 // Minimizar chat
-document.getElementById('minimizeChat').addEventListener('click', () => {
-    document.getElementById('chatSidebar').classList.remove('active');
-});
 
-document.getElementById('minimizeChatMessages').addEventListener('click', () => {
-    document.getElementById('chatMessagesView').style.display = 'none';
-    document.getElementById('chatListView').style.display = 'block';
-});
+// document.getElementById('minimizeChatMessages').addEventListener('click', () => {
+//     document.getElementById('chatMessagesView').style.display = 'none';
+//     document.getElementById('chatListView').style.display = 'block';
+// });
 
 // Abrir conversa
 let currentConversaId = null;
