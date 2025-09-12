@@ -146,6 +146,4 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-@include('components.chat')
-
 @include("components.footer")
