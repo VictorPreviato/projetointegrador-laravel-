@@ -95,19 +95,21 @@
 </button>
 
 <script>
-function startChat(userId) {
+    function startChat(userId) {
     fetch(`/chat/start/${userId}`)
         .then(res => res.json())
         .then(data => {
+            const outroUser = data.outro_user;
+
             // abre sidebar
             document.getElementById('chatSidebar').classList.add('active');
 
-            // carrega conversa
-            fetch(`/chat/fetch/${data.conversa_id}`)
-                .then(res => res.text())
-                .then(html => {
-                    document.getElementById('chatMessages').innerHTML = html;
-                });
+            // preenche título e foto do chat
+            document.getElementById('chatUserName').innerText = outroUser.name;
+            document.getElementById('chatUserFoto').src = outroUser.foto;
+
+            // carrega mensagens
+            loadChat(data.conversa_id, true);
         });
 }
 </script>

@@ -22,12 +22,12 @@
                     <strong>
                         {{ $conversa->user1_id == auth()->id() ? $conversa->user2->name : $conversa->user1->name }}
                     </strong>
-                    <p style="font-size:12px; color:#aaa;">
+                    <p  style="font-size:12px; color:#aaa;">
                         {{ $conversa->mensagens->last()->conteudo ?? 'Sem mensagens ainda' }}
                     </p>
                 </div>
             @empty
-                <p style="text-align:center; padding:20px;">Sem conversas no momento</p>
+                <p id="noChatsMessage" style="text-align:center; padding:20px;">Sem conversas no momento</p>
             @endforelse
         </div>
     </div>
@@ -150,88 +150,131 @@
 });
 </script>
 
+
 <script>
+let currentConversaId = null;
+let lastMessageId = 0;
+
+// Abre ou fecha sidebar
 function toggleChat() {
     document.getElementById('chatSidebar').classList.toggle('active');
 }
 
-// Minimizar chat
-
-// document.getElementById('minimizeChatMessages').addEventListener('click', () => {
-//     document.getElementById('chatMessagesView').style.display = 'none';
-//     document.getElementById('chatListView').style.display = 'block';
-// });
-
+// Fecha sidebar ao clicar fora
 document.addEventListener('click', function(e) {
     const sidebar = document.getElementById('chatSidebar');
     const toggle = document.querySelector('.chat-toggle');
 
-    // se o clique NÃO foi no sidebar e nem no botão toggle
-    if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+    if (!sidebar.contains(e.target) && (!toggle || !toggle.contains(e.target))) {
         sidebar.classList.remove('active');
     }
 });
 
+// Inicia ou abre conversa (para botão na descrição)
+function startChat(userId) {
+    fetch(`/chat/start/${userId}`)
+        .then(res => res.json())
+        .then(data => {
+            const outroUser = data.outro_user;
 
+            // Abre sidebar
+            document.getElementById('chatSidebar').classList.add('active');
 
-// Abrir conversa
-let currentConversaId = null;
-let lastMessageId = 0;
+            // Remove mensagem "sem chats"
+            const noChats = document.getElementById('noChatsMessage');
+            if (noChats) noChats.remove();
 
+            // Adiciona conversa à lista se não existir
+            let chatItem = document.querySelector(`.conversa-item[data-id="${data.conversa_id}"]`);
+            if (!chatItem) {
+                const chatList = document.getElementById('chatList');
+                chatItem = document.createElement('div');
+                chatItem.classList.add('conversa-item');
+                chatItem.dataset.id = data.conversa_id;
+                chatItem.dataset.foto = outroUser.foto;
+                chatItem.innerHTML = `<strong>${outroUser.name}</strong><p style="font-size:12px;color:#aaa;">Sem mensagens ainda</p>`;
+                chatList.prepend(chatItem);
+
+                chatItem.addEventListener('click', () => openChat(data.conversa_id, outroUser));
+            }
+
+            // Abre chat imediatamente
+            openChat(data.conversa_id, outroUser);
+        });
+}
+
+// Abre chat de qualquer item
+function openChat(conversaId, outroUser) {
+    currentConversaId = conversaId;
+    lastMessageId = 0;
+
+    document.getElementById('chatListView').style.display = "none";
+    document.getElementById('chatMessagesView').style.display = "flex";
+
+    document.getElementById('conversaIdInput').value = conversaId;
+    document.getElementById('chatUserName').innerText = outroUser.name;
+    document.getElementById('chatUserFoto').src = outroUser.foto;
+
+    loadChat(conversaId, true);
+
+    // Marca mensagens como lidas
+    fetch(`/chat/read/${conversaId}`, {
+        method: 'POST',
+        headers: {
+            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    }).then(() => updateChatBadge());
+}
+
+// Carrega mensagens
+function loadChat(conversaId, scroll = false) {
+    fetch(`/chat/fetch/${conversaId}?last_id=${lastMessageId}`)
+        .then(res => res.text())
+        .then(html => {
+            const container = document.getElementById('chatMessages');
+            if (lastMessageId === 0) {
+                container.innerHTML = html;
+            } else {
+                container.insertAdjacentHTML('beforeend', html);
+            }
+
+            const mensagens = container.querySelectorAll('[data-id]');
+            if (mensagens.length) lastMessageId = parseInt(mensagens[mensagens.length - 1].getAttribute('data-id'));
+
+            if (scroll) container.scrollTop = container.scrollHeight;
+
+            // Atualiza preview da última mensagem no sidebar
+            const chatItem = document.querySelector(`.conversa-item[data-id="${conversaId}"]`);
+            if (chatItem && mensagens.length) {
+                const lastMsgText = mensagens[mensagens.length - 1].querySelector('p').innerText;
+                chatItem.querySelector('p').innerText = lastMsgText;
+            }
+        });
+}
+
+// Listener para itens existentes na lista de chats
 document.querySelectorAll('.conversa-item').forEach(item => {
     item.addEventListener('click', () => {
-        currentConversaId = item.dataset.id;
-        lastMessageId = 0;
-
-        document.getElementById('chatListView').style.display = "none";
-        document.getElementById('chatMessagesView').style.display = "flex";
-
-        document.getElementById('conversaIdInput').value = currentConversaId;
-        document.getElementById('chatUserName').innerText = item.querySelector("strong").innerText;
-
-        loadChat(currentConversaId, true);
+        const conversaId = item.dataset.id;
+        const outroUser = {
+            name: item.querySelector('strong').innerText,
+            foto: item.dataset.foto || '/images/default-avatar.png'
+        };
+        openChat(conversaId, outroUser);
     });
 });
 
-// Voltar para lista
+// Botão voltar para lista de chats
 document.getElementById('backToList').addEventListener('click', () => {
     document.getElementById('chatMessagesView').style.display = "none";
     document.getElementById('chatListView').style.display = "block";
     currentConversaId = null;
 });
 
-// Carregar mensagens
-function loadChat(conversaId, scroll = false) {
-    fetch(`/chat/fetch/${conversaId}?last_id=${lastMessageId}`)
-        .then(res => res.text())
-        .then(html => {
-            if (lastMessageId === 0) {
-                document.getElementById('chatMessages').innerHTML = html;
-            } else {
-                document.getElementById('chatMessages').insertAdjacentHTML('beforeend', html);
-            }
-
-            const mensagens = document.getElementById('chatMessages').querySelectorAll('[data-id]');
-            if (mensagens.length) {
-                lastMessageId = parseInt(mensagens[mensagens.length - 1].getAttribute('data-id'));
-            }
-
-            if (scroll) {
-                let chatDiv = document.getElementById('chatMessages');
-                chatDiv.scrollTop = chatDiv.scrollHeight;
-            }
-        });
-}
-
-// Atualiza a cada 3s
-setInterval(() => {
-    if (currentConversaId) loadChat(currentConversaId);
-}, 3000);
-
-// Enviar mensagem
+// Envio de mensagem
 document.getElementById('sendMessageForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    let formData = new FormData(this);
+    const formData = new FormData(this);
 
     fetch("/chat/send", {
         method: "POST",
@@ -242,41 +285,28 @@ document.getElementById('sendMessageForm').addEventListener('submit', function(e
     })
     .then(res => res.text())
     .then(html => {
-        document.getElementById('chatMessages').insertAdjacentHTML('beforeend', html);
+        const container = document.getElementById('chatMessages');
+        container.insertAdjacentHTML('beforeend', html);
 
-        const mensagens = document.getElementById('chatMessages').querySelectorAll('[data-id]');
+        const mensagens = container.querySelectorAll('[data-id]');
         if (mensagens.length) lastMessageId = parseInt(mensagens[mensagens.length - 1].getAttribute('data-id'));
 
         this.reset();
-        let chatDiv = document.getElementById('chatMessages');
-        chatDiv.scrollTop = chatDiv.scrollHeight;
+        container.scrollTop = container.scrollHeight;
+
+        // Atualiza preview no sidebar
+        const chatItem = document.querySelector(`.conversa-item[data-id="${currentConversaId}"]`);
+        if (chatItem && mensagens.length) {
+            const lastMsgText = mensagens[mensagens.length - 1].querySelector('p').innerText;
+            chatItem.querySelector('p').innerText = lastMsgText;
+        }
     });
 });
 
-document.querySelectorAll('.conversa-item').forEach(item => {
-    item.addEventListener('click', () => {
-        currentConversaId = item.dataset.id;
-        lastMessageId = 0;
-
-        document.getElementById('chatListView').style.display = "none";
-        document.getElementById('chatMessagesView').style.display = "flex";
-
-        document.getElementById('conversaIdInput').value = currentConversaId;
-        document.getElementById('chatUserName').innerText = item.querySelector("strong").innerText;
-
-        loadChat(currentConversaId, true);
-
-        // marca mensagens como lidas
-        fetch(`/chat/read/${currentConversaId}`, {
-            method: 'POST',
-            headers: {
-                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-        }).then(() => updateChatBadge());
-    });
-});
-
-
-
+// Atualiza chat automaticamente a cada 3s
+setInterval(() => {
+    if (currentConversaId) loadChat(currentConversaId);
+}, 3000);
 </script>
+
 @endauth
