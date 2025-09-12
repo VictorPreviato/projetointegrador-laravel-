@@ -1,37 +1,32 @@
-
 @auth
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="chat-sidebar" id="chatSidebar">
-    <!-- TELA DE LISTA DE CONVERSAS -->
+    <!-- LISTA DE CONVERSAS -->
     <div id="chatListView" class="chat-list">
         <div class="chat-header">
             <h4>Mensagens</h4>
-           
         </div>
         
         <div id="chatList">
             @php
                 $conversas = \App\Models\Conversa::where('user1_id', auth()->id())
                     ->orWhere('user2_id', auth()->id())
-                    ->with('mensagens.user')
+                    ->with(['user1', 'user2', 'mensagens.user'])
                     ->latest()
                     ->get();
             @endphp
 
             @forelse($conversas as $conversa)
+                @php
+                    $outroUser = $conversa->user1_id == auth()->id() ? $conversa->user2 : $conversa->user1;
+                @endphp
 
-            
-             @php
-        $outroUser = $conversa->user1_id == auth()->id() ? $conversa->user2 : $conversa->user1;
-    @endphp
-
-  
-
-                <div class="conversa-item" data-id="{{ $conversa->id }}">
-                    <strong>
-                        {{ $conversa->user1_id == auth()->id() ? $conversa->user2->name : $conversa->user1->name }}
-                    </strong>
-                    <p  style="font-size:12px; color:#aaa;">
+                <div class="conversa-item"
+                     data-id="{{ $conversa->id }}"
+                     data-nome="{{ $outroUser->name }}"
+                     data-foto="{{ $outroUser->foto ? asset('storage/'.$outroUser->foto) : '' }}">
+                    <strong>{{ $outroUser->name }}</strong>
+                    <p style="font-size:12px; color:#aaa;">
                         {{ $conversa->mensagens->last()->conteudo ?? 'Sem mensagens ainda' }}
                     </p>
                 </div>
@@ -41,40 +36,34 @@
         </div>
     </div>
 
-    <!-- TELA DE CHAT -->
+    <!-- CHAT -->
     <div id="chatMessagesView" class="chat-messages" style="display:none;">
         <div class="chat-header">
-         <div class="ftperfilheadchat">
-            @if($outroUser->foto)
-            <img src="{{ asset('storage/' . $outroUser->foto) }}"
-                 alt="Foto de {{ $outroUser->name }}"
-                 >
-        @else
-            <div class="img"
-                 data-letter="{{ strtoupper(substr($outroUser->name, 0, 1)) }}"
-                 style="background: var(--cor-5);"></div>
-        @endif
-       </div> 
-            <button id="backToList"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg></button>
-          
+            <div class="ftperfilheadchat">
+                <img id="chatUserFoto" src="" alt="Foto do usuário"
+                     style="width:48px; height:48px; border-radius:50%; object-fit:cover;">
+            </div>
+
+            <button id="backToList">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                     viewBox="0 -960 960 960" width="24px" fill="#">
+                     <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/>
+                </svg>
+            </button>
             <h4 id="chatUserName"></h4>
-            <!-- <button id="minimizeChatMessages"><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#EFEFEF"><path d="M240-120v-66.67h480.67V-120H240Z"/></svg></button> -->
         </div>
 
         <div id="chatMessages" style="flex:1; overflow-y:auto;"></div>
 
         <form id="sendMessageForm" style="display:flex; padding:10px; border-top:1px solid #333;">
-    @csrf
-    <input type="hidden" name="conversa_id" id="conversaIdInput" value="">
-<div style="position:relative; display:flex; align-items:center;">
-  <button type="button" id="emojiButton" aria-label="Abrir emojis"
+            @csrf
+            <input type="hidden" name="conversa_id" id="conversaIdInput" value="">
+             <button type="button" id="emojiButton" aria-label="Abrir emojis"
           style="background:none; border:none; cursor:pointer; padding:6px;">
     
     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#31403E"><path d="M620-520q25 0 42.5-17.5T680-580q0-25-17.5-42.5T620-640q-25 0-42.5 17.5T560-580q0 25 17.5 42.5T620-520Zm-280 0q25 0 42.5-17.5T400-580q0-25-17.5-42.5T340-640q-25 0-42.5 17.5T280-580q0 25 17.5 42.5T340-520Zm140 260q68 0 123.5-38.5T684-400H276q25 63 80.5 101.5T480-260Zm0 180q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Z"/></svg>
   </button>
-
-  
-  <div id="emojiPicker"
+    <div id="emojiPicker"
        style="display:none; position:absolute; bottom:40px; left:0;
               background:#2a2a2a; padding:10px; border-radius:10px;
               width:220px; z-index:100001; box-shadow:0 6px 18px rgba(0,0,0,0.4);
@@ -82,20 +71,21 @@
 
   
   </div>
-</div>
-    <input type="text" id="chatInput" name="conteudo" placeholder="Mensagem..." style="flex:1; margin-right:10px;" required>
-
-</form>
-
-
+            <input type="text" id="chatInput" name="conteudo"
+                   placeholder="Mensagem..." style="flex:1; margin-right:10px;" required>
+        </form>
     </div>
 </div>
+@endauth
 
 <div class="chat-toggle" onclick="toggleChat()">
-    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EFEFEF"><path d="M80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>
-
-     <span id="chatBadge" class="chat-badge" style="display:none;">0</span>
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+         viewBox="0 -960 960 960" width="24px" fill="#EFEFEF">
+         <path d="M80-80v-720q0-33 23.5-56.5T160-880h640q33 0
+                  56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Z"/>
+    </svg>
 </div>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -177,27 +167,14 @@ function toggleChat() {
     document.getElementById('chatSidebar').classList.toggle('active');
 }
 
-// Minimizar chat
-
-// document.getElementById('minimizeChatMessages').addEventListener('click', () => {
-//     document.getElementById('chatMessagesView').style.display = 'none';
-//     document.getElementById('chatListView').style.display = 'block';
-// });
-
 document.addEventListener('click', function(e) {
     const sidebar = document.getElementById('chatSidebar');
     const toggle = document.querySelector('.chat-toggle');
-
-    // se o clique NÃO foi no sidebar e nem no botão toggle
     if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
         sidebar.classList.remove('active');
     }
 });
 
-
-
-
-// Abrir conversa
 let currentConversaId = null;
 let lastMessageId = 0;
 
@@ -209,9 +186,12 @@ document.querySelectorAll('.conversa-item').forEach(item => {
         document.getElementById('chatListView').style.display = "none";
         document.getElementById('chatMessagesView').style.display = "flex";
 
-        document.getElementById('conversaIdInput').value = currentConversaId;
-        document.getElementById('chatUserName').innerText = item.querySelector("strong").innerText;
+        // 🔥 Atualiza nome e foto do usuário
+        document.getElementById('chatUserName').innerText = item.dataset.nome;
+        const foto = item.dataset.foto;
+        document.getElementById('chatUserFoto').src = foto !== "" ? foto : "/images/default-user.png";
 
+        document.getElementById('conversaIdInput').value = currentConversaId;
         loadChat(currentConversaId, true);
     });
 });
@@ -279,4 +259,4 @@ document.getElementById('sendMessageForm').addEventListener('submit', function(e
 
 </script>
 
-@endauth
+

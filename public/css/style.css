@@ -2449,6 +2449,11 @@ text-align: left;
     border-radius: 50%;
 }
 
+#chatUserName{
+    margin-right: 60px;
+    margin-top: 25px;
+}
+
 
 /* <<<<< FOOTER >>>>> */
 
