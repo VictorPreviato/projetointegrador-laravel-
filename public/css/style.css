@@ -2249,12 +2249,6 @@ text-align: left;
 }
 
 /* Mensagens do outro usuário */
-.message.you {
-    background: #2c2c2c;
-    color: #fff;
-    text-align: left;
-    align-self: flex-start;
-}
 
 .chat-toggle {
     position: fixed;
@@ -2281,8 +2275,8 @@ text-align: left;
     position: fixed;
     bottom: 80px;
     right: 20px;
-    width: 350px;
-    max-height: 500px;
+    width: 350px;  
+    height: 400px;
     background: white;
     color: var(--cor-1);
     border-radius: 12px;
@@ -2326,7 +2320,6 @@ text-align: left;
 
 .conversa-item {
     padding: 10px;
-    border-bottom: 1px solid #333;
     cursor: pointer;
 }
 
@@ -2451,7 +2444,7 @@ text-align: left;
 
 #chatUserName{
     margin-right: 60px;
-    margin-top: 25px;
+    margin-top: 17px;
 }
 
 

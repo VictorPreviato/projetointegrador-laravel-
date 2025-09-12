@@ -72,7 +72,7 @@
   
   </div>
             <input type="text" id="chatInput" name="conteudo"
-                   placeholder="Mensagem..." style="flex:1; margin-right:10px;" required>
+                   placeholder="Mensagem..."  required>
         </form>
     </div>
 </div>
