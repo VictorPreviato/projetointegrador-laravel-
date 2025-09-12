@@ -2366,7 +2366,7 @@ text-align: left;
 .message.you {
     text-align: left;
     align-self: flex-start;
-    background: var(--cor-4);
+    background: var(--cor-5);
     color: var(--cor-1);
     padding: 6px 12px;
     border-radius: 12px;
