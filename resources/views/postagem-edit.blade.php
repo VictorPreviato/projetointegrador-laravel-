@@ -30,8 +30,6 @@
 </div>
 </div>
 
-
-
         <!-- Tipo de cadastro -->
         <label for="tipo_cadastro">Tipo de cadastro*</label>
         <select name="tipo_cadastro" id="tipo_cadastro" required>

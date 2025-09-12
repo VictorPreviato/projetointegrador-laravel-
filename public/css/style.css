@@ -2366,19 +2366,19 @@ text-align: left;
     padding: 6px 12px;
     border-radius: 12px;
     margin-bottom: 6px;
-    max-width: 70%;
-    margin-left: 80px;
+    max-width: 65%;
+    margin-left: 100px;
 }
 
 .message.you {
     text-align: left;
     align-self: flex-start;
-    background: var(--cor-2);
+    background: var(--cor-4);
     color: var(--cor-1);
     padding: 6px 12px;
     border-radius: 12px;
     margin-bottom: 6px;
-    max-width: 70%;
+    max-width: 65%;
 }
 
 #minimizeChatMessages{
