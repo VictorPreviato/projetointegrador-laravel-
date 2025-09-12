@@ -8,6 +8,7 @@
             <h4>Mensagens</h4>
            
         </div>
+        
         <div id="chatList">
             @php
                 $conversas = \App\Models\Conversa::where('user1_id', auth()->id())
@@ -18,6 +19,14 @@
             @endphp
 
             @forelse($conversas as $conversa)
+
+            
+             @php
+        $outroUser = $conversa->user1_id == auth()->id() ? $conversa->user2 : $conversa->user1;
+    @endphp
+
+  
+
                 <div class="conversa-item" data-id="{{ $conversa->id }}">
                     <strong>
                         {{ $conversa->user1_id == auth()->id() ? $conversa->user2->name : $conversa->user1->name }}
@@ -35,7 +44,19 @@
     <!-- TELA DE CHAT -->
     <div id="chatMessagesView" class="chat-messages" style="display:none;">
         <div class="chat-header">
+         <div class="ftperfilheadchat">
+            @if($outroUser->foto)
+            <img src="{{ asset('storage/' . $outroUser->foto) }}"
+                 alt="Foto de {{ $outroUser->name }}"
+                 >
+        @else
+            <div class="img"
+                 data-letter="{{ strtoupper(substr($outroUser->name, 0, 1)) }}"
+                 style="background: var(--cor-5);"></div>
+        @endif
+       </div> 
             <button id="backToList"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#"><path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/></svg></button>
+          
             <h4 id="chatUserName"></h4>
             <!-- <button id="minimizeChatMessages"><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#EFEFEF"><path d="M240-120v-66.67h480.67V-120H240Z"/></svg></button> -->
         </div>
@@ -172,6 +193,9 @@ document.addEventListener('click', function(e) {
         sidebar.classList.remove('active');
     }
 });
+
+
+
 
 // Abrir conversa
 let currentConversaId = null;
