@@ -48,20 +48,22 @@ class ChatController extends Controller
 
 
     // Busca mensagens (incremental)
-    public function fetch(Request $request, $conversaId)
-    {
-        $conversa = Conversa::findOrFail($conversaId);
+ public function fetch($conversaId)
+{
+    $lastId = request('last_id', 0);
 
-        $lastId = $request->query('last_id', 0);
+    $mensagensQuery = Mensagem::where('conversa_id', $conversaId)
+        ->with('user')
+        ->orderBy('id');
 
-        $mensagens = $conversa->mensagens()
-            ->with('user')
-            ->where('id', '>', $lastId)
-            ->orderBy('created_at', 'asc')
-            ->get();
-
-        return view('components.chat-messages', compact('mensagens'));
+    if ($lastId > 0) {
+        $mensagensQuery->where('id', '>', $lastId);
     }
+
+    $mensagens = $mensagensQuery->get();
+
+    return view('components.chat-messages', compact('mensagens'));
+}
 
   
     // Envia mensagem
