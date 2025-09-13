@@ -2337,7 +2337,6 @@ text-align: left;
 .chat-messages form {
     display: flex;
     padding: 10px;
-    border-top: 1px solid #333;
     gap: 5px;
 }
 

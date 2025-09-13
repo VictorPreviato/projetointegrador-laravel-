@@ -74,7 +74,7 @@
 
         <div id="chatMessages" style="flex:1; overflow-y:auto;"></div>
 
-        <form id="sendMessageForm" style="display:flex; padding:10px; border-top:1px solid #333;">
+        <form id="sendMessageForm" style="display:flex; padding:10px;">
             @csrf
             <input type="hidden" name="conversa_id" id="conversaIdInput" value="">
              <button type="button" id="emojiButton" aria-label="Abrir emojis"
