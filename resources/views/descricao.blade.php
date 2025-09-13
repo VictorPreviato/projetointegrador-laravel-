@@ -90,9 +90,11 @@
             <p>{{ $post->user->email }}</p>
         </div>
 
-     <button class="contdono" onclick="startChat({{ $post->user->id }})">
-    Fale com {{ $post->user->name }}
-</button>
+     @if(auth()->id() !== $post->user_id)
+    <button class="contdono" onclick="startChat({{ $post->user->id }})">
+        Fale com {{ $post->user->name }}
+    </button>
+@endif
 
 <script>
   function startChat(userId) {
