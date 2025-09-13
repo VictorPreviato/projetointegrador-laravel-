@@ -5,7 +5,7 @@
    <div id="chatListView" class="chat-list">
     <div class="chat-header">
         <h4>Mensagens</h4>
-        <button id="closeChatList"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#31403E"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
+        <button type="button" id="closeChatList"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#31403E"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
     </div>
 
     <div id="chatList">
@@ -62,14 +62,14 @@
                 <img id="chatUserFoto" src="" alt="Foto do usuário">
             </div>
 
-            <button id="backToList">
+            <button type="button" id="backToList">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px"
                      viewBox="0 -960 960 960" width="24px" fill="#">
                      <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"/>
                 </svg>
             </button>
             <h4 id="chatUserName"></h4>
-            <button id="closeChat"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#31403E"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
+            <button type="button" id="closeChat"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#31403E"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
         </div>
 
         <div id="chatMessages" style="flex:1; overflow-y:auto;"></div>
