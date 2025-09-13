@@ -95,23 +95,74 @@
 </button>
 
 <script>
-    function startChat(userId) {
+  function startChat(userId) {
     fetch(`/chat/start/${userId}`)
         .then(res => res.json())
         .then(data => {
             const outroUser = data.outro_user;
 
-            // abre sidebar
+            // abre sidebar e troca pra view de mensagens
             document.getElementById('chatSidebar').classList.add('active');
+            document.getElementById('chatListView').style.display = "none";
+            document.getElementById('chatMessagesView').style.display = "flex";
 
-            // preenche título e foto do chat
+            // seta conversa atual
+            currentConversaId = data.conversa_id;
+            lastMessageId = 0;
+
+            // preenche header
             document.getElementById('chatUserName').innerText = outroUser.name;
-            document.getElementById('chatUserFoto').src = outroUser.foto;
+            document.getElementById('chatUserFoto').src = outroUser.foto !== "" 
+                ? outroUser.foto 
+                : "/IMG/user-icon.png";
+
+            document.getElementById('conversaIdInput').value = currentConversaId;
 
             // carrega mensagens
-            loadChat(data.conversa_id, true);
+            loadChat(currentConversaId, true);
+
+            // 🔥 garante que a conversa aparece na lista (se ainda não existir)
+            if (!document.querySelector(`.conversa-item[data-id="${data.conversa_id}"]`)) {
+                const chatList = document.getElementById('chatList');
+
+                // remove "Sem conversas" se existir
+                const noChats = document.getElementById('noChatsMessage');
+                if (noChats) noChats.remove();
+
+                // cria novo item
+                const div = document.createElement('div');
+                div.classList.add('conversa-item');
+                div.dataset.id = data.conversa_id;
+                div.dataset.nome = outroUser.name;
+                div.dataset.foto = outroUser.foto ?? "";
+
+                div.innerHTML = `
+                    <strong>${outroUser.name}</strong>
+                    <p style="font-size:12px; color:#aaa;">Sem mensagens ainda</p>
+                `;
+
+                chatList.prepend(div); // adiciona no topo da lista
+
+                // reanexa evento de clique
+                div.addEventListener('click', () => {
+                    currentConversaId = div.dataset.id;
+                    lastMessageId = 0;
+
+                    document.getElementById('chatListView').style.display = "none";
+                    document.getElementById('chatMessagesView').style.display = "flex";
+
+                    document.getElementById('chatUserName').innerText = div.dataset.nome;
+                    document.getElementById('chatUserFoto').src = div.dataset.foto !== "" 
+                        ? div.dataset.foto 
+                        : "/IMG/user-icon.png";
+
+                    document.getElementById('conversaIdInput').value = currentConversaId;
+                    loadChat(currentConversaId, true);
+                });
+            }
         });
 }
+
 </script>
 
     </div>

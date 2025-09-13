@@ -235,6 +235,7 @@ setInterval(() => {
 }, 3000);
 
 // Enviar mensagem
+// Enviar mensagem
 document.getElementById('sendMessageForm').addEventListener('submit', function(e) {
     e.preventDefault();
     let formData = new FormData(this);
@@ -248,14 +249,28 @@ document.getElementById('sendMessageForm').addEventListener('submit', function(e
     })
     .then(res => res.text())
     .then(html => {
+        // adiciona no chat aberto
         document.getElementById('chatMessages').insertAdjacentHTML('beforeend', html);
 
         const mensagens = document.getElementById('chatMessages').querySelectorAll('[data-id]');
         if (mensagens.length) lastMessageId = parseInt(mensagens[mensagens.length - 1].getAttribute('data-id'));
 
         this.reset();
+
         let chatDiv = document.getElementById('chatMessages');
         chatDiv.scrollTop = chatDiv.scrollHeight;
+
+    
+        const conversaItem = document.querySelector(`.conversa-item[data-id="${currentConversaId}"]`);
+        if (conversaItem) {
+            const lastMsgPreview = conversaItem.querySelector("p");
+            if (lastMsgPreview) {
+                const inputMsg = formData.get("conteudo");
+                lastMsgPreview.textContent = inputMsg; // mostra a msg enviada
+            }
+            // opcional: jogar conversa para o topo da lista
+            conversaItem.parentNode.prepend(conversaItem);
+        }
     });
 });
 
