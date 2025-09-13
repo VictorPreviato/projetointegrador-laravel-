@@ -254,7 +254,7 @@ setInterval(() => {
     if (currentConversaId) loadChat(currentConversaId);
 }, 3000);
 
-// Enviar mensagem
+
 // Enviar mensagem
 document.getElementById('sendMessageForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -269,40 +269,47 @@ document.getElementById('sendMessageForm').addEventListener('submit', function(e
     })
     .then(res => res.text())
     .then(html => {
-        // adiciona no chat aberto
-        document.getElementById('chatMessages').insertAdjacentHTML('beforeend', html);
+        // 🔹 adiciona no chat aberto
+        const chatMessages = document.getElementById('chatMessages');
+        chatMessages.insertAdjacentHTML('beforeend', html);
 
-        const mensagens = document.getElementById('chatMessages').querySelectorAll('[data-id]');
-        if (mensagens.length) lastMessageId = parseInt(mensagens[mensagens.length - 1].getAttribute('data-id'));
+        // 🔹 atualiza controle de última mensagem
+        const mensagens = chatMessages.querySelectorAll('[data-id]');
+        if (mensagens.length) {
+            lastMessageId = parseInt(mensagens[mensagens.length - 1].getAttribute('data-id'));
+        }
 
+        // 🔹 limpa input e scrolla pro fim
         this.reset();
+        chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        let chatDiv = document.getElementById('chatMessages');
-        chatDiv.scrollTop = chatDiv.scrollHeight;
+        // 🔹 atualiza preview na lista de conversas
+        const conversaId = document.getElementById('conversaIdInput').value;
+        const inputMsg = formData.get("conteudo");
 
-    
-        const conversaItem = document.querySelector(`.conversa-item[data-id="${currentConversaId}"]`);
+        const conversaItem = document.querySelector(`.conversa-item[data-id="${conversaId}"]`);
         if (conversaItem) {
             const lastMsgPreview = conversaItem.querySelector("p");
             if (lastMsgPreview) {
-                const inputMsg = formData.get("conteudo");
-                lastMsgPreview.textContent = inputMsg; // mostra a msg enviada
+                lastMsgPreview.textContent = "Você: " + inputMsg;
             }
-            // opcional: jogar conversa para o topo da lista
+
+            // move conversa para o topo da lista
             conversaItem.parentNode.prepend(conversaItem);
         }
     });
 });
 
-// Fecha a lista de chats
+// 🔹 Fecha a lista de chats
 document.getElementById('closeChatList').addEventListener('click', () => {
     document.getElementById('chatSidebar').classList.remove('active');
 });
 
-// Fecha o chat aberto
+// 🔹 Fecha o chat aberto
 document.getElementById('closeChat').addEventListener('click', () => {
     document.getElementById('chatSidebar').classList.remove('active');
 });
+
 
 
 </script>
