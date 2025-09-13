@@ -12,6 +12,7 @@
     </h4>
 </div>
 
+
 <div class="descflex">
     <div>
         <img id="imgdesc" src="{{ asset('storage/' . $post->foto) }}" alt="{{ $post->nome_pet ?? 'Pet' }}">
@@ -89,6 +90,13 @@
             <h5>E-mail</h5>
             <p>{{ $post->user->email }}</p>
         </div>
+
+        @if(auth()->id() == $post->user_id)
+   <button type="button" class="contdono"
+    onclick="window.location='{{ route('postagem.edit', $post->id) }}'">
+    Editar
+</button>
+@endif
 
      @if(auth()->id() !== $post->user_id)
     <button class="contdono" onclick="startChat({{ $post->user->id }})">

@@ -2333,8 +2333,8 @@ text-align: left;
 .chat-messages input[name="conteudo"] {
     flex: 1;
     width: 250px;
-    border-radius: 5px;
-    box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+    border-radius: 20px;
+    box-shadow: 6px 6px 6px rgba(0,0,0,0.2);
     border: none;
     outline: none;
 }
