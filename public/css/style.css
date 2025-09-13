@@ -2357,7 +2357,7 @@ text-align: left;
     background: var(--cor-1);
     color: var(--cor-4);
     padding: 6px 12px;
-    border-radius: 12px;
+    border-radius: 20px 0px 20px 20px;
     margin-bottom: 6px;
     max-width: 65%;
     margin-left: 100px;
@@ -2366,10 +2366,10 @@ text-align: left;
 .message.you {
     text-align: left;
     align-self: flex-start;
-    background: var(--cor-5);
+    background: #D9D9D9;
     color: var(--cor-1);
     padding: 6px 12px;
-    border-radius: 12px;
+    border-radius: 0 20px 20px;
     margin-bottom: 6px;
     max-width: 65%;
 }
