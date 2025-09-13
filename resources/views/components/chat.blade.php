@@ -5,6 +5,7 @@
    <div id="chatListView" class="chat-list">
     <div class="chat-header">
         <h4>Mensagens</h4>
+        <button id="closeChatList"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#31403E"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
     </div>
 
     <div id="chatList">
@@ -20,30 +21,36 @@
         @endphp
 
         @forelse($conversas as $conversa)
-            @php
-                $outroUser = $conversa->user1_id == auth()->id() ? $conversa->user2 : $conversa->user1;
-                $fotoUser = $outroUser->foto ? asset('storage/'.$outroUser->foto) : $svgBase64;
-            @endphp
+    @php
+        $outroUser = $conversa->user1_id == auth()->id() ? $conversa->user2 : $conversa->user1;
+        $fotoUser = $outroUser->foto ? asset('storage/'.$outroUser->foto) : $svgBase64;
 
-            <div class="conversa-item"
-                 data-id="{{ $conversa->id }}"
-                 data-nome="{{ $outroUser->name }}"
-                 data-foto="{{ $fotoUser }}"
-                 style="display:flex; align-items:center; gap:10px; padding:8px; cursor:pointer;">
+        $lastMensagem = $conversa->mensagens->last();
+        $mensagemConteudo = $lastMensagem 
+            ? ($lastMensagem->user_id == auth()->id() ? 'Você: '.$lastMensagem->conteudo : $lastMensagem->conteudo)
+            : 'Sem mensagens ainda';
+    @endphp
 
-                 <img src="{{ $fotoUser }}" alt="Foto do usuário"
-                      style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
+    <div class="conversa-item"
+         data-id="{{ $conversa->id }}"
+         data-nome="{{ $outroUser->name }}"
+         data-foto="{{ $fotoUser }}"
+         style="display:flex; align-items:center; gap:10px; padding:8px; cursor:pointer;">
 
-                <div style="flex:1;">
-                    <strong style="display:block;">{{ $outroUser->name }}</strong>
-                    <p style="font-size:12px; color:#aaa; margin:0;">
-                        {{ $conversa->mensagens->last()->conteudo ?? 'Sem mensagens ainda' }}
-                    </p>
-                </div>
-            </div>
-        @empty
-            <p id="noChatsMessage" style="text-align:center; padding:20px;">Sem conversas no momento</p>
-        @endforelse
+         <img src="{{ $fotoUser }}" alt="Foto do usuário"
+              style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
+
+        <div style="flex:1;">
+            <strong style="display:block;">{{ $outroUser->name }}</strong>
+            <p style="font-size:12px; color:#aaa; margin:0;">
+                {{ $mensagemConteudo }}
+            </p>
+        </div>
+    </div>
+@empty
+    <p id="noChatsMessage" style="text-align:center; padding:20px;">Sem conversas no momento</p>
+@endforelse
+
     </div>
 </div>
 
@@ -62,6 +69,7 @@
                 </svg>
             </button>
             <h4 id="chatUserName"></h4>
+            <button id="closeChat"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#31403E"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
         </div>
 
         <div id="chatMessages" style="flex:1; overflow-y:auto;"></div>
@@ -284,6 +292,16 @@ document.getElementById('sendMessageForm').addEventListener('submit', function(e
             conversaItem.parentNode.prepend(conversaItem);
         }
     });
+});
+
+// Fecha a lista de chats
+document.getElementById('closeChatList').addEventListener('click', () => {
+    document.getElementById('chatSidebar').classList.remove('active');
+});
+
+// Fecha o chat aberto
+document.getElementById('closeChat').addEventListener('click', () => {
+    document.getElementById('chatSidebar').classList.remove('active');
 });
 
 
