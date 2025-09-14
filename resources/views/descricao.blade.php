@@ -124,14 +124,14 @@
             document.getElementById('chatUserName').innerText = outroUser.name;
             document.getElementById('chatUserFoto').src = outroUser.foto !== "" 
                 ? outroUser.foto 
-                : "/IMG/user-icon.png";
+                : "/IMG/user-icon.svg";
 
             document.getElementById('conversaIdInput').value = currentConversaId;
 
             // carrega mensagens
             loadChat(currentConversaId, true);
 
-            // 🔥 garante que a conversa aparece na lista (se ainda não existir)
+          
             if (!document.querySelector(`.conversa-item[data-id="${data.conversa_id}"]`)) {
                 const chatList = document.getElementById('chatList');
 
@@ -140,35 +140,48 @@
                 if (noChats) noChats.remove();
 
                 // cria novo item
-                const div = document.createElement('div');
-                div.classList.add('conversa-item');
-                div.dataset.id = data.conversa_id;
-                div.dataset.nome = outroUser.name;
-                div.dataset.foto = outroUser.foto ?? "";
+const div = document.createElement('div');
+div.classList.add('conversa-item');
+div.dataset.id = data.conversa_id;
+div.dataset.nome = outroUser.name;
+div.dataset.foto = outroUser.foto ?? "/IMG/user-icon.svg";
 
-                div.innerHTML = `
-                    <strong>${outroUser.name}</strong>
-                    <p style="font-size:12px; color:#aaa;">Sem mensagens ainda</p>
-                `;
+div.style.display = "flex";
+div.style.alignItems = "center";
+div.style.gap = "10px";
+div.style.padding = "8px";
+div.style.cursor = "pointer";
 
-                chatList.prepend(div); // adiciona no topo da lista
+div.innerHTML = `
+    <div class="foto-container" style="width:50px; height:50px; border-radius:50%; overflow:hidden;"></div>
+    <div style="flex:1;">
+        <strong style="display:block;">${outroUser.name}</strong>
+        <p style="font-size:12px; color:#aaa; margin:0;">Sem mensagens ainda</p>
+    </div>
+`;
 
-                // reanexa evento de clique
-                div.addEventListener('click', () => {
-                    currentConversaId = div.dataset.id;
-                    lastMessageId = 0;
+chatList.prepend(div);
 
-                    document.getElementById('chatListView').style.display = "none";
-                    document.getElementById('chatMessagesView').style.display = "flex";
+// 🔥 renderiza a foto (com cache-busting)
+renderConversaFoto(div);
 
-                    document.getElementById('chatUserName').innerText = div.dataset.nome;
-                    document.getElementById('chatUserFoto').src = div.dataset.foto !== "" 
-                        ? div.dataset.foto 
-                        : "/IMG/user-icon.png";
+// reanexa evento de clique
+div.addEventListener('click', () => {
+    currentConversaId = div.dataset.id;
+    lastMessageId = 0;
 
-                    document.getElementById('conversaIdInput').value = currentConversaId;
-                    loadChat(currentConversaId, true);
-                });
+    document.getElementById('chatListView').style.display = "none";
+    document.getElementById('chatMessagesView').style.display = "flex";
+
+    document.getElementById('chatUserName').innerText = div.dataset.nome;
+    document.getElementById('chatUserFoto').src = div.dataset.foto !== "" 
+        ? div.dataset.foto 
+        : "/IMG/user-icon.svg";
+
+    document.getElementById('conversaIdInput').value = currentConversaId;
+    loadChat(currentConversaId, true);
+});
+
             }
         });
 }

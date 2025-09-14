@@ -8,50 +8,46 @@
         <button type="button" id="closeChatList"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#31403E"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
     </div>
 
-    <div id="chatList">
-        @php
-            $conversas = \App\Models\Conversa::where('user1_id', auth()->id())
-                ->orWhere('user2_id', auth()->id())
-                ->with(['user1', 'user2', 'mensagens.user'])
-                ->latest()
-                ->get();
-
-            $svgDefault = '<svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#485958"><path d="M226-266q62-39 122.5-58T480-343q71 0 133 20t122 57q42-55 59-105.46 17-50.45 17-108.54 0-140.25-95.33-235.62Q620.35-811 480.17-811 340-811 244.5-715.62 149-620.25 149-480q0 58 17.03 108.22Q183.05-321.57 226-266Zm253.81-177q-60.97 0-101.89-41.19Q337-525.37 337-585.69q0-60.31 41.11-101.81 41.1-41.5 102.08-41.5 60.97 0 101.89 41.69 40.92 41.68 40.92 102Q623-525 581.89-484q-41.1 41-102.08 41Zm-.21 388q-87.15 0-164.9-33.28-77.75-33.29-135.82-91.56-58.07-58.27-90.98-135.44Q55-392.46 55-480.39t33.5-165.27Q122-723 180-780.5T315.25-872q77.24-34 165.25-34t165.25 34Q723-838 780.5-780.5T872-645.59q34 77.4 34 165.32 0 87.93-34 165.1Q838-238 780.5-180 723-122 645.46-88.5 567.93-55 479.6-55Z"/></svg>';
-            $svgBase64 = 'data:image/svg+xml;base64,' . base64_encode($svgDefault);
-        @endphp
-
-        @forelse($conversas as $conversa)
+   <div id="chatList">
     @php
-        $outroUser = $conversa->user1_id == auth()->id() ? $conversa->user2 : $conversa->user1;
-        $fotoUser = $outroUser->foto ? asset('storage/'.$outroUser->foto) : $svgBase64;
-
-        $lastMensagem = $conversa->mensagens->last();
-        $mensagemConteudo = $lastMensagem 
-            ? ($lastMensagem->user_id == auth()->id() ? 'Você: '.$lastMensagem->conteudo : $lastMensagem->conteudo)
-            : 'Sem mensagens ainda';
+        $conversas = \App\Models\Conversa::where('user1_id', auth()->id())
+            ->orWhere('user2_id', auth()->id())
+            ->with(['user1', 'user2', 'mensagens.user'])
+            ->latest()
+            ->get();
     @endphp
 
-    <div class="conversa-item"
-         data-id="{{ $conversa->id }}"
-         data-nome="{{ $outroUser->name }}"
-         data-foto="{{ $fotoUser }}"
-         style="display:flex; align-items:center; gap:10px; padding:8px; cursor:pointer;">
+    @forelse($conversas as $conversa)
+        @php
+            $outroUser = $conversa->user1_id == auth()->id() ? $conversa->user2 : $conversa->user1;
+            $fotoUser = $outroUser->foto ? asset('storage/'.$outroUser->foto) : asset('IMG/user-icon.svg'); // default
+            $lastMensagem = $conversa->mensagens->last();
+            $mensagemConteudo = $lastMensagem 
+                ? ($lastMensagem->user_id == auth()->id() ? 'Você: '.$lastMensagem->conteudo : $lastMensagem->conteudo)
+                : 'Sem mensagens ainda';
+        @endphp
 
-         <img src="{{ $fotoUser }}" alt="Foto do usuário"
-              style="width:50px; height:50px; border-radius:50%; object-fit:cover;">
+        <div class="conversa-item"
+             data-id="{{ $conversa->id }}"
+             data-nome="{{ $outroUser->name }}"
+             data-foto="{{ $fotoUser }}"
+             style="display:flex; align-items:center; gap:10px; padding:8px; cursor:pointer;">
 
-        <div style="flex:1;">
-            <strong style="display:block;">{{ $outroUser->name }}</strong>
-            <p style="font-size:12px; color:#aaa; margin:0;">
-                {{ $mensagemConteudo }}
-            </p>
+             <!-- container para a foto, que o JS vai preencher -->
+             <div class="foto-container" style="width:50px; height:50px; border-radius:50%; overflow:hidden;"></div>
+
+            <div style="flex:1;">
+                <strong style="display:block;">{{ $outroUser->name }}</strong>
+                <p style="font-size:12px; color:#aaa; margin:0;">
+                    {{ $mensagemConteudo }}
+                </p>
+            </div>
         </div>
-    </div>
-@empty
-    <p id="noChatsMessage" style="text-align:center; padding:20px;">Sem conversas no momento</p>
-@endforelse
+    @empty
+        <p id="noChatsMessage" style="text-align:center; padding:20px;">Sem conversas no momento</p>
+    @endforelse
+</div>
 
-    </div>
 </div>
 
 
@@ -197,6 +193,48 @@ document.addEventListener('click', function(e) {
 let currentConversaId = null;
 let lastMessageId = 0;
 
+// Função para renderizar foto com cache-busting
+function renderConversaFoto(conversaItem) {
+    if (!conversaItem) return;
+    const fotoContainer = conversaItem.querySelector('.foto-container');
+    if (!fotoContainer) return;
+
+    const fotoAttr = conversaItem.dataset.foto || '/IMG/user-icon.svg';
+    const sep = fotoAttr.includes('?') ? '&' : '?';
+    const src = fotoAttr + sep + 't=' + Date.now();
+
+    // Reuse existing img if houver
+    let img = fotoContainer.querySelector('img');
+    if (!img) {
+        img = document.createElement('img');
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.style.borderRadius = '50%';
+        img.loading = 'lazy';
+        fotoContainer.appendChild(img);
+    }
+
+    // debug rápido (remova depois)
+    console.log('renderConversaFoto -> id', conversaItem.dataset.id, 'src', src);
+
+    img.onload = () => {
+        // opcional: console.log('avatar loaded', conversaItem.dataset.id);
+    };
+    img.onerror = () => {
+        console.warn('Erro ao carregar avatar:', src);
+        img.src = '/IMG/user-icon.svg';
+    };
+
+    // atribui por último
+    img.src = src;
+}
+
+
+// Inicializa fotos na lista
+document.querySelectorAll('.conversa-item').forEach(item => renderConversaFoto(item));
+
+// Abrir conversa ao clicar na lista
 document.querySelectorAll('.conversa-item').forEach(item => {
     item.addEventListener('click', () => {
         currentConversaId = item.dataset.id;
@@ -205,16 +243,15 @@ document.querySelectorAll('.conversa-item').forEach(item => {
         document.getElementById('chatListView').style.display = "none";
         document.getElementById('chatMessagesView').style.display = "flex";
 
-     
         document.getElementById('chatUserName').innerText = item.dataset.nome;
-        const foto = item.dataset.foto;
-        document.getElementById('chatUserFoto').src = foto !== "" ? foto : `data:image/svg+xml;base64,${btoa(`
-        <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#485958"><path d="M226-266q62-39 122.5-58T480-343q71 0 133 20t122 57q42-55 59-105.46 17-50.45 17-108.54 0-140.25-95.33-235.62Q620.35-811 480.17-811 340-811 244.5-715.62 149-620.25 149-480q0 58 17.03 108.22Q183.05-321.57 226-266Zm253.81-177q-60.97 0-101.89-41.19Q337-525.37 337-585.69q0-60.31 41.11-101.81 41.1-41.5 102.08-41.5 60.97 0 101.89 41.69 40.92 41.68 40.92 102Q623-525 581.89-484q-41.1 41-102.08 41Zm-.21 388q-87.15 0-164.9-33.28-77.75-33.29-135.82-91.56-58.07-58.27-90.98-135.44Q55-392.46 55-480.39t33.5-165.27Q122-723 180-780.5T315.25-872q77.24-34 165.25-34t165.25 34Q723-838 780.5-780.5T872-645.59q34 77.4 34 165.32 0 87.93-34 165.1Q838-238 780.5-180 723-122 645.46-88.5 567.93-55 479.6-55Z"/></svg>
-
-
-    `)}`;
+        document.getElementById('chatUserFoto').src = item.dataset.foto + '?t=' + new Date().getTime();
 
         document.getElementById('conversaIdInput').value = currentConversaId;
+
+        // Atualiza foto da lista
+        const conversaItem = document.querySelector(`.conversa-item[data-id="${currentConversaId}"]`);
+        renderConversaFoto(conversaItem);
+
         loadChat(currentConversaId, true);
     });
 });
@@ -224,6 +261,10 @@ document.getElementById('backToList').addEventListener('click', () => {
     document.getElementById('chatMessagesView').style.display = "none";
     document.getElementById('chatListView').style.display = "block";
     currentConversaId = null;
+
+    requestAnimationFrame(() => {
+        document.querySelectorAll('.conversa-item').forEach(item => renderConversaFoto(item));
+    });
 });
 
 // Carregar mensagens
@@ -231,21 +272,20 @@ function loadChat(conversaId, scroll = false) {
     fetch(`/chat/fetch/${conversaId}?last_id=${lastMessageId}`)
         .then(res => res.text())
         .then(html => {
+            const chatMessages = document.getElementById('chatMessages');
+
             if (lastMessageId === 0) {
-                document.getElementById('chatMessages').innerHTML = html;
+                chatMessages.innerHTML = html;
             } else {
-                document.getElementById('chatMessages').insertAdjacentHTML('beforeend', html);
+                chatMessages.insertAdjacentHTML('beforeend', html);
             }
 
-            const mensagens = document.getElementById('chatMessages').querySelectorAll('[data-id]');
+            const mensagens = chatMessages.querySelectorAll('[data-id]');
             if (mensagens.length) {
                 lastMessageId = parseInt(mensagens[mensagens.length - 1].getAttribute('data-id'));
             }
 
-            if (scroll) {
-                let chatDiv = document.getElementById('chatMessages');
-                chatDiv.scrollTop = chatDiv.scrollHeight;
-            }
+            if (scroll) chatMessages.scrollTop = chatMessages.scrollHeight;
         });
 }
 
@@ -253,7 +293,6 @@ function loadChat(conversaId, scroll = false) {
 setInterval(() => {
     if (currentConversaId) loadChat(currentConversaId);
 }, 3000);
-
 
 // Enviar mensagem
 document.getElementById('sendMessageForm').addEventListener('submit', function(e) {
@@ -269,48 +308,39 @@ document.getElementById('sendMessageForm').addEventListener('submit', function(e
     })
     .then(res => res.text())
     .then(html => {
-        // 🔹 adiciona no chat aberto
         const chatMessages = document.getElementById('chatMessages');
         chatMessages.insertAdjacentHTML('beforeend', html);
 
-        // 🔹 atualiza controle de última mensagem
         const mensagens = chatMessages.querySelectorAll('[data-id]');
-        if (mensagens.length) {
-            lastMessageId = parseInt(mensagens[mensagens.length - 1].getAttribute('data-id'));
-        }
+        if (mensagens.length) lastMessageId = parseInt(mensagens[mensagens.length - 1].getAttribute('data-id'));
 
-        // 🔹 limpa input e scrolla pro fim
         this.reset();
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        // 🔹 atualiza preview na lista de conversas
         const conversaId = document.getElementById('conversaIdInput').value;
         const inputMsg = formData.get("conteudo");
-
         const conversaItem = document.querySelector(`.conversa-item[data-id="${conversaId}"]`);
         if (conversaItem) {
             const lastMsgPreview = conversaItem.querySelector("p");
-            if (lastMsgPreview) {
-                lastMsgPreview.textContent = "Você: " + inputMsg;
-            }
+            if (lastMsgPreview) lastMsgPreview.textContent = "Você: " + inputMsg;
 
-            // move conversa para o topo da lista
             conversaItem.parentNode.prepend(conversaItem);
+
+            // Atualiza a foto da lista com cache-busting 
+            renderConversaFoto(conversaItem);
         }
     });
 });
 
-// 🔹 Fecha a lista de chats
+// Fecha a lista de chats
 document.getElementById('closeChatList').addEventListener('click', () => {
     document.getElementById('chatSidebar').classList.remove('active');
 });
 
-// 🔹 Fecha o chat aberto
+// Fecha o chat aberto
 document.getElementById('closeChat').addEventListener('click', () => {
     document.getElementById('chatSidebar').classList.remove('active');
 });
-
-
 
 </script>
 
