@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Depoimento;
-
+use Illuminate\Support\Str;
 
 class DotmeController extends Controller
 {
@@ -45,26 +45,42 @@ class DotmeController extends Controller
 
     // Login de usuário
     public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
+{
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
 
-        if (Auth::guard('web')->attempt($credentials)) {
-            $user = Auth::user();
-            Session::put('user', $user);
-            Session::put('user_id', $user->id);
+    $credentials = $request->only('email', 'password');
 
-            return redirect()->route('index');
-        } else {
-            // Verifica se o email existe
-            $userExists = User::where('email', $request->email)->exists();
+    if (Auth::guard('web')->attempt($credentials)) {
+        $request->session()->regenerate(); // importante
 
-            if (!$userExists) {
-                return redirect()->back()->withErrors(['email' => 'E-mail não cadastrado.']);
-            } else {
-                return redirect()->back()->withErrors(['password' => 'A senha está incorreta.']);
-            }
+        $user = Auth::user();
+        Session::put('user', $user);
+        Session::put('user_id', $user->id);
+
+        // pega do POST (hidden input) ou usa intended como fallback
+        $redirect = $request->input('redirect_to');
+
+        // valida: aceita só URLs internas (começando com a URL da aplicação)
+        if ($redirect && Str::startsWith($redirect, url('/'))) {
+            return redirect()->to($redirect);
         }
+
+        // fallback para intended (caso outra rota tenha sido guardada) ou index
+        return redirect()->intended(route('index'));
     }
+
+    // erro de autenticação
+    $userExists = User::where('email', $request->email)->exists();
+
+    if (!$userExists) {
+        return redirect()->back()->withErrors(['email' => 'E-mail não cadastrado.']);
+    } else {
+        return redirect()->back()->withErrors(['password' => 'A senha está incorreta.']);
+    }
+}
 
     // Logout
     public function logout()

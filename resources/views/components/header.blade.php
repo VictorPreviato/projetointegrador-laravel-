@@ -12,6 +12,7 @@
   <link rel="icon" type="image/x-icon" href="{{ asset('IMG/LOGOS/Logosn.svg') }}">
   <link rel="stylesheet" href="{{ asset('CSS/style.css') }}">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <body>

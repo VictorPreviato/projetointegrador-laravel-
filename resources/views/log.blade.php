@@ -20,6 +20,8 @@
 <!-- Formulário único envolvendo os campos -->
 <form action="{{ route('dotmelogin.post') }}" method="POST">
     @csrf
+
+     <input type="hidden" name="redirect_to" value="{{ request()->query('redirect_to') }}">
  
     <div class="row">
         <div class="col-12">

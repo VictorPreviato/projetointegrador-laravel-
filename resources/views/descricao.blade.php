@@ -98,11 +98,27 @@
 </button>
 @endif
 
-     @if(auth()->id() !== $post->user_id)
-    <button class="contdono" onclick="startChat({{ $post->user->id }})">
-        Fale com {{ $post->user->name }}
-    </button>
+@if(auth()->id() !== $post->user_id)
+<button class="contdono" 
+    onclick="@auth 
+                startChat({{ $post->user->id }}) 
+             @else 
+                Swal.fire({
+                    title: 'Ops...',
+                    text: 'Você precisa estar logado para falar com o dono deste post.',
+                    icon: 'info',
+                    confirmButtonText: 'Fazer login',
+                    confirmButtonColor: '#485958'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href='{{ route('log') }}?redirect_to={{ urlencode(url()->current()) }}';
+                    }
+                });
+             @endauth">
+    Fale com {{ $post->user->name }}
+</button>
 @endif
+
 
 <script>
   function startChat(userId) {
