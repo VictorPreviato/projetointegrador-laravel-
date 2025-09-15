@@ -10,7 +10,6 @@
 body {
     font-family: "Poppins", Arial, Helvetica, sans-serif;
     margin-top: 110px;
-  
 }
 
 .custom-select.invalid {
@@ -2008,18 +2007,15 @@ text-align: left;
 .secao-contato-principal {
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Faz com que esta seção ocupe o espaço restante */
 }
 
 /* Seção do Formulário de Contato com Fundo Escuro */
 .formulario-contato-fundo {
-    background-color: var(--cor-1); /* Cor de fundo escura como na imagem */
-    color: #f4f4f4; /* Cor do texto claro para contraste */
-    padding: 60px 20px; /* Mais padding para espaçamento vertical */
+
     display: flex;
     justify-content: center; /* Centraliza o container do formulário */
     align-items: center;
-    flex-grow: 1; /* Permite que esta seção cresça e empurre o rodapé para baixo */
+  
 }
 
 .container-form {
@@ -2033,7 +2029,7 @@ text-align: left;
 .container-form h1 {
     font-size: 2.5em;
     margin-bottom: 40px; /* Espaço abaixo do título */
-    color: #ffffff; /* Título branco */
+    color: var(--cor-1);
 }
 
 /* Estilos do Formulário */
@@ -2064,7 +2060,7 @@ text-align: left;
     background: transparent; /* Fundo transparente */
     border: none;
     border-bottom: 1px solid #b0c4de; /* Linha inferior do input */
-    color: #ffffff; /* Cor do texto digitado */
+
     font-size: 1.1em;
     outline: none; /* Remove a borda de foco padrão */
 }
@@ -2082,8 +2078,8 @@ text-align: left;
 
 /* Estilo do Botão Enviar */
 .botao-enviar {
-    background-color: var(--cor-5); /* Cor do botão como na imagem */
-    color: var(--cor-1); /* Cor do texto do botão */
+    background-color: var(--cor-1); /* Cor do botão como na imagem */
+    color: white;
     border: none;
     padding: 10px 80px;
     font-size: 1.2em;
@@ -2095,7 +2091,7 @@ text-align: left;
 }
 
 .botao-enviar:hover {
-    background-color: var(--cor-2); /* Um tom ligeiramente mais escuro ao passar o mouse */
+    background-color: var(--cor-3);
 }
 
 /* Seção de Redes Sociais com Fundo Branco */

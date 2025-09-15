@@ -26,7 +26,7 @@ placeholder="Escreva sua mensagem" required></textarea>
 </section>
 <section class="redes-sociais-fundo">
 <div class="container-redes">
-<h2>Siga-nos nas redes</h2>
+<h3>Siga-nos nas redes</h3>
 <div class="icones-redes">
 <a href="https://www.instagram.com/" class="icone-rede" aria￾label="Instagram">
 <img src="IMG/ICONES/instagram-icone.png">
