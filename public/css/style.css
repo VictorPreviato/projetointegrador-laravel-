@@ -2059,8 +2059,7 @@ text-align: left;
     padding: 10px 0; /* Padding vertical para os inputs */
     background: transparent; /* Fundo transparente */
     border: none;
-    border-bottom: 1px solid #b0c4de; /* Linha inferior do input */
-
+    border-bottom: 1px solid var(--cor-1); /* Linha inferior do input */
     font-size: 1.1em;
     outline: none; /* Remove a borda de foco padrão */
 }
@@ -2671,6 +2670,7 @@ text-align: left;
     border-color: #485958 !important;
     color: #485958 !important;
 }
+
 
 /* <<<<< Mobile - Retrato >>>>>*/
 
