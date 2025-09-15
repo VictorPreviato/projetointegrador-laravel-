@@ -17,40 +17,51 @@
             ->get();
     @endphp
 
-    @forelse($conversas as $conversa)
-        @php
-            $outroUser = $conversa->user1_id == auth()->id() ? $conversa->user2 : $conversa->user1;
-            $fotoUser = $outroUser->foto ? asset('storage/'.$outroUser->foto) : asset('IMG/user-icon.svg'); // default
-            $lastMensagem = $conversa->mensagens->last();
-            $mensagemConteudo = $lastMensagem 
-                ? ($lastMensagem->user_id == auth()->id() ? 'Você: '.$lastMensagem->conteudo : $lastMensagem->conteudo)
-                : 'Sem mensagens ainda';
-        @endphp
+   @forelse($conversas as $conversa)
+    @php
+        $outroUser = $conversa->user1_id == auth()->id() ? $conversa->user2 : $conversa->user1;
+        $fotoUser = $outroUser->foto ? asset('storage/'.$outroUser->foto) : asset('IMG/user-icon.svg'); // default
+        $lastMensagem = $conversa->mensagens->last();
+        $mensagemConteudo = $lastMensagem 
+            ? ($lastMensagem->user_id == auth()->id() ? 'Você: '.$lastMensagem->conteudo : $lastMensagem->conteudo)
+            : 'Sem mensagens ainda';
 
-        <div class="conversa-item"
-             data-id="{{ $conversa->id }}"
-             data-nome="{{ $outroUser->name }}"
-             data-foto="{{ $fotoUser }}"
-             style="display:flex; align-items:center; gap:10px; padding:8px; cursor:pointer;">
+        // verifica se há mensagens não lidas desse usuário
+        $hasUnread = $conversa->mensagens
+            ->where('user_id', '!=', auth()->id())
+            ->where('lida', false)
+            ->count() > 0;
+    @endphp
 
-             <!-- container para a foto, que o JS vai preencher -->
-             <div class="foto-container" style="width:50px; height:50px; border-radius:50%; overflow:hidden;"></div>
+    <div class="conversa-item"
+         data-id="{{ $conversa->id }}"
+         data-nome="{{ $outroUser->name }}"
+         data-foto="{{ $fotoUser }}"
+         style="display:flex; align-items:center; gap:10px; padding:8px; cursor:pointer;">
 
-            <div style="flex:1;">
-                <strong style="display:block;">{{ $outroUser->name }}</strong>
-                <p style="font-size:12px; color:#aaa; margin:0;">
-                    {{ $mensagemConteudo }}
-                </p>
-            </div>
-            <span class="chat-unread"
-           style="display:none; background:red; color:white; font-size:10px;
-                  font-weight:bold; padding:2px 5px; border-radius:50%;">
-     </span>
+         <!-- container para a foto, que o JS vai preencher -->
+         <div class="foto-container" style="width:50px; height:50px; border-radius:50%; overflow:hidden;"></div>
+
+        <div style="flex:1;">
+            <strong class="{{ $hasUnread ? 'unread' : '' }}" style="display:block;">
+                {{ $outroUser->name }}
+            </strong>
+            <p class="last-msg {{ $hasUnread ? 'unread' : '' }}" style="font-size:12px; margin:0;">
+                {{ $mensagemConteudo }}
+            </p>
         </div>
-    @empty
-        <p id="noChatsMessage" style="text-align:center; padding:20px;">Sem conversas no momento</p>
-    @endforelse
+
+        <span class="chat-unread"
+              style="display:{{ $hasUnread ? 'inline-block' : 'none' }};
+                     background:red; color:white; font-size:10px;
+                     font-weight:bold; padding:2px 5px; border-radius:50%;">
+        </span>
+    </div>
+@empty
+    <p id="noChatsMessage" style="text-align:center; padding:20px;">Sem conversas no momento</p>
+@endforelse
 </div>
+
 
 </div>
 
