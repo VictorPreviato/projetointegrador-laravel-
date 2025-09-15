@@ -65,7 +65,10 @@ Route::middleware('auth')->group(function () {
         'total' => $total,
         'conversas' => $conversas->pluck('unread_count', 'id')
     ]);
-});   
+});
+
+ 
+   
 });
 
 // Rotas públicas
