@@ -49,8 +49,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/chat/start/{userId}', [App\Http\Controllers\ChatController::class, 'start']);
     Route::get('/chat/fetch/{conversa}', [ChatController::class, 'fetch'])->name('chat.fetch');
     Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
- 
-   
+    Route::get('/chat/unread', function () {
+    $userId = auth()->id();
+
+    $conversas = \App\Models\Conversa::where('user1_id', $userId)
+        ->orWhere('user2_id', $userId)
+        ->withCount(['mensagens as unread_count' => function ($q) use ($userId) {
+            $q->where('lida', false)->where('user_id', '!=', $userId);
+        }])
+        ->get(['id']);
+
+    $total = $conversas->sum('unread_count');
+
+    return response()->json([
+        'total' => $total,
+        'conversas' => $conversas->pluck('unread_count', 'id')
+    ]);
+});   
 });
 
 // Rotas públicas

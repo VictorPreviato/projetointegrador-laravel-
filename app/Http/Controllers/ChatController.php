@@ -48,10 +48,17 @@ class ChatController extends Controller
 
 
     // Busca mensagens (incremental)
- public function fetch($conversaId)
+public function fetch($conversaId)
 {
     $lastId = request('last_id', 0);
 
+    // Marca como lidas as mensagens que não são do usuário logado
+    Mensagem::where('conversa_id', $conversaId)
+        ->where('user_id', '!=', auth()->id()) // mensagens do outro user
+        ->where('lida', false)
+        ->update(['lida' => true]);
+
+    // Busca mensagens normalmente
     $mensagensQuery = Mensagem::where('conversa_id', $conversaId)
         ->with('user')
         ->orderBy('id');

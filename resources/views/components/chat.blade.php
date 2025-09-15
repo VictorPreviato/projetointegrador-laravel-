@@ -42,6 +42,10 @@
                     {{ $mensagemConteudo }}
                 </p>
             </div>
+            <span class="chat-unread"
+           style="display:none; background:red; color:white; font-size:10px;
+                  font-weight:bold; padding:2px 5px; border-radius:50%;">
+     </span>
         </div>
     @empty
         <p id="noChatsMessage" style="text-align:center; padding:20px;">Sem conversas no momento</p>
@@ -99,6 +103,11 @@
          <path d="M80-80v-720q0-33 23.5-56.5T160-880h640q33 0
                   56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Z"/>
     </svg>
+    <span id="chatBadge"
+          style="display:none; position:absolute; top:0; right:0;
+                 background:red; color:white; font-size:12px;
+                 font-weight:bold; padding:2px 6px; border-radius:50%;">
+    </span>
 </div>
 
 
@@ -290,9 +299,40 @@ function loadChat(conversaId, scroll = false) {
 }
 
 // Atualiza a cada 3s
+function updateUnread() {
+    fetch("/chat/unread")
+        .then(res => res.json())
+        .then(data => {
+            // Badge do balão
+            const badge = document.getElementById('chatBadge');
+            if (data.total > 0) {
+                badge.innerText = data.total;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+
+            // Badge por conversa
+            for (const [conversaId, count] of Object.entries(data.conversas)) {
+                const item = document.querySelector(`.conversa-item[data-id="${conversaId}"] .chat-unread`);
+                if (item) {
+                    if (count > 0) {
+                        item.innerText = count;
+                        item.style.display = 'inline-block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            }
+        });
+}
+
+// roda junto com atualização do chat
 setInterval(() => {
     if (currentConversaId) loadChat(currentConversaId);
+    updateUnread();
 }, 3000);
+
 
 // Enviar mensagem
 document.getElementById('sendMessageForm').addEventListener('submit', function(e) {
