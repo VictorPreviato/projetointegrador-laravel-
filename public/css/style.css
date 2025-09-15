@@ -2312,8 +2312,15 @@ text-align: left;
     padding: 10px;
     height: 80px;
     cursor: pointer;
+    font-size: large;
 }
 
+.conversa-item p {
+    width: 240px;        
+    overflow: hidden;      
+    white-space: nowrap;   
+    text-overflow: ellipsis; 
+}
 .conversa-item:hover {
     background: rgba(218, 220, 222, 0.5);
 }
