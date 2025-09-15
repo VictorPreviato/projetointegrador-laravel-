@@ -43,8 +43,7 @@
                 </p>
             </div>
             <span class="chat-unread"
-           style="display:none; background:red; color:white; font-size:10px;
-                  font-weight:bold; padding:2px 5px; border-radius:50%;">
+           >
      </span>
         </div>
     @empty
@@ -103,10 +102,7 @@
          <path d="M80-80v-720q0-33 23.5-56.5T160-880h640q33 0
                   56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Z"/>
     </svg>
-    <span id="chatBadge"
-          style="display:none; position:absolute; top:0; right:0;
-                 background:red; color:white; font-size:12px;
-                 font-weight:bold; padding:2px 6px; border-radius:50%;">
+    <span id="chatBadge">
     </span>
 </div>
 
