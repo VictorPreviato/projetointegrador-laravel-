@@ -2286,6 +2286,17 @@ text-align: left;
     background: white;
 }
 
+#chatUserName{
+    margin-bottom: 15px;
+     margin-right: 5%;
+    margin-top: 15px;
+    overflow: hidden;      
+    white-space: nowrap;   
+    text-overflow: ellipsis; 
+    width: 140px;
+
+}
+
 .chat-header h4 {
     margin: 0;
     font-size: 16px;
@@ -2370,9 +2381,7 @@ text-align: left;
     margin-bottom: 22px;
 }
 
-#chatUserName{
-    margin-bottom: 15px;
-}
+
 
 #emojiPicker span {
     cursor: pointer;
@@ -2438,11 +2447,6 @@ text-align: left;
 }
 
 
-
-#chatUserName{
-    margin-right: 5%;
-    margin-top: 15px;
-}
 
 .unread {
     font-weight: bold;
@@ -3467,6 +3471,10 @@ text-align: left;
 
 .chat-sidebar {
 width: 90vw;
+}
+
+#chatUserName{
+    margin-left: 20px;
 }
 
 

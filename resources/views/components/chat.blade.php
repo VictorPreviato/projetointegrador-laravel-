@@ -37,7 +37,7 @@
              <div class="foto-container" style="width:50px; height:50px; border-radius:50%; overflow:hidden;"></div>
 
             <div style="flex:1;">
-                <strong style="display:block;">{{ $outroUser->name }}</strong>
+                <strong style="display:block; overflow: hidden; white-space: nowrap;text-overflow: ellipsis; width: 250px;">{{ $outroUser->name }}</strong>
                 <p style="font-size:12px; color:#aaa; margin:0;">
                     {{ $mensagemConteudo }}
                 </p>
