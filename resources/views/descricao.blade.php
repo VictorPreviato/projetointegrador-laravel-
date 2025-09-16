@@ -111,7 +111,8 @@
                     confirmButtonColor: '#485958'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href='{{ route('log') }}?redirect_to={{ urlencode(url()->current()) }}';
+                       window.location.href='{{ route('log') }}?redirect_to={{ urlencode(url()->current()) }}';
+
                     }
                 });
              @endauth">

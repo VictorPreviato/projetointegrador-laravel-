@@ -49,7 +49,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/chat/start/{userId}', [App\Http\Controllers\ChatController::class, 'start']);
     Route::get('/chat/fetch/{conversa}', [ChatController::class, 'fetch'])->name('chat.fetch');
     Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
-    Route::get('/chat/unread', function () {
+    Route::get('/chat/unread', function (\Illuminate\Http\Request $request) {
+    // limpa qualquer intended antes de responder
+    $request->session()->forget('url.intended');
+
     $userId = auth()->id();
 
     $conversas = \App\Models\Conversa::where('user1_id', $userId)

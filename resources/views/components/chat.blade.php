@@ -184,7 +184,23 @@
 
 <script>
 function toggleChat() {
-    document.getElementById('chatSidebar').classList.toggle('active');
+    const sidebar = document.getElementById('chatSidebar');
+    const chatMessagesView = document.getElementById('chatMessagesView');
+    const chatListView = document.getElementById('chatListView');
+
+    sidebar.classList.toggle('active');
+
+    if (sidebar.classList.contains('active')) {
+        const chatOpenedTo = sessionStorage.getItem('chatOpenedTo');
+
+        if (chatOpenedTo === 'chat') {
+            chatMessagesView.style.display = "flex";
+            chatListView.style.display = "none";
+        } else {
+            chatMessagesView.style.display = "none";
+            chatListView.style.display = "block";
+        }
+    }
 }
 
 document.addEventListener('click', function(e) {
@@ -198,7 +214,6 @@ document.addEventListener('click', function(e) {
 let currentConversaId = null;
 let lastMessageId = 0;
 
-// Função para renderizar foto com cache-busting
 function renderConversaFoto(conversaItem) {
     if (!conversaItem) return;
     const fotoContainer = conversaItem.querySelector('.foto-container');
@@ -208,7 +223,6 @@ function renderConversaFoto(conversaItem) {
     const sep = fotoAttr.includes('?') ? '&' : '?';
     const src = fotoAttr + sep + 't=' + Date.now();
 
-    // Reuse existing img if houver
     let img = fotoContainer.querySelector('img');
     if (!img) {
         img = document.createElement('img');
@@ -220,48 +234,59 @@ function renderConversaFoto(conversaItem) {
         fotoContainer.appendChild(img);
     }
 
-    // debug rápido (remova depois)
-    console.log('renderConversaFoto -> id', conversaItem.dataset.id, 'src', src);
-
-    img.onload = () => {
-        // opcional: console.log('avatar loaded', conversaItem.dataset.id);
-    };
+    img.onload = () => {};
     img.onerror = () => {
         console.warn('Erro ao carregar avatar:', src);
         img.src = '/IMG/user-icon.svg';
     };
 
-    // atribui por último
     img.src = src;
 }
 
+// Função para setar a foto do usuário no header, aguardando o carregamento
+function setChatUserPhoto(src) {
+    return new Promise((resolve) => {
+        const img = document.getElementById('chatUserFoto');
+        img.onload = () => resolve();
+        img.onerror = () => {
+            img.src = '/IMG/user-icon.svg';
+            resolve();
+        };
+        img.src = src;
+    });
+}
 
-// Inicializa fotos na lista
 document.querySelectorAll('.conversa-item').forEach(item => renderConversaFoto(item));
 
-// Abrir conversa ao clicar na lista
+// Abrir conversa (async para usar await no carregamento da foto)
 document.querySelectorAll('.conversa-item').forEach(item => {
-    item.addEventListener('click', () => {
+    item.addEventListener('click', async () => {
         currentConversaId = item.dataset.id;
         lastMessageId = 0;
+
+        document.getElementById('chatUserName').innerText = item.dataset.nome;
+
+        const fotoSrc = item.dataset.foto + '?t=' + new Date().getTime();
+        await setChatUserPhoto(fotoSrc);
+
+        document.getElementById('conversaIdInput').value = currentConversaId;
 
         document.getElementById('chatListView').style.display = "none";
         document.getElementById('chatMessagesView').style.display = "flex";
 
-        document.getElementById('chatUserName').innerText = item.dataset.nome;
-        document.getElementById('chatUserFoto').src = item.dataset.foto + '?t=' + new Date().getTime();
+        // Limpa mensagens antigas e mostra carregando
+        const chatMessages = document.getElementById('chatMessages');
+        chatMessages.innerHTML = '<p style="color:#ccc; text-align:center; margin-top:20px;">Carregando mensagens...</p>';
 
-        document.getElementById('conversaIdInput').value = currentConversaId;
-
-        // Atualiza foto da lista
         const conversaItem = document.querySelector(`.conversa-item[data-id="${currentConversaId}"]`);
         renderConversaFoto(conversaItem);
 
         loadChat(currentConversaId, true);
+
+        sessionStorage.setItem('chatOpenedTo', 'chat');
     });
 });
 
-// Voltar para lista
 document.getElementById('backToList').addEventListener('click', () => {
     document.getElementById('chatMessagesView').style.display = "none";
     document.getElementById('chatListView').style.display = "block";
@@ -270,9 +295,10 @@ document.getElementById('backToList').addEventListener('click', () => {
     requestAnimationFrame(() => {
         document.querySelectorAll('.conversa-item').forEach(item => renderConversaFoto(item));
     });
+
+    sessionStorage.setItem('chatOpenedTo', 'list');
 });
 
-// Carregar mensagens
 function loadChat(conversaId, scroll = false) {
     fetch(`/chat/fetch/${conversaId}?last_id=${lastMessageId}`)
         .then(res => res.text())
@@ -294,12 +320,10 @@ function loadChat(conversaId, scroll = false) {
         });
 }
 
-// Atualiza a cada 3s
 function updateUnread() {
     fetch("/chat/unread")
         .then(res => res.json())
         .then(data => {
-            // Badge do balão
             const badge = document.getElementById('chatBadge');
             if (data.total > 0) {
                 badge.innerText = data.total;
@@ -308,7 +332,6 @@ function updateUnread() {
                 badge.style.display = 'none';
             }
 
-            // Badge por conversa
             for (const [conversaId, count] of Object.entries(data.conversas)) {
                 const item = document.querySelector(`.conversa-item[data-id="${conversaId}"] .chat-unread`);
                 if (item) {
@@ -323,14 +346,11 @@ function updateUnread() {
         });
 }
 
-// roda junto com atualização do chat
 setInterval(() => {
     if (currentConversaId) loadChat(currentConversaId);
     updateUnread();
 }, 3000);
 
-
-// Enviar mensagem
 document.getElementById('sendMessageForm').addEventListener('submit', function(e) {
     e.preventDefault();
     let formData = new FormData(this);
@@ -362,7 +382,6 @@ document.getElementById('sendMessageForm').addEventListener('submit', function(e
 
             conversaItem.parentNode.prepend(conversaItem);
 
-            // Atualiza a foto da lista com cache-busting 
             renderConversaFoto(conversaItem);
         }
     });
@@ -376,7 +395,13 @@ document.getElementById('closeChatList').addEventListener('click', () => {
 // Fecha o chat aberto
 document.getElementById('closeChat').addEventListener('click', () => {
     document.getElementById('chatSidebar').classList.remove('active');
+
+    document.getElementById('chatMessagesView').style.display = "none";
+    document.getElementById('chatListView').style.display = "block";
+
+    sessionStorage.setItem('chatOpenedTo', 'list');
 });
+
 
 </script>
 
