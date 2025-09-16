@@ -191,15 +191,10 @@ function toggleChat() {
     sidebar.classList.toggle('active');
 
     if (sidebar.classList.contains('active')) {
-        const chatOpenedTo = sessionStorage.getItem('chatOpenedTo');
-
-        if (chatOpenedTo === 'chat') {
-            chatMessagesView.style.display = "flex";
-            chatListView.style.display = "none";
-        } else {
-            chatMessagesView.style.display = "none";
-            chatListView.style.display = "block";
-        }
+        // Sempre abre na lista quando reabrir
+        chatMessagesView.style.display = "none";
+        chatListView.style.display = "block";
+        sessionStorage.setItem('chatOpenedTo', 'list');
     }
 }
 
