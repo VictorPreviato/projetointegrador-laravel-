@@ -357,10 +357,13 @@ function updateUnread() {
 }
 
 // Intervalo de atualização
-setInterval(() => {
-    if (currentConversaId) loadChat(currentConversaId);
-    updateUnread();
-}, 3000);
+@if(auth()->check())
+    setInterval(() => {
+        if (currentConversaId) loadChat(currentConversaId);
+        updateUnread();
+    }, 3000);
+@endif
+
 
 // Enviar mensagem
 document.getElementById('sendMessageForm').addEventListener('submit', function(e) {

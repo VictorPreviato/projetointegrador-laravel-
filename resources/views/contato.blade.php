@@ -1,4 +1,6 @@
+
 @include("components.header")
+
 <main class="secao-contato-principal">
 <section class="formulario-contato-fundo">
 <div class="container-form">
@@ -28,10 +30,10 @@ placeholder="Escreva sua mensagem" required></textarea>
 <div class="container-redes">
 <h3>Siga-nos nas redes</h3>
 <div class="icones-redes">
-<a href="https://www.instagram.com/" class="icone-rede" aria￾label="Instagram">
+<a href="https://www.instagram.com/" target="_blank" class="icone-rede">
 <img src="IMG/ICONES/instagram-icone.png">
 </a>
-<a href="https://www.facebook.com/?locale=pt_BR" class="icone-rede"
+<a href="https://www.facebook.com/?locale=pt_BR" target="_blank" class="icone-rede"
 aria-label="Facebook">
 <img src="IMG/ICONES/facebook-icone.png">
 </a>
@@ -39,4 +41,5 @@ aria-label="Facebook">
 </div>
 </section>
 </main>
+
 @include("components.footer")
