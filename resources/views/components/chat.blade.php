@@ -209,6 +209,7 @@ document.addEventListener('click', function(e) {
 let currentConversaId = null;
 let lastMessageId = 0;
 
+// Renderiza a foto da conversa
 function renderConversaFoto(conversaItem) {
     if (!conversaItem) return;
     const fotoContainer = conversaItem.querySelector('.foto-container');
@@ -238,7 +239,7 @@ function renderConversaFoto(conversaItem) {
     img.src = src;
 }
 
-// Função para setar a foto do usuário no header, aguardando o carregamento
+// Setar foto no header
 function setChatUserPhoto(src) {
     return new Promise((resolve) => {
         const img = document.getElementById('chatUserFoto');
@@ -251,9 +252,10 @@ function setChatUserPhoto(src) {
     });
 }
 
+// Inicializa fotos da lista
 document.querySelectorAll('.conversa-item').forEach(item => renderConversaFoto(item));
 
-// Abrir conversa (async para usar await no carregamento da foto)
+// Abrir conversa
 document.querySelectorAll('.conversa-item').forEach(item => {
     item.addEventListener('click', async () => {
         currentConversaId = item.dataset.id;
@@ -261,7 +263,7 @@ document.querySelectorAll('.conversa-item').forEach(item => {
 
         document.getElementById('chatUserName').innerText = item.dataset.nome;
 
-        const fotoSrc = item.dataset.foto + '?t=' + new Date().getTime();
+        const fotoSrc = (item.dataset.foto || '/IMG/user-icon.svg') + '?t=' + new Date().getTime();
         await setChatUserPhoto(fotoSrc);
 
         document.getElementById('conversaIdInput').value = currentConversaId;
@@ -269,9 +271,9 @@ document.querySelectorAll('.conversa-item').forEach(item => {
         document.getElementById('chatListView').style.display = "none";
         document.getElementById('chatMessagesView').style.display = "flex";
 
-        // Limpa mensagens antigas e mostra carregando
         const chatMessages = document.getElementById('chatMessages');
-        chatMessages.innerHTML = '<p style="color:#ccc; text-align:center; margin-top:20px;">Carregando mensagens...</p>';
+        // Mensagem de carregando
+        chatMessages.innerHTML = '<p class="loading-msg" style="color:#ccc; text-align:center; margin-top:20px;">Carregando mensagens...</p>';
 
         const conversaItem = document.querySelector(`.conversa-item[data-id="${currentConversaId}"]`);
         renderConversaFoto(conversaItem);
@@ -282,6 +284,7 @@ document.querySelectorAll('.conversa-item').forEach(item => {
     });
 });
 
+// Voltar para lista
 document.getElementById('backToList').addEventListener('click', () => {
     document.getElementById('chatMessagesView').style.display = "none";
     document.getElementById('chatListView').style.display = "block";
@@ -294,27 +297,39 @@ document.getElementById('backToList').addEventListener('click', () => {
     sessionStorage.setItem('chatOpenedTo', 'list');
 });
 
+// Carregar chat
 function loadChat(conversaId, scroll = false) {
+    const chatMessages = document.getElementById('chatMessages');
+
+    // Remove "Carregando mensagens..." se existir
+    const loadingMsg = chatMessages.querySelector('.loading-msg');
+    if (loadingMsg) loadingMsg.remove();
+
     fetch(`/chat/fetch/${conversaId}?last_id=${lastMessageId}`)
         .then(res => res.text())
         .then(html => {
-            const chatMessages = document.getElementById('chatMessages');
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
 
-            if (lastMessageId === 0) {
-                chatMessages.innerHTML = html;
-            } else {
-                chatMessages.insertAdjacentHTML('beforeend', html);
+            const novasMensagens = tempDiv.querySelectorAll('[data-id]');
+
+            novasMensagens.forEach(msg => {
+                if (!chatMessages.querySelector(`[data-id="${msg.dataset.id}"]`)) {
+                    chatMessages.appendChild(msg);
+                }
+            });
+
+            if (novasMensagens.length) {
+                lastMessageId = parseInt(
+                    novasMensagens[novasMensagens.length - 1].getAttribute('data-id')
+                );
+
+                if (scroll) chatMessages.scrollTop = chatMessages.scrollHeight;
             }
-
-            const mensagens = chatMessages.querySelectorAll('[data-id]');
-            if (mensagens.length) {
-                lastMessageId = parseInt(mensagens[mensagens.length - 1].getAttribute('data-id'));
-            }
-
-            if (scroll) chatMessages.scrollTop = chatMessages.scrollHeight;
         });
 }
 
+// Atualizar mensagens não lidas
 function updateUnread() {
     fetch("/chat/unread")
         .then(res => res.json())
@@ -341,11 +356,13 @@ function updateUnread() {
         });
 }
 
+// Intervalo de atualização
 setInterval(() => {
     if (currentConversaId) loadChat(currentConversaId);
     updateUnread();
 }, 3000);
 
+// Enviar mensagem
 document.getElementById('sendMessageForm').addEventListener('submit', function(e) {
     e.preventDefault();
     let formData = new FormData(this);
@@ -363,7 +380,9 @@ document.getElementById('sendMessageForm').addEventListener('submit', function(e
         chatMessages.insertAdjacentHTML('beforeend', html);
 
         const mensagens = chatMessages.querySelectorAll('[data-id]');
-        if (mensagens.length) lastMessageId = parseInt(mensagens[mensagens.length - 1].getAttribute('data-id'));
+        if (mensagens.length) {
+            lastMessageId = parseInt(mensagens[mensagens.length - 1].getAttribute('data-id'));
+        }
 
         this.reset();
         chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -382,12 +401,12 @@ document.getElementById('sendMessageForm').addEventListener('submit', function(e
     });
 });
 
-// Fecha a lista de chats
+// Fechar lista de chats
 document.getElementById('closeChatList').addEventListener('click', () => {
     document.getElementById('chatSidebar').classList.remove('active');
 });
 
-// Fecha o chat aberto
+// Fechar chat aberto
 document.getElementById('closeChat').addEventListener('click', () => {
     document.getElementById('chatSidebar').classList.remove('active');
 
