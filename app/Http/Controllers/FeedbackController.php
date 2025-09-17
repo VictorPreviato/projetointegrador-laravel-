@@ -29,8 +29,9 @@ class FeedbackController extends Controller
                     ->subject('Novo Feedback do Site');
         });
 
-        // Redireciona pro index com success
-        return redirect()->route('index')->with('success_feed', 'Feedback enviado com sucesso!');
+   session()->flash('success_feed', 'Feedback enviado com sucesso!');
+
+return back();
     }
 
  public function messages(): array

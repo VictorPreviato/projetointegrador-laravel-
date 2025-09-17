@@ -22,16 +22,14 @@ class ContatoController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-   public function store(Request $request)
+  public function store(Request $request)
 {
-    // Validar
     $request->validate([
-        'nome' => ['required', 'string', 'max:255', 'regex:/^(?!.*(<script|<\/script|<\?|<\s*\/?\s*php)).*$/i'],
+        'nome' => ['required', 'string', 'max:255'],
         'email' => 'required|email|max:255',
-        'mensagem' => ['required', 'string', 'regex:/^(?!.*(<script|<\/script|<\?|<\s*\/?\s*php)).*$/i'],
+        'mensagem' => ['required', 'string'],
     ]);
 
-    // Enviar e-mail
     Mail::send('emails.contato', [
         'nome' => $request->nome,
         'email' => $request->email,
@@ -42,10 +40,10 @@ class ContatoController extends Controller
                 ->subject('Novo Contato do Site');
     });
 
-    // Teste: salvar algo na sessão
-   return back()->with('success_contato', 'Mensagem enviada com sucesso!');
-
+    // Flash vai para a próxima requisição
+    return back()->with('success_contato', 'Feedback enviado com sucesso!');
 }
+
 
 
     /**

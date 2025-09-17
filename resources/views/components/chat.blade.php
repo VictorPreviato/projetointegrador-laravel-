@@ -357,12 +357,23 @@ function updateUnread() {
 }
 
 // Intervalo de atualização
-@if(auth()->check())
-    setInterval(() => {
-        if (currentConversaId) loadChat(currentConversaId);
-        updateUnread();
-    }, 3000);
-@endif
+// guarda o id para poder cancelar
+const chatPollInterval = setInterval(() => {
+    if (currentConversaId) loadChat(currentConversaId);
+    updateUnread();
+}, 3000);
+
+// cancela polling ao submeter formulários que redirecionam
+// se quiser só para formulários específicos, use um ID ao invés de 'form'
+document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', () => {
+        if (chatPollInterval) clearInterval(chatPollInterval);
+    });
+});
+
+// ou, se preferir só para os formulários de contato:
+// const contactForm = document.getElementById('contactForm');
+// if (contactForm) contactForm.addEventListener('submit', () => clearInterval(chatPollInterval));
 
 
 // Enviar mensagem

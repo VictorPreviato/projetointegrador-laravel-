@@ -49,11 +49,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/chat/start/{userId}', [App\Http\Controllers\ChatController::class, 'start']);
     Route::get('/chat/fetch/{conversa}', [ChatController::class, 'fetch'])->name('chat.fetch');
     Route::post('/chat/send', [ChatController::class, 'send'])->name('chat.send');
-    Route::get('/chat/unread', function (\Illuminate\Http\Request $request) {
-    // limpa qualquer intended antes de responder
-    $request->session()->forget('url.intended');
-
+    // routes/web.php
+Route::get('/chat/unread', function (\Illuminate\Http\Request $request) {
     $userId = auth()->id();
+
+    if (!$userId) {
+        return response()->json([
+            'total' => 0,
+            'conversas' => []
+        ]);
+    }
 
     $conversas = \App\Models\Conversa::where('user1_id', $userId)
         ->orWhere('user2_id', $userId)
@@ -68,7 +73,8 @@ Route::middleware('auth')->group(function () {
         'total' => $total,
         'conversas' => $conversas->pluck('unread_count', 'id')
     ]);
-});
+})->name('chat.unread');
+
 
    
 });

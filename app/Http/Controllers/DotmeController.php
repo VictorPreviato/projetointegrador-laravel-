@@ -40,19 +40,21 @@ class DotmeController extends Controller
     }
 
     // Login de usuário
- public function login(Request $request)
+  public function login(Request $request)
 {
     $credentials = $request->only('email', 'password');
 
     if (Auth::guard('web')->attempt($credentials)) {
         $user = Auth::user();
-        Session::put('user', $user);
-        Session::put('user_id', $user->id);
+
+        // ❌ NÃO precisa salvar o user na sessão manualmente
+        // Session::put('user', $user);
+        // Session::put('user_id', $user->id);
 
         // Se o form mandou redirect_to, sempre prioriza isso
         $redirect = $request->input('redirect_to');
         if ($redirect && Str::startsWith($redirect, url('/'))) {
-            session()->reflash(); // mantém os flashes (sweet alert)
+            session()->reflash(); // mantém os flashes do request anterior
             return redirect()->to($redirect);
         }
 
@@ -64,7 +66,7 @@ class DotmeController extends Controller
             $intended = route('index');
         }
 
-        session()->reflash(); // garante que os with() cheguem intactos
+        session()->reflash(); // garante que os flashes não sejam perdidos
         return redirect()->to($intended);
     }
 

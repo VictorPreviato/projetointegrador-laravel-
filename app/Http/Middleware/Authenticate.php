@@ -17,17 +17,19 @@ class Authenticate extends Middleware
      */
 protected function redirectTo($request)
 {
-    if (! $request->expectsJson()) {
+    if (! $request->expectsJson() && !auth()->check()) {
         $path = $request->path();
 
         // Impede que rotas AJAX do chat virem intended
         if (!preg_match('#^chat($|/)#', $path)) {
-    session(['url.intended' => url()->current()]);
-}
+            session(['url.intended' => url()->current()]);
+        }
 
-
-        return route('log'); // sua rota de login
+        return route('log'); // rota de login
     }
+
+    return null;
 }
+
 
 }
