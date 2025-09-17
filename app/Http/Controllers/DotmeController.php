@@ -40,7 +40,7 @@ class DotmeController extends Controller
     }
 
     // Login de usuário
-   public function login(Request $request)
+ public function login(Request $request)
 {
     $credentials = $request->only('email', 'password');
 
@@ -49,19 +49,26 @@ class DotmeController extends Controller
         Session::put('user', $user);
         Session::put('user_id', $user->id);
 
-        // Se veio com redirect_to, ignora o intended
+        // Se o form mandou redirect_to, sempre prioriza isso
         $redirect = $request->input('redirect_to');
         if ($redirect && Str::startsWith($redirect, url('/'))) {
-    // Se o formulário mandou redirect_to, sempre prioriza isso
-    $request->session()->forget('url.intended'); 
-    return redirect()->to($redirect);
-}
+            session()->reflash(); // mantém os flashes (sweet alert)
+            return redirect()->to($redirect);
+        }
 
-// Se não veio redirect_to, tenta o intended → index
-return redirect()->intended(route('index'));
+        // Recupera intended direto da sessão
+        $intended = session()->pull('url.intended', route('index'));
 
+        // Se cair no chat/unread, força pro index
+        if (str_contains($intended, '/chat/')) {
+            $intended = route('index');
+        }
+
+        session()->reflash(); // garante que os with() cheguem intactos
+        return redirect()->to($intended);
     }
 
+    // Tratamento de login inválido
     $userExists = User::where('email', $request->email)->exists();
     if (!$userExists) {
         return redirect()->back()->withErrors(['email' => 'E-mail não cadastrado.']);
@@ -69,6 +76,8 @@ return redirect()->intended(route('index'));
         return redirect()->back()->withErrors(['password' => 'A senha está incorreta.']);
     }
 }
+
+
 
 
     // Logout

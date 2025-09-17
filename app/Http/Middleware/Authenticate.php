@@ -15,10 +15,19 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    protected function redirectTo($request)
-    {
-        if (! $request->expectsJson()) {
-            return route('log'); // redireciona para a rota nomeada 'log'
-        }
+protected function redirectTo($request)
+{
+    if (! $request->expectsJson()) {
+        $path = $request->path();
+
+        // Impede que rotas AJAX do chat virem intended
+        if (!preg_match('#^chat($|/)#', $path)) {
+    session(['url.intended' => url()->current()]);
+}
+
+
+        return route('log'); // sua rota de login
     }
+}
+
 }
