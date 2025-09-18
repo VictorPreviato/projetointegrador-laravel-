@@ -17,7 +17,7 @@
                 <p style="color:red;">{{ $message }}</p>
             @enderror
 
-            <input type="text" name="resposta_secreta" placeholder="Sua resposta" required>
+            <input type="text" name="resposta_secreta" placeholder="Sua resposta" required style="width:450px; height:55px;">
 
          
 
