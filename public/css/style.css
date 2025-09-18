@@ -578,6 +578,7 @@ input[type=search] {
 .h1depoi{
     text-align: center; 
     margin-top:3%;
+  
 }
 
 .tdepoi {
@@ -593,6 +594,13 @@ input[type=search] {
 .cards-box {
     transform: translateX(-15px);
     margin-left: 4vw;
+}
+
+.depoi h3{
+    width: 250px;
+      overflow: hidden;      
+    white-space: nowrap;   
+    text-overflow: ellipsis; 
 }
 
 
