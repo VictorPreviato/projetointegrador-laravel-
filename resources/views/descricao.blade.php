@@ -82,10 +82,10 @@
             <h5>Nome do Dono</h5>
             <p>{{ $post->user->name }}</p>
         </div>
-        <div>
+        <!-- <div>
             <h5>Contato</h5>
             <p>{{ $post->user->telefone ?? 'Não informado' }}</p>
-        </div>
+        </div> -->
         <div>
             <h5>E-mail</h5>
             <p>{{ $post->user->email }}</p>
