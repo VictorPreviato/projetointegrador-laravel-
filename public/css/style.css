@@ -2495,12 +2495,12 @@ text-align: left;
 /* Título principal e subtítulo */
 .titulocamp {
     text-align: center;
-    margin-bottom: 50px;
+[    margin-bottom: 50px;]
 }
 
 /* Seção de cada tipo de campanha (ração, vacina, castração) */
 .campanha {
-    margin-bottom: 80px;
+    margin-bottom: 20px;
 }
 
 /* Título de cada seção de campanha */
