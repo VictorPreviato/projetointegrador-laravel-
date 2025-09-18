@@ -58,7 +58,11 @@
     <div id="chatMessagesView" class="chat-messages" style="display:none;">
         <div class="chat-header">
             <div class="ftperfilheadchat">
-                <img id="chatUserFoto" src="" alt="Foto do usuário">
+                <img id="chatUserFoto" 
+     src="{{ asset('/IMG/user-icon.svg') }}" 
+     alt="Foto do usuário" 
+     onerror="this.src='/IMG/user-icon.svg'">
+
             </div>
 
             <button type="button" id="backToList">
@@ -209,15 +213,21 @@ document.addEventListener('click', function(e) {
 let currentConversaId = null;
 let lastMessageId = 0;
 
-// Renderiza a foto da conversa
+// Renderiza a foto da conversa (lista)
 function renderConversaFoto(conversaItem) {
     if (!conversaItem) return;
     const fotoContainer = conversaItem.querySelector('.foto-container');
     if (!fotoContainer) return;
 
-    const fotoAttr = conversaItem.dataset.foto || '/IMG/user-icon.svg';
-    const sep = fotoAttr.includes('?') ? '&' : '?';
-    const src = fotoAttr + sep + 't=' + Date.now();
+    let fotoAttr = conversaItem.dataset.foto;
+    let src;
+
+    if (fotoAttr && fotoAttr.trim() !== "" && fotoAttr !== '/IMG/user-icon.svg') {
+        const sep = fotoAttr.includes('?') ? '&' : '?';
+        src = fotoAttr + sep + 't=' + Date.now();
+    } else {
+        src = '/IMG/user-icon.svg'; // fallback imediato sem cache-busting
+    }
 
     let img = fotoContainer.querySelector('img');
     if (!img) {
@@ -230,10 +240,10 @@ function renderConversaFoto(conversaItem) {
         fotoContainer.appendChild(img);
     }
 
-    img.onload = () => {};
     img.onerror = () => {
-        console.warn('Erro ao carregar avatar:', src);
-        img.src = '/IMG/user-icon.svg';
+        if (src !== '/IMG/user-icon.svg') {
+            img.src = '/IMG/user-icon.svg';
+        }
     };
 
     img.src = src;
@@ -243,11 +253,20 @@ function renderConversaFoto(conversaItem) {
 function setChatUserPhoto(src) {
     return new Promise((resolve) => {
         const img = document.getElementById('chatUserFoto');
+
+        // fallback direto sem ?t=
+        if (src === '/IMG/user-icon.svg') {
+            img.src = src;
+            resolve();
+            return;
+        }
+
         img.onload = () => resolve();
         img.onerror = () => {
             img.src = '/IMG/user-icon.svg';
             resolve();
         };
+
         img.src = src;
     });
 }
@@ -263,7 +282,13 @@ document.querySelectorAll('.conversa-item').forEach(item => {
 
         document.getElementById('chatUserName').innerText = item.dataset.nome;
 
-        const fotoSrc = (item.dataset.foto || '/IMG/user-icon.svg') + '?t=' + new Date().getTime();
+        let fotoSrc;
+        if (item.dataset.foto && item.dataset.foto.trim() !== "" && item.dataset.foto !== '/IMG/user-icon.svg') {
+            fotoSrc = item.dataset.foto + '?t=' + new Date().getTime();
+        } else {
+            fotoSrc = '/IMG/user-icon.svg'; // sem ?t=
+        }
+
         await setChatUserPhoto(fotoSrc);
 
         document.getElementById('conversaIdInput').value = currentConversaId;
@@ -272,7 +297,6 @@ document.querySelectorAll('.conversa-item').forEach(item => {
         document.getElementById('chatMessagesView').style.display = "flex";
 
         const chatMessages = document.getElementById('chatMessages');
-        // Mensagem de carregando
         chatMessages.innerHTML = '<p class="loading-msg" style="color:#ccc; text-align:center; margin-top:20px;">Carregando mensagens...</p>';
 
         const conversaItem = document.querySelector(`.conversa-item[data-id="${currentConversaId}"]`);
@@ -357,24 +381,17 @@ function updateUnread() {
 }
 
 // Intervalo de atualização
-// guarda o id para poder cancelar
 const chatPollInterval = setInterval(() => {
     if (currentConversaId) loadChat(currentConversaId);
     updateUnread();
 }, 3000);
 
-// cancela polling ao submeter formulários que redirecionam
-// se quiser só para formulários específicos, use um ID ao invés de 'form'
+// Cancela polling ao submeter formulários que redirecionam
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', () => {
         if (chatPollInterval) clearInterval(chatPollInterval);
     });
 });
-
-// ou, se preferir só para os formulários de contato:
-// const contactForm = document.getElementById('contactForm');
-// if (contactForm) contactForm.addEventListener('submit', () => clearInterval(chatPollInterval));
-
 
 // Enviar mensagem
 document.getElementById('sendMessageForm').addEventListener('submit', function(e) {
