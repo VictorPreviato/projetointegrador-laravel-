@@ -21,7 +21,7 @@
                 <h5>Conheça os animais para adoção na sua região</h5>
             </div>
             <button id="bcar1" onclick="document.location='{{ route('adote') }}' ">Verificar</button>
-            <img src="IMG/HOME/CARINI/pexels-alinaskazka-24740464.jpg" class="d-block" alt="...">
+            <img src="{{ ('IMG/HOME/CARINI/pexels-alinaskazka-24740464.jpg') }}" class="d-block" alt="...">
             <div class="carousel-caption d-none d-md-block">
             </div>
         </div>
@@ -31,7 +31,7 @@
                 <h5>Confira histórias reais de quem teve a vida transformada com a nossa ajuda.</h5>
             </div>
             <button id="bcar2">Depoimentos</button>
-            <img src="IMG/HOME/CARINI/pexels-cong-h-613161-1404819.jpg" class="d-block" alt="...">
+            <img src="{{ asset('IMG/HOME/CARINI/pexels-cong-h-613161-1404819.jpg') }}" class="d-block" alt="...">
             <div class="carousel-caption d-none d-md-block">
             </div>
         </div>
@@ -41,7 +41,7 @@
                 <h5 style="color: white;">Se você é dev e curte pets, vem ajudar a gente a mudar vidas com uns cliques!</h5>
             </div>
             <button id="bcar2" onclick="document.location='{{ route('contato') }}' ">Fale Conosco</button>
-            <img src="IMG/HOME/CARINI/pexels-edd1egalaxy-3628100.jpg" class="d-block" alt="...">
+            <img src="{{ asset('IMG/HOME/CARINI/pexels-edd1egalaxy-3628100.jpg') }}" class="d-block" alt="...">
             <div class="carousel-caption d-none d-md-block">
             </div>
         </div>
