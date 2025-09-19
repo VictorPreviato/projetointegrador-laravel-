@@ -338,7 +338,7 @@ input[type=search] {
     right: 20%;
     bottom: 15%;
     background-color: transparent;
-    width: 8vw;
+   width: 8vw;
     height: 5vh;
     border-radius: 15px;
     border: solid 2px white;
@@ -354,7 +354,7 @@ input[type=search] {
     position: absolute;
     text-align: center;
     top: 50%;
-    right: 13%;
+    right: 12%;
 }
 
 .carousel-indicators #on {

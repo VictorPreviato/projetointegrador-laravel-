@@ -40,6 +40,7 @@
                 <h1 style="color: white;">Use seu talento pra salvar patinhas!</h1>
                 <h5 style="color: white;">Se você é dev e curte pets, vem ajudar a gente a mudar vidas com uns cliques!</h5>
             </div>
+            <button id="bcar2" onclick="document.location='{{ route('contato') }}' ">Fale Conosco</button>
             <img src="IMG/HOME/CARINI/pexels-edd1egalaxy-3628100.jpg" class="d-block" alt="...">
             <div class="carousel-caption d-none d-md-block">
             </div>
