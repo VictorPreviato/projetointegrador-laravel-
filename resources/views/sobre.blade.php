@@ -1,36 +1,42 @@
 @include("components.header")
  
 <div class="cont-apoie">
-        <h1>Bem vindo à Dotme!</h1>
- 
+       
         <section class="secao-texto">
            
         <div class="caixa-azu-sobre">
-        <div class="text-azu-sobre"></div>
-            <p>
+             <h1>Bem vindo à Dotme!</h1>
+            <div class="flex-azu">
+ 
+        <div class="text-azu-sobre">
+            <p class="p-azu">
                 A Dotme é uma plataforma dedicada a ajudar animais de estimação a encontrar novos lares. Aqui, você pode cadastrar pets para doação ou informar sobre animais perdidos, facilitando a conexão entre pessoas que desejam adotar e aquelas que precisam de ajuda para encontrar seus pets.
-           
+ 
                 Se você está interessado em adotar um pet, explore os cadastros disponíveis e entre em contato com os responsáveis. Se você perdeu um animal, cadastre-o aqui para que mais pessoas possam ajudar na busca.
            
                 Nossa missão é promover o bem-estar animal e facilitar a adoção responsável. Junte-se a nós nessa causa e ajude a fazer a diferença na vida de muitos animais!
             </p>
+        </div>
+       
+           
  
-            <div class="azu-sobre"><img class="dogA-sobre" src="{{ asset('IMG/PET/PetAzul.jpg')}}" alt=""></div>
- 
+            </div>
             </div>
  
         </section>
  
         <section class="secao-nossa-historia">
-            <h1>Nossa História</h1>
+           
  
 <div class="caixa-ver-sobre">
+    <h1>Nossa História</h1>
+    <div class="flex-ver">
  
-<div class="ver-sobre"><img class="dogV-sobre" src="{{ asset('IMG/PET/PetVermelho.jpg')}}" alt=""></div>
+ 
  
 <div class="text-ver-sobre">
  
-<p>
+<p class="p-ver">
  
  A <b>Dotme</b> nasceu de algo muito maior do que apenas uma ideia, nasceu de um verdadeiro amor pelos animais e de um propósito claro: transformar vidas, tanto humanas quanto de nossos companheiros de quatro patas. Desde o primeiro momento, carregamos conosco o desejo profundo de fazer a diferença, construindo uma comunidade sólida, empática e engajada com a causa da adoção responsável. <br>
  
@@ -38,9 +44,12 @@ Acreditamos que cada animal merece um lar onde possa se sentir seguro, amado e r
  
 Ao longo do tempo, fomos além de simplesmente promover adoções, buscamos informar, inspirar e mobilizar. Queremos que mais pessoas compreendam a importância da posse responsável, do cuidado contínuo e do compromisso que a adoção representa. Na <b>Dotme</b>, cada história de adoção é uma vitória coletiva, e cada reencontro entre humano e animal nos motiva a continuar.<br>
  
-Estamos aqui por eles, e por você também. Juntos, acreditamos que é possível construir um mundo onde todos os animais tenham uma segunda chance e onde o amor encontre sempre um caminho.</div>
+Estamos aqui por eles, e por você também. Juntos, acreditamos que é possível construir um mundo onde todos os animais tenham uma segunda chance e onde o amor encontre sempre um caminho.
+</p>
 </div>
-            </p>
+</div>
+</div>
+           
         </section>
  
         <div class="caixa-alerta">
@@ -77,4 +86,3 @@ Estamos aqui por eles, e por você também. Juntos, acreditamos que é possível
     </div>
  
 @include("components.footer")
- 
