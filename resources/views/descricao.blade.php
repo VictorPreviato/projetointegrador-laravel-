@@ -21,7 +21,6 @@
         <div class="headcontdesc">
             <div>
                 <h1>{{ $post->nome_pet ?? 'Sem nome' }}</h1>
-                <p>{{ $post->tipo_animal }} | {{ $post->genero }} | {{ $post->idade ?? '-' }} | Porte {{ $post->porte }}</p>
             </div>
         </div>
         <div>

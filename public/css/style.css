@@ -626,6 +626,22 @@ input[type=search] {
     object-fit: cover;
 }
 
+.imgdephome{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 4%;
+    top: 5%;
+    width: calc(22px + 2vw);
+    height: calc(22px + 2vw);
+    border-radius: 50%;
+    color: var(--cor-1);
+    background-color: var(--cor-5);
+    font-weight: bold;
+    font-size: 35px;
+}
+
 .content-placeholder .row .img.placeholder {
     background: var(--cor-5);
     display: flex;
@@ -2896,6 +2912,8 @@ summary::-webkit-details-marker {
         right: 10%;
     }
 
+    
+
     .tcar2 h1 {
         font-size: 30px;
 
@@ -2997,6 +3015,13 @@ summary::-webkit-details-marker {
     width: calc(50px + 2vw);
     height: calc(50px + 2vw);
 }
+
+.imgdephome{
+    top: 3%;
+    right: 4%;
+    width: calc(40px + 2vw);
+    height: calc(40px + 2vw);
+    }
 
 
 

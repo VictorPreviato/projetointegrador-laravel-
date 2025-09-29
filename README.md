@@ -49,10 +49,11 @@ composer install
 
 #### 3. Instale as dependências front-end com o npm
 npm install
+npm run build
 npm run dev
 
 #### 4. Configuração do .env
-Para este projeto, o arquivo .env **não está incluído no .gitignore**, por tratar-se de um projeto educacional não utilizamos senhas sensíveis no banco de dados
+O proveto tem um modelo ".env.exemple" onde você pode adicionar suas credenciais de banco de dados e e-mail para testar as funções corretamente, após inserir os valores você deve renomear o nome do arquivo para ".env"
 
 #### 5. Rode as migrations para criar as tabelas no banco
 php artisan migrate
